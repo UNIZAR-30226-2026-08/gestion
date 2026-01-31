@@ -1,0 +1,16 @@
+POST /user/create/ ({email, username, password}) -> {}
+POST /user/token/ (email, password) -> {refresh, access}
+POST /user/refresh/
+
+GET /user/me/accountinfo/ -> {username, email, exp, elo, points}
+POST /user/me/update/email/<str>/
+POST /user/me/update/username/<str>/
+
+GET /user/me/ownsitem/ ({itemid}) -> {bool}
+GET /user/me/activeitems/ -> {[itemid]}
+POST /user/me/changeitems/ ([itemid]) -> {message}
+
+POST /store/buy/ (itemid) -> {message}
+
+GET /user/me/gamesplayed/ -> {[gamesid]}
+GET /games/game (gameid) -> {game}

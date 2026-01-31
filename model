@@ -1,0 +1,19 @@
+User: 
+- email
+- username
+- password
+- games list 
+- item list 
+- elo 
+- points 
+- exp 
+- role
+- active game -> case hes playing 
+
+Item: 
+- name 
+- type 
+
+
+Game: 
+- datetime 
