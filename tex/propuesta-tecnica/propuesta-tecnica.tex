@@ -1,0 +1,161 @@
+% File: lab-report.tex
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amssymb} % AMS fonts
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{../common/file-config}
+\usepackage{../common/colours}
+\usepackage{../common/listings-config}
+
+\usepackage{graphicx}
+% \graphicspath{{res/}}
+
+% Tables
+\usepackage{booktabs}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+
+% Algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\floatname{algorithm}{}
+\renewcommand{\thealgorithm}{}
+
+\usepackage{url}
+\usepackage[pdftex, colorlinks=true, citecolor=cyan, linkcolor=black, 
+urlcolor=black]{hyperref}
+
+\usepackage[backend=biber, style=numeric]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+    
+\begin{titlepage}
+	\centering
+    % \includegraphics[width=0.5\textwidth]{logo.pdf} \par \vspace{1cm}
+	{\scshape \LARGE Asignatura \par}
+	\vspace{1cm}
+	{\huge\bfseries Práctica... \par}
+	\vspace{2cm}
+	{\Large Autor} \par
+    \texttt{NIP} \par
+	\vspace{2cm}
+    \textbf{Grupo: }A
+    \vfill
+    {\Large \today \par}
+\end{titlepage}
+
+% \clearemptydoublepage
+
+\thispagestyle{empty}
+\tableofcontents
+
+\newpage
+% \clearemptydoublepage
+
+\section{Resumen ejecutivo}
+
+\section{Objetivos del sistema}
+El sistema a desarrollar consiste en un juego de inspiración en el Monopoly, multiplataforma
+(para escritorio y web), online y multijugador. Este contará con funcionalidades de tipo de
+red social y otras características atractivas al juego como la inclusión de ``skins'' 
+personalizables.
+
+\subsection{Análisis de requisitos preliminar}
+En concreto, los requisitos funcionales del sistema incluyen los que se recogen en la Tabla
+\ref{tab:rf}.
+
+
+\section{Descripción técnica}
+En esta sección se recogen las necesidades técnicas para emplear la aplicación, tanto por parte
+de los usuarios finales como del cliente, y se incluye un esbozo de la tecnología empleada.
+
+\subsection{Necesidades de los usuarios finales}
+El sistema será accesible tanto desde navegadores web como ordenadores, pudiendo parar partidas y
+reanudarlas desde otro dispositivo. Las tecnologías mínimas compatibles con el sistema, por tipo
+de plataforma, son las siguientes:
+\begin{itemize}
+		\item Navegador web: Chromium 144.0.7559.96.
+		\item Aplicación de escritorio compatible con sistemas operativos: Arch Linux 6.18.6.
+\end{itemize}
+
+\subsection{Necesidades técnicas del sistema}
+El sistema utilizará las siguientes tecnologías:
+\begin{itemize}
+		\item Godot 4.6 (implementación del sistema para aplicación de escritorio).
+		\item React (implementación del sistema para navegador web).
+		\item Django (\textit{backend}).
+		\item PostgreSQL (\textit{backend} de la BDD).
+\end{itemize}
+La comunicación entre estas se realizará mediante %TODO JAIME 
+
+El despliegue del sistema se realizará en un servidor de la compañía MATINFO, ofreciendo el
+servicio durante un periodo de prueba de 3 meses tras el que se podrá prorrogar anualmente.
+El código fuente del sistema será proporcionado al cliente, en el momento posterior al periodo de
+prueba en el que el cliente decidiera asumir el despliegue del sistema. 
+
+El sistema será compatible para su despliegue con un sistema operativo %TODO MARIO
+.
+El hardware necesario para su despliegue comprende %TODO MARIO
+
+
+\section{Plan de trabajo}
+En el desarrollo del sistema, se marcan los siguientes hitos de relevancia al cliente:
+\begin{itemize}
+		\item 10 de febrero: Entrega de este documento (propuesta técnica y económica).
+		\item 13 de marzo: Demostración de una primera versión funcional del sistema con la jugabilidad 
+				básica del juego y tratamiento básico de los usuarios.
+		\item 15 de marzo: Entrega del Plan de gestión, análisis y diseño y memoria del proyecto (versión preliminar). 
+		\item 6 de abril: Entrega de la Evaluación del estado del proyecto.
+		\item 10 de abril: Demostración de una segunda versión del sistema con las funcionalidades de
+				red social implementadas.
+		\item 1 de mayo: Entrega del Plan de gestión, análisis y diseño y memoria del proyecto (versión final).
+		\item 11 de mayo: Demostración del juego completo desplegado con todas las funcionalidades
+				especificadas.
+\end{itemize}
+
+\section{Equipo técnico encargado del proyecto}
+Los encargados del proyecto son la totalidad de la empresa MATINFO, que conformamos los estudiantes de
+5º curso del Programa Conjunto en Matemáticas-Informática de la Universidad de Zaragoza. 
+La conformación del equipo de trabajo surge de manera natural tras las experiencias compartidas a lo
+largo del grado, que refuerzan nuestra confianza y seguridad en nosotros mismos como equipo y como
+profesionales. Como portfolio de presentación a nuestros futuros clientes para que compartan nuestra
+opinión, podemos poner en valor nuestro trabajo realizado en las siguientes asignaturas y por los
+siguientes equipos:
+\begin{itemize}
+		\item Cooktale. (Sistemas de información. Julia, Cris y Nico.)
+		\item Experiencia laboral de Nico (si compete).
+		\item La web de Jaime \&co.
+		\item Luquín y Naudín, a venderse.
+		\item OSUZ xd (Julia, tareas de organización y gestión. Mario, fotografía @mariostellfotos).
+\end{itemize}
+
+Basándonos en nuestras habilidades y experiencia previa, se ha decidido conjuntamente el siguiente 
+reparto de cargos y tareas entre todos:
+
+\section{Propuesta económica}
+
+\newpage
+
+\thispagestyle{empty}
+\nocite{*}
+\printbibliography
+
+\newpage
+
+\appendix
+
+\section{Glosario}
+\begin{itemize}
+		\item BDD: Base de datos.
+\end{itemize}
+
+\section{Estimación de costes}
+
+\end{document}
