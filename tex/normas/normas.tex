@@ -1,0 +1,297 @@
+% File: lab-report.tex
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amssymb} % AMS fonts
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{../common/file-config}
+\usepackage{../common/colours}
+\usepackage{../common/listings-config}
+
+\usepackage{graphicx}
+% \graphicspath{{res/}}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{multirow}
+
+% Algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\floatname{algorithm}{}
+\renewcommand{\thealgorithm}{}
+
+\usepackage{url}
+\usepackage[pdftex, colorlinks=true, citecolor=cyan, linkcolor=black, 
+urlcolor=black]{hyperref}
+
+\usepackage[backend=biber, style=numeric]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+    
+\begin{titlepage}
+	\centering
+    % \includegraphics[width=0.5\textwidth]{logo.pdf} \par \vspace{1cm}
+	{\scshape \LARGE Proyecto Software \par}
+	\vspace{1cm}
+	{\huge\bfseries Normas MAGNATE \par}
+	\vspace{2cm}
+	{\Large Roberta Williams} \par
+    \texttt{Grupo 08} \par
+	\vspace{2cm}
+	Por el amor de dios que alguien mejore esta portada TODO:
+    \vfill
+    {\Large \today \par}
+\end{titlepage}
+
+% \clearemptydoublepage
+
+\thispagestyle{empty}
+\tableofcontents
+
+\newpage
+% \clearemptydoublepage
+
+\section{Introducción}
+En este documento se definirán las mecánicas y reglas del juego \textit{Magnate}.
+Se explicarán las diferentes fases del juego, las acciones que pueden realizar 
+los jugadores y las condiciones de victoria. 
+
+Se definirá desde el diseño del tablero hasta los distintos eventos especiales
+que pueden ocurrir, considerando todos los casos posibles.
+
+Las reglas están basadas en las reglas originales del Monopoly TODO: CITAR 
+tomando inspiración adicional de la saga de videojuegos Mario Party.
+Magnate busca ser un juego dinámico con alto grado de aleatoriedad, pero
+sin perder la estrategia del Monopoly original.
+
+\section{Objetivo del juego}
+El objetivo del juego es ser el jugador con mayor valor neto al final de la
+partida, limitada por un número de rondas. El valor neto de un jugador se calcula
+mediante la suma de su dinero en efectivo más el valor de TODO: ELEGIR 
+SI DE VENTA O DE COMPRA, DE VENTA MÁS SENTIDO CREO. de sus propiedades.
+
+
+
+\section{Equipamiento}
+A continuación está la lista de elementos para una partida.%TODO: mirar numeros
+\begin{itemize}
+	\item Tablero
+	\item 2 Dados normales
+	\item 1 Dado bus 
+	\item Cartas de las propiedades 
+	\item N casas
+	\item M hoteles 
+	\item X Cartas "Sales de la cárcel"
+\end{itemize}
+
+\subsection{Los dados: definición y funcionamiento}
+En el juego hay 3 dados en juego, 2 normales de 6 caras numerados del 1 al 
+6 y uno especial llamado \textit{Dado bus}. El dado bus está compuesto de 6
+caras, 3 de ellas con el dibujo de un bus y las otras 3 numeradas del 1 al 3.
+%TODO: y si hacemos 4,5,6???
+
+En una tirada de dados se tiran siempre los 3 dados a la vez.
+En caso de salir 3 números se tendrá en cuenta para el movimiento
+la suma total de los 3. En caso de salir un bus el jugador podrá elegir 3
+valores: el valor de uno de los dados normales, el valor del otro de los dados
+normales o la suma de los 2 dados normales.
+
+Para las mecánicas de los dobles se tendrán en cuenta únicamente los dados 
+normales. Al sacar dobles, el jugador gana una tirada extra. Si llega a 
+sacar dobles una tercera vez consecutiva en el mismo turno, va directamente 
+a la cárcel. 
+
+Si en la tirada sale un triple (en los casos en los que el Dado bus saque número),
+el jugador puede viajar a la casilla del tablero que quiera, aplicándose el efecto
+de caer en esa casilla tal y como hubiera sido si la tirada hubiera sido 
+convencional. Después de sacar un triple no se vuelve a tirar (como si de unos 
+dobles se tratara). Los triples no cuentan en la racha de dobles, por lo que no 
+te oueden mandar a la cárcel.
+
+\subsection{Tablero}
+El tablero está compuesto de 2 pistas cuadradas concéntricas,
+el anillo exterior tiene 36 casillas y 4 esquinas y el anillo 
+interior tiene 12 casillas y 4 esquinas (La particularidad
+de las casillas para transición y cómo afectan al tablero 
+se comentará en la sección 
+TODO:REFERENCIAR A LAS ESTACIONES DE TREN).
+
+
+\section{Casillas}
+En esta sección se definirán todos los distintos tipos de casilla 
+que hay en el tablero y sus efectos y mecánicas.
+
+\subsection{Propiedades}
+Las propiedades son casillas que se pueden comprar, vender e hipotecar,
+y por las que se cobra alquiler a jugadores rivales. Si un juegador 
+cae en una de estas casillas pueden pasar varias cosas en función del 
+estado de compra de la propiedad:
+\begin{itemize}
+	\item La casilla no tiene dueño. En este caso el jugador tiene derecho 
+	a comprarla por el precio de compra indicado. En caso de no querer comprar o no 
+	tener suficiente dinero, la propiedad pasa a ser subastada.
+	\item La casilla tiene dueño. El jugador debe pagar el alquiler calculado
+	en función de las construcciones o de si tiene el grupo completo.
+	\item La casilla está hipotecada. No ocurre nada.
+	\item La casilla es del propio jugador. No ocurre nada.
+\end{itemize}
+
+\subsection{Grupos de propiedades}
+Las propiedades están divididas en grupos de color. Un jugador que posea
+todas las propiedades de un mismo grupo, podrá cobrar el doble de alquiler
+por las propiedades sin construcciones
+y obtendrá derecho a construir en ellas.
+
+
+\subsection{Estaciones de tren}
+Las estaciones de tren son un tipo especial de propiedad. En el juego tienen
+una función doble: poder ganar dinero por alquiler (como en el resto de 
+propiedades), y habilitar la transición entre el cuadrado interior y el 
+cuadrado exterior.
+
+El alquiler a pagar en las estaciones viene marcado por el número de 
+estaciones que el jugador posea.
+
+2 de las estaciones del juego conectan el cuadrado interior con el 
+exterior. La mecánica de transición viene marcada por el valor usado 
+en la tirada de dados (las casillas que el jugador elige mover). Si la 
+tirada es par se continúa en el mismo cuadrado, si es impar se cambia de 
+cuadrado (o viceversa, lo que indique la casilla).
+
+En caso de caer justo en la casilla de la estación, la decisión par o impar 
+la tomará la tirada de dados de la siguiente jugada y no la tirada de la jugada 
+de caer en la estación.
+
+
+\subsection{Casillas fantasía}
+Al caer en una casilla fantasía, aparecerán 2 cartas, una desvelada y 
+una oculta. La carta desvelada tendrá un evento fantasía, que se podrá 
+aplicar por el precio indicado en la carta. El evento fantasía de la 
+carta oculta es gratuito pero podrá ser un evento positivo o negativo.
+En caso de no querer comprar el evento desvelado, o no tener dinero 
+para comprarlo, habrá que escoger la carta oculta obligatoriamente.
+En caso de comprar y aplicar el evento fantasía de pago, no se aplicará 
+ni desvelará el evento oculto.
+
+\subsection{Vas a la cárcel}
+Si caes en esta casilla vas directamente a la cárcel y acaba tu turno.
+
+\subsection{Cárcel}
+Un jugador en la cárcel tiene derecho al principio de su turno a 
+tirar los dados. Si saca dobles puede salir de la cárcel usando 
+el valor de la tirada (pero sin repetir turno por ser dobles).
+Si no saca dobles, puede pagar una fianza de TODO:PRECIO o usar
+una carta de salir de la cárcel. Si al tercer turno en la cárcel no ha 
+salido, será obligado a pagar la fianza.
+
+Los jugadores en la cárcel tienen derecho a cobrar alquileres y a realizar
+acciones de gestión en su turno, pero no pueden moverse por el tablero.
+
+\subsection{Salida}
+En esta casilla comienza la partida y cada vez que un jugador pasa por
+ella recibe una cantidad fija de dinero. Si por algún motivo un jugador 
+decide mantenerse en el cuadrado interior y no pasar por salida, no recibirá
+dinero.
+
+\subsection{Tranvías}
+Hay 4 estaciones de tranvía repartidas por las esquinas del tablero. Si un 
+jugador cae en una de estas casillas podrá moverse directamente a otra 
+estación de tranvía de su elección pagando un precio por el desplazamiento.
+
+
+\subsection{Párking}
+Durante la partida, las multas y pagos de impuestos a la banca en general,
+se acumularán en un bote. El jugador que caiga en el parking se llevará
+el bote completo. Si el bote está vacío, no ocurre nada.
+
+\section{Preparación}
+Cada jugador comienza con TODO: ELEGIR DINERO.
+El turno se elige tirando un único dado, el que obtenga mayor valor empieza.
+En caso de empate, desempatar. El orden de valores indica el orden de juego
+de mayor a menor.
+
+
+\section{Turno de juego}
+Al comienzo del turno, el jugador lanzará los dados y moverá en función de lo 
+que salga. Al caer en una casilla, se aplicará su efecto correspondiente.
+Tras todos los efectos de casilla, el jugador podrá realizar acciones de 
+gestión. Estas acciones son: comprar o vender construcciones, hipotecar o 
+deshipotecar propiedades y comprar o vender propiedades a otros jugadores.
+
+Haga lo que haga el jugador, su balance debe quedar positivo al final de su turno,
+de lo contrario será declarado en bancarrota y eliminado de la partida.
+
+\section{Subastas}
+Las subastas serán pujas abiertas de valor oculto. Es decir, cada jugador
+participante en la puja decidirá si participar o no, y en caso de participar
+elegirá el valor por el que puja. El resto de jugadores no sabrá en ningún 
+momento los jugadores que deciden participar en la puja ni los valores por los 
+que pujan hasta el final de la subasta, donde se desvelarán los valores y 
+el ganador de la puja. En caso de empate TODO: TOMAR DECISION EMPATE
+
+\section{Alquileres}
+Si un jugador cae en una propiedad de otro jugador, deberá pagar el alquiler
+correspondiente. El alquiler se calcula en función de si el dueño tiene el grupo 
+de propiedades completo y de las construcciones que haya en la propiedad.
+
+En caso de que el jugador no tenga dinero para pagar el alquiler al dueño,
+el banco pagará el alquiler y al final del turno, el jugador deberá saldar 
+su deuda con el banco mediante el hipotecado de propiedades o la venta de
+construcciones o propiedades tanto al banco como a otros jugadores.
+
+\section{Construcciones}
+Una vez un jugador tiene el grupo completo de un color, podrá construir
+casas en las propiedades de este grupo. El coste de construcción de cada 
+casa vendrá marcado en cada propiedad. Las casas deben construirse de forma 
+escalonada, es decir, si se quiere construir una segunda casa en una propiedad 
+primero se tendrá que tener una casa en el resto de propiedades del grupo.
+TODO: HACERLO ESCALONADO TODO? POSIBLES PROBLEMAS CON FANTASIAS QUE ROMPAN CASAS
+
+Una vez un jugador tenga 4 casas en todas las propiedades de un grupo, podrá
+sustituir las 4 casas de una propiedad por un hotel por el precio de compra
+de una casa.
+
+A la hora de demoler construcciones se hará igualmente de forma escalonada en 
+sentido inverso. TODO: PARA DESHACER HOTELES, DAR 4 CASAS? QUE PASA SI NO QUEDAN
+CASAS? DISCUTIR ESTO.
+El jugador recibirá la mitad del precio de compra de las construcciones demolidas.
+
+\section{Eventos fantasía}
+Al caer en una casilla fantasía aparecerán 2 cartas, una desvelada y una oculta.
+En la desvelada el jugador podrá leer una acción fantasía positiva 
+TODO: O NO NEGATIVA POR LO MENOS, HABLARLO que podrá aplicar
+por un precio determinado. En caso de no querer o no tener dinero para aplicarla 
+se aplicará la acción oculta, que podrá ser positiva o negativa.
+
+\section{Bonificaciones finales}
+Al final de la partida, antes de desvelar al ganador, se aplicarán 3
+bonificaciones finales aleatorias. Las bonificaciones darán una cantidad
+de dinero determinada por TODO: EN FUNCIÓN DEL PIB O DINERO PLANO????
+
+Las posibles bonificaciones son: 
+\begin{itemize}
+	\item Andarín. El que más haya recorrido
+	\item Constructor. El que más casas haya construido (no me mola)
+	\item Ladrón. El que más haya recaurdado en alquileres (tampoco me mola)
+	\item Cojo. El que menos haya recorrido.
+	\item Hacienda somos todos. El que más impuestos haya pagado.
+	\item Mr fantasía. El que más eventos fantasía haya sufrido.
+	\item TODO: PENSAR MAS
+\end{itemize}
+
+
+\newpage
+\thispagestyle{empty}
+\nocite{*}
+\printbibliography
+
+
+
+\end{document}
