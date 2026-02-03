@@ -9,8 +9,13 @@ POST /user/me/update/username/<str>/
 GET /user/me/ownsitem/ ({itemid}) -> {bool}
 GET /user/me/activeitems/ -> {[itemid]}
 POST /user/me/changeitems/ ([itemid]) -> {message}
+GET /user/me/gamesplayed/ -> {[gamesid]}
 
 POST /store/buy/ (itemid) -> {message}
 
-GET /user/me/gamesplayed/ -> {[gamesid]}
-GET /games/game (gameid) -> {game}
+GET /games/game (gameid) -> {game}  
+
+GET /play/private/createroom/ -> {token} ¿?
+POST /play/public/searchgame/ -> {} ¿?
+POST /play/private/startgame/ -> {} ¿?
+POST /play/private/setready/ -> {} ¿? todo esto websockets
