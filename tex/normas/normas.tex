@@ -66,7 +66,7 @@ los jugadores y las condiciones de victoria.
 Se definirá desde el diseño del tablero hasta los distintos eventos especiales
 que pueden ocurrir, considerando todos los casos posibles.
 
-Las reglas están basadas en las reglas originales del Monopoly TODO: CITAR 
+Las reglas están basadas en las reglas originales del Monopoly \cite{hasbro_monopoly_es} 
 tomando inspiración adicional de la saga de videojuegos Mario Party.
 Magnate busca ser un juego dinámico con alto grado de aleatoriedad, pero
 sin perder la estrategia del Monopoly original.
@@ -74,28 +74,29 @@ sin perder la estrategia del Monopoly original.
 \section{Objetivo del juego}
 El objetivo del juego es ser el jugador con mayor valor neto al final de la
 partida, limitada por un número de rondas. El valor neto de un jugador se calcula
-mediante la suma de su dinero en efectivo más el valor de TODO: ELEGIR 
-SI DE VENTA O DE COMPRA, DE VENTA MÁS SENTIDO CREO. de sus propiedades.
+mediante la suma de su dinero en efectivo más el valor de venta
+de todas sus propiedades, sin contar las que tenga hipotecadas y
+el valor de venta de sus construcciones.
 
 
 
 \section{Equipamiento}
-A continuación está la lista de elementos para una partida.%TODO: mirar numeros
+A continuación está la lista de elementos para una partida.
 \begin{itemize}
 	\item Tablero
 	\item 2 Dados normales
 	\item 1 Dado bus 
 	\item Cartas de las propiedades 
-	\item N casas
-	\item M hoteles 
-	\item X Cartas "Sales de la cárcel"
+	\item Casas
+	\item Hoteles 
+	\item Cartas "Sales de la cárcel"
+	\item Cartas de evento fantasía
 \end{itemize}
 
 \subsection{Los dados: definición y funcionamiento}
 En el juego hay 3 dados en juego, 2 normales de 6 caras numerados del 1 al 
 6 y uno especial llamado \textit{Dado bus}. El dado bus está compuesto de 6
 caras, 3 de ellas con el dibujo de un bus y las otras 3 numeradas del 1 al 3.
-%TODO: y si hacemos 4,5,6???
 
 En una tirada de dados se tiran siempre los 3 dados a la vez.
 En caso de salir 3 números se tendrá en cuenta para el movimiento
@@ -120,8 +121,7 @@ El tablero está compuesto de 2 pistas cuadradas concéntricas,
 el anillo exterior tiene 36 casillas y 4 esquinas y el anillo 
 interior tiene 12 casillas y 4 esquinas (La particularidad
 de las casillas para transición y cómo afectan al tablero 
-se comentará en la sección 
-TODO:REFERENCIAR A LAS ESTACIONES DE TREN).
+se comentará con las casillas de puentes).
 
 
 \section{Casillas}
@@ -130,7 +130,7 @@ que hay en el tablero y sus efectos y mecánicas.
 
 \subsection{Propiedades}
 Las propiedades son casillas que se pueden comprar, vender e hipotecar,
-y por las que se cobra alquiler a jugadores rivales. Si un juegador 
+y por las que se cobra alquiler a jugadores rivales. Si un jugador 
 cae en una de estas casillas pueden pasar varias cosas en función del 
 estado de compra de la propiedad:
 \begin{itemize}
@@ -150,35 +150,42 @@ por las propiedades sin construcciones
 y obtendrá derecho a construir en ellas.
 
 
-\subsection{Estaciones de tren}
-Las estaciones de tren son un tipo especial de propiedad. En el juego tienen
+\subsection{Puentes}
+Los puentes son un tipo especial de propiedad. En el juego tienen
 una función doble: poder ganar dinero por alquiler (como en el resto de 
 propiedades), y habilitar la transición entre el cuadrado interior y el 
 cuadrado exterior.
 
-El alquiler a pagar en las estaciones viene marcado por el número de 
-estaciones que el jugador posea.
+El alquiler a pagar en los puentes viene marcado por el número de 
+puentes que el jugador posea.
 
-2 de las estaciones del juego conectan el cuadrado interior con el 
-exterior. La mecánica de transición viene marcada por el valor usado 
+La mecánica de transición viene marcada por el valor usado 
 en la tirada de dados (las casillas que el jugador elige mover). Si la 
 tirada es par se continúa en el mismo cuadrado, si es impar se cambia de 
 cuadrado (o viceversa, lo que indique la casilla).
 
-En caso de caer justo en la casilla de la estación, la decisión par o impar 
+En caso de caer justo en la casilla del puente, la decisión par o impar 
 la tomará la tirada de dados de la siguiente jugada y no la tirada de la jugada 
-de caer en la estación.
+de caer en el puente.
 
+\section{Servidores}
+Los servidores son otro tipo especial de propiedad. El valor de su 
+alquiler viene determinado por la cantidad de servidores que 
+el jugador posea.
 
 \subsection{Casillas fantasía}
 Al caer en una casilla fantasía, aparecerán 2 cartas, una desvelada y 
-una oculta. La carta desvelada tendrá un evento fantasía, que se podrá 
+una oculta. La carta desvelada tendrá un evento fantasía aleatorio, que se podrá 
 aplicar por el precio indicado en la carta. El evento fantasía de la 
-carta oculta es gratuito pero podrá ser un evento positivo o negativo.
+carta oculta es gratuito.
 En caso de no querer comprar el evento desvelado, o no tener dinero 
 para comprarlo, habrá que escoger la carta oculta obligatoriamente.
 En caso de comprar y aplicar el evento fantasía de pago, no se aplicará 
 ni desvelará el evento oculto.
+
+Los eventos fantasía tendrán acciones positivas (como ganar dinero),
+negativas (como perder propiedades) o neutras (como mover a otro 
+jugador a cualquier casilla del mapa).
 
 \subsection{Vas a la cárcel}
 Si caes en esta casilla vas directamente a la cárcel y acaba tu turno.
@@ -187,12 +194,17 @@ Si caes en esta casilla vas directamente a la cárcel y acaba tu turno.
 Un jugador en la cárcel tiene derecho al principio de su turno a 
 tirar los dados. Si saca dobles puede salir de la cárcel usando 
 el valor de la tirada (pero sin repetir turno por ser dobles).
-Si no saca dobles, puede pagar una fianza de TODO:PRECIO o usar
+Si no saca dobles, puede pagar una fianza de valor fijo o usar
 una carta de salir de la cárcel. Si al tercer turno en la cárcel no ha 
 salido, será obligado a pagar la fianza.
 
 Los jugadores en la cárcel tienen derecho a cobrar alquileres y a realizar
-acciones de gestión en su turno, pero no pueden moverse por el tablero.
+acciones de gestión en su turno, pero no pueden moverse por el tablero ni
+participar en las subastas.
+
+Los turnos en los que un jugador acabe en la cárcel acaban cuando se 
+entre en la cárcel sin tener oportunidad de hacer gestiones (excepto
+el caso en el que tenga que saldar deudas con el banco).
 
 \subsection{Salida}
 En esta casilla comienza la partida y cada vez que un jugador pasa por
@@ -207,12 +219,13 @@ estación de tranvía de su elección pagando un precio por el desplazamiento.
 
 
 \subsection{Párking}
-Durante la partida, las multas y pagos de impuestos a la banca en general,
+Durante la partida, las multas, pagos de impuestos y demás ingresos 
+a la banca en general,
 se acumularán en un bote. El jugador que caiga en el parking se llevará
 el bote completo. Si el bote está vacío, no ocurre nada.
 
 \section{Preparación}
-Cada jugador comienza con TODO: ELEGIR DINERO.
+Cada jugador comienza con una cantidad de dinero determinada.
 El turno se elige tirando un único dado, el que obtenga mayor valor empieza.
 En caso de empate, desempatar. El orden de valores indica el orden de juego
 de mayor a menor.
@@ -234,7 +247,9 @@ participante en la puja decidirá si participar o no, y en caso de participar
 elegirá el valor por el que puja. El resto de jugadores no sabrá en ningún 
 momento los jugadores que deciden participar en la puja ni los valores por los 
 que pujan hasta el final de la subasta, donde se desvelarán los valores y 
-el ganador de la puja. En caso de empate TODO: TOMAR DECISION EMPATE
+el ganador de la puja. En caso de empate la propiedad no se dará a nadie.
+
+Los jugadores que provocan una subasta no podrán participar en ella.
 
 \section{Alquileres}
 Si un jugador cae en una propiedad de otro jugador, deberá pagar el alquiler
@@ -252,39 +267,43 @@ casas en las propiedades de este grupo. El coste de construcción de cada
 casa vendrá marcado en cada propiedad. Las casas deben construirse de forma 
 escalonada, es decir, si se quiere construir una segunda casa en una propiedad 
 primero se tendrá que tener una casa en el resto de propiedades del grupo.
-TODO: HACERLO ESCALONADO TODO? POSIBLES PROBLEMAS CON FANTASIAS QUE ROMPAN CASAS
 
 Una vez un jugador tenga 4 casas en todas las propiedades de un grupo, podrá
 sustituir las 4 casas de una propiedad por un hotel por el precio de compra
 de una casa.
 
 A la hora de demoler construcciones se hará igualmente de forma escalonada en 
-sentido inverso. TODO: PARA DESHACER HOTELES, DAR 4 CASAS? QUE PASA SI NO QUEDAN
-CASAS? DISCUTIR ESTO.
+sentido inverso. En el caso particular de los hoteles, no se demolerán de golpe,
+sino que primero se pasará de hotel a 4 casas.
 El jugador recibirá la mitad del precio de compra de las construcciones demolidas.
 
-\section{Eventos fantasía}
-Al caer en una casilla fantasía aparecerán 2 cartas, una desvelada y una oculta.
-En la desvelada el jugador podrá leer una acción fantasía positiva 
-TODO: O NO NEGATIVA POR LO MENOS, HABLARLO que podrá aplicar
-por un precio determinado. En caso de no querer o no tener dinero para aplicarla 
-se aplicará la acción oculta, que podrá ser positiva o negativa.
 
 \section{Bonificaciones finales}
 Al final de la partida, antes de desvelar al ganador, se aplicarán 3
 bonificaciones finales aleatorias. Las bonificaciones darán una cantidad
-de dinero determinada por TODO: EN FUNCIÓN DEL PIB O DINERO PLANO????
+de dinero determinada por un porcentaje del valor total de todos los jugadores 
+sumado.
 
 Las posibles bonificaciones son: 
 \begin{itemize}
-	\item Andarín. El que más haya recorrido
-	\item Constructor. El que más casas haya construido (no me mola)
-	\item Ladrón. El que más haya recaurdado en alquileres (tampoco me mola)
-	\item Cojo. El que menos haya recorrido.
-	\item Hacienda somos todos. El que más impuestos haya pagado.
-	\item Mr fantasía. El que más eventos fantasía haya sufrido.
-	\item TODO: PENSAR MAS
+	\item El que más haya recorrido
+	\item El que más haya pagado en alquileres
+	\item El que menos haya recorrido.
+	\item El que más impuestos haya pagado.
+	\item El que más eventos fantasía haya sufrido.
 \end{itemize}
+
+\section{Bancarrota}
+Si un jugador no logra acabar su turno con balance positivo,
+incluso después de hipotecar sus propiedades,
+de vender todas sus construcciones y en general después de hacer 
+gestiones para recaudar dinero,
+todas las propiedades que le queden serán embargadas por el banco,
+poniéndolas inmediatamente a la venta por su valor original.
+
+Esto aplicará también a los jugadores que se rindan, cuyo dinero en 
+metálico quedará además absorbido por el banco sin ir al párking gratuito.
+
 
 
 \newpage
