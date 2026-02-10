@@ -95,7 +95,7 @@ A continuación está la lista de elementos para una partida.
 
 \subsection{Los dados: definición y funcionamiento}
 En el juego hay 3 dados en juego, 2 normales de 6 caras numerados del 1 al 
-6 y uno especial llamado \textit{Dado bus}. El dado bus está compuesto de 6
+6 y uno especial llamado \textit{Dado bus}. El Dado bus está compuesto de 6
 caras, 3 de ellas con el dibujo de un bus y las otras 3 numeradas del 1 al 3.
 
 En una tirada de dados se tiran siempre los 3 dados a la vez.
@@ -152,7 +152,7 @@ y obtendrá derecho a construir en ellas.
 
 \subsection{Puentes}
 Los puentes son un tipo especial de propiedad. En el juego tienen
-una función doble: poder ganar dinero por alquiler (como en el resto de 
+una función doble: poder ganar dinero por alquiler (como el resto de 
 propiedades), y habilitar la transición entre el cuadrado interior y el 
 cuadrado exterior.
 
@@ -168,7 +168,12 @@ En caso de caer justo en la casilla del puente, la decisión par o impar
 la tomará la tirada de dados de la siguiente jugada y no la tirada de la jugada 
 de caer en el puente.
 
-\section{Servidores}
+Las casillas puente, a pesar de ocupar el espacio de 2 casillas convencionales
+únicamente contarán como una en los movimientos tanto en los casos de 
+mantenerse en el cuadrado como en el caso de transicionar al otro
+cuadrado.
+
+\subsection{Servidores}
 Los servidores son otro tipo especial de propiedad. El valor de su 
 alquiler viene determinado por la cantidad de servidores que 
 el jugador posea.
@@ -189,11 +194,13 @@ jugador a cualquier casilla del mapa).
 
 \subsection{Vas a la cárcel}
 Si caes en esta casilla vas directamente a la cárcel y acaba tu turno.
+En el caso de que el jugador deba dinero al banco se le permitirá realizar
+las gestiones necesarias para saldar su deuda.
 
 \subsection{Cárcel}
 Un jugador en la cárcel tiene derecho al principio de su turno a 
 tirar los dados. Si saca dobles puede salir de la cárcel usando 
-el valor de la tirada (pero sin repetir turno por ser dobles).
+el valor de la tirada y jugar su turno con normalidad (pero sin repetir turno por ser dobles).
 Si no saca dobles, puede pagar una fianza de valor fijo o usar
 una carta de salir de la cárcel. Si al tercer turno en la cárcel no ha 
 salido, será obligado a pagar la fianza.
@@ -227,7 +234,8 @@ el bote completo. Si el bote está vacío, no ocurre nada.
 \section{Preparación}
 Cada jugador comienza con una cantidad de dinero determinada.
 El turno se elige tirando un único dado, el que obtenga mayor valor empieza.
-En caso de empate, desempatar. El orden de valores indica el orden de juego
+En caso de empate se vuelven a lanzar los dados para desempatar.
+El orden de valores indica el orden de juego
 de mayor a menor.
 
 
@@ -283,15 +291,9 @@ Al final de la partida, antes de desvelar al ganador, se aplicarán 3
 bonificaciones finales aleatorias. Las bonificaciones darán una cantidad
 de dinero determinada por un porcentaje del valor total de todos los jugadores 
 sumado.
-
-Las posibles bonificaciones son: 
-\begin{itemize}
-	\item El que más haya recorrido
-	\item El que más haya pagado en alquileres
-	\item El que menos haya recorrido.
-	\item El que más impuestos haya pagado.
-	\item El que más eventos fantasía haya sufrido.
-\end{itemize}
+Estas bonificaciones vienen determinadas por estadísticas de la partida,
+como el jugador que más se haya desplazado o el que más alquileres ha 
+tenido que pagar al resto de jugadores, entre otras.
 
 \section{Bancarrota}
 Si un jugador no logra acabar su turno con balance positivo,
@@ -301,7 +303,7 @@ gestiones para recaudar dinero,
 todas las propiedades que le queden serán embargadas por el banco,
 poniéndolas inmediatamente a la venta por su valor original.
 
-Esto aplicará también a los jugadores que se rindan, cuyo dinero en 
+Esto se aplicará también a los jugadores que se rindan, cuyo dinero en 
 metálico quedará además absorbido por el banco sin ir al párking gratuito.
 
 
