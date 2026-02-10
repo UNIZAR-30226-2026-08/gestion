@@ -1,0 +1,28 @@
+Para cada jugada en una partida:
+  HACER FASES -> MOVIMIENTO, NEGOCIO Y LIQUIDACIÓN
+- Guardarla en el vector como sea -> tipo jugada serializarlo 
+- Ejecutar la acción -> hacer el juego 
+- Jugadas: 
+  Tirada de dados -> devolver donde ir si se puede ir , si es bus decirlo y esoerar respuesta 
+  Ver si estas en la carcel (solo pa ver si sacas dobles) .
+  Si te mandan a la carcel no hay negocios. Si hay carcel pero estas en 
+  negativo si hay negocio. 
+  Devuelves 1 o 3 posibilidades y esperas a que te respondan. 
+  Cuando responden con la tirada de dados elegida, devolver la lista y lo que 
+  puede hacer la casilla.
+    Propiedad sin comprar 
+    Propiedad comprada (por un adversario o por ti)
+    Propiedad hipotecada 
+    Tranvia 
+    Parking 
+    Ve a la carcel 
+    Casilla de la carcel 
+    Fantasia 
+    Salida 
+  Subasta en caso de no comprar. EL que no compra no puede. 
+- Volver al principio si son dobles o el tio elige donde mueve son triples (eso al principio)
+- Negocios: edifica, demoler, hipotecar, deshipotecar, proponer venta, proponer compra (poder usar Propiedad
+  OPCIONAL). En las proposiciones se espera a la respuesta de los otros. 
+- Gestion de las derrotas al final de cada ronda. 
+
+
