@@ -20,6 +20,11 @@
 \usepackage{booktabs}
 \usepackage[table]{xcolor}
 \usepackage{multirow}
+\usepackage{makecell}
+\usepackage{tabularx}
+
+% Images
+\usepackage{rotating}
 
 % Algorithms
 \usepackage{algorithm}
@@ -29,7 +34,7 @@
 
 \usepackage{url}
 \usepackage[pdftex, colorlinks=true, citecolor=cyan, linkcolor=black, 
-urlcolor=black]{hyperref}
+urlcolor=blue]{hyperref}
 
 \usepackage[backend=biber, style=numeric]{biblatex}
 \addbibresource{references.bib}
@@ -38,15 +43,30 @@ urlcolor=black]{hyperref}
     
 \begin{titlepage}
 	\centering
-    % \includegraphics[width=0.5\textwidth]{logo.pdf} \par \vspace{1cm}
-	{\scshape \LARGE Asignatura \par}
-	\vspace{1cm}
-	{\huge\bfseries Práctica... \par}
+    \includegraphics[width=0.5\textwidth]{../logo/logo_rw.jpg} 
+
+		08 -- Roberta Williams 
+\par \vspace{1cm}
+
+
+	{\Large Contacto} \par
+    %\texttt{NIP} \par
+		\begin{table}[h]
+				\centering
+				\begin{tabular}{cl} 
+						845977 & Jaime Alconchel Gallego \\ 
+						844699 & Mario Casado Fontana \\
+						842102 & Cristina Embid Martínez \\ 
+						844472 & Hugo Naudín López \\ 
+						844459 & Miguel Ángel Luquín Guerrero  \\ 
+						792310 & Julia Quero Pérez  \\
+						843740 & Nicolás Eugenio de Rivas Morillo \\ 
+						844487 & Miguel Ángel Royo Miguel  \\
+			\end{tabular}
+		\end{table}
 	\vspace{2cm}
-	{\Large Autor} \par
-    \texttt{NIP} \par
-	\vspace{2cm}
-    \textbf{Grupo: }A
+	{\huge\bfseries Propuesta Técnica y Económica del proyecto\par}
+    \includegraphics[width=0.9\textwidth]{../logo/logo.png} \par \vspace{1cm}
     \vfill
     {\Large \today \par}
 \end{titlepage}
@@ -60,19 +80,137 @@ urlcolor=black]{hyperref}
 % \clearemptydoublepage
 
 \section{Resumen ejecutivo}
+El presente documento recoge la propuesta técnica y económica correspondiente
+al sistema para jugar a Magnate, un juego de mesa por turnos inspirado en el
+popular juego Monopoly, pero con más reglas que esperan hacer de la 
+experiencia de juego novedosa y emocionante.
+Estas incluyen un tablero en dos niveles, un nuevo sistema de tarjetas,
+más formas de desplazamiento a lo largo del tablero y un nuevo sistema de
+puntuación.
+El sistema a desarrollar consiste en un juego multiplataforma, para escritorio
+y web, online y multijugador, con funcionalidades de tipo de red social.
+Tendrá un diseño sencillo, estético y lúdico. 
+
+El sistema será compatible con el navegador web Chromium 144.0.7559.96 y
+para aplicaciones de escritorio con el sistema operativo Arch Linux 6.18.6.
+Se desplegará en varios 
+contenedores Docker en un servidor de la empresa 08 -- Roberta Williams.
+Las tecnologías a utilizar abarcan Godot 4.6, React, Django y PostgreSQL.
+
+El desarrollo del sistema se realizará a lo largo de los meses de febrero,
+marzo, abril y mayo, realizando una primera demostración de una versión con
+funcionalidades básicas del sistema el día 10 de abril y presentando el
+11 de mayo el código y versión final. El precio del sistema y el proyecto 
+suman 30795,50 €. El equipo encargado del proyecto 
+consiste en los estudiantes matriculados en 5º curso del Programa Conjunto en 
+Matemáticas e Ingeniería Informática. 
+
+En la sección \ref{sec:objetivos} se recoge una descripción en alto nivel
+de los requisitos funcionales del sistema, así como una serie de bocetos
+y primeros diseños de la interfaz para ilustrar estos.
+
+En la sección \ref{sec:tecnica} se especifican las necesidades técnicas
+tanto para los usuarios del sistema como para el cliente, incluidas las
+particularidades del despliegue del sistema.
+
+En la sección \ref{sec:plan} se detallan los hitos y fechas relevantes en
+la realización del proyecto.
+
+En la sección \ref{sec:equipo} se presentan a los miembros de la empresa
+08 -- Roberta Williams encargados del proyecto y la relación de sus cargos.
+Además, se aporta un portfolio con proyectos y experiencias similares de los
+miembros del equipo que apoyan la decisión de formar parte del proyecto.
+
+En la sección \ref{sec:propuesta} se recogen los detalles económicos de
+interés para el cliente con respecto al coste del proyecto, en forma de
+factura.
+
+Los apéndices incluyen 
+la sección \ref{sec:glosario}, que recoge las abreviaciones utilizadas
+en el documento; y
+la sección \ref{sec:reglas}, donde se detallan las reglas del juego Magnate.
+
+\newpage
 
 \section{Objetivos del sistema}
-El sistema a desarrollar consiste en un juego de inspiración en el Monopoly, multiplataforma
-(para escritorio y web), online y multijugador. Este contará con funcionalidades de tipo de
+\label{sec:objetivos}
+El sistema a desarrollar consiste en un juego de inspiración en el Monopoly, 
+llamado Magnate. Este juego es multiplataforma
+(para escritorio y web), online y multijugador. Contará con funcionalidades de tipo de
 red social y otras características atractivas al juego como la inclusión de ``skins'' 
 personalizables.
 
 \subsection{Análisis de requisitos preliminar}
-En concreto, los requisitos funcionales del sistema incluyen los que se recogen en la Tabla
-\ref{tab:rf}.
+En concreto, los requisitos funcionales del sistema incluyen los siguientes:
+\begin{enumerate}
+\item El sistema permitirá jugar a un juego de inspiración en el Monopoly, que
+contenga sus reglas básicas y una combinación de reglas de expansiones
+inusuales (como el uso de 3 dados y el párking) y nuevas reglas para el
+desplazamiento y la acumulación de efectos. En concreto, las reglas pueden
+consultarse en el Apéndice \ref{sec:reglas}.
+\item El usuario se puede registrar en el sistema, y de él se guardará 
+información relativa a su cuenta de usuario.
+\item Se guardará información de las partidas pausadas y en curso. 
+\item Se almacenará el historial de las partidas de los usuarios.
+\item Las partidas se podrán pausar y reanudar en otra plataforma.
+\item El sistema tendrá características de red social, como registrar
+		amigos, comparar estadísticas y desafiarse a partidas.
+\item El sistema permitirá la creación automática y manual de salas de 
+		partidas con otros jugadores.
+\item El sistema permitirá un tipo de comunicación simultánea durante la
+		partida, como un chat o uso de emoticonos.
+\item El sistema permitirá la personalización de la ficha del juego y la
+		adquisición de los distintos modelos de estas o ``skins'' disponibles
+		mediante un sistema de gacha.
+\item El sistema contará con una IA contra la que se podrán jugar partidas de
+		forma local.
+\end{enumerate}
 
+Como propuesta de diseño e imagen de marca 
+y para ilustrar algunos de los requisitos 
+recopilamos a continuación bocetos del diseño de la interfaz.
+
+En la Figura \ref{fig:inicio} puede verse el inicio de sesión de una cuenta
+de la aplicación Magnate para escritorio. En esta aparece el logo de la 
+aplicación en la parte superior de la pantalla y toda la información
+necesaria para crear e identificar una cuenta en la inferior.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{img/inicio.jpeg}
+	\caption{Pantalla de inicio de sesión en la aplicación de escritorio Magnate.}
+	\label{fig:inicio}
+\end{figure}
+
+En la Figura \ref{fig:modo} puede verse la pantalla de selección de modo de
+juego de la aplicación web. De esta forma ilustramos las distintas formas de 
+las que se puede jugar. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{img/modo.jpeg}
+	\caption{Pantalla de selección del modo de juego para la aplicación web Magnate.}
+	\label{fig:modo}
+\end{figure}
+
+Además, para concretar el requisito funcional 1 (RF-1) e ilustrar
+lo mencionado en el Apéndice \ref{sec:reglas} referente a las reglas del 
+juego, mostramos en la Figura \ref{fig:tablero} un boceto del tablero.
+En este vemos la disposición de los distintos tipos de casilla: las casillas
+marcadas con azul son los puentes, las rojas los servidores, las verdes los
+eventos fantasía, y las que no están marcadas representan las propiedades.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{../img/tablero.PNG}
+	\caption{Boceto del tablero del juego Magnate.}
+	\label{fig:tablero}
+\end{figure}
+
+\newpage 
 
 \section{Descripción técnica}
+\label{sec:tecnica}
 En esta sección se recogen las necesidades técnicas para emplear la aplicación, tanto por parte
 de los usuarios finales como del cliente, y se incluye un esbozo de la tecnología empleada.
 
@@ -90,56 +228,268 @@ El sistema utilizará las siguientes tecnologías:
 \begin{itemize}
 		\item Godot 4.6 (implementación del sistema para aplicación de escritorio).
 		\item React (implementación del sistema para navegador web).
-		\item Django (\textit{backend}).
-		\item PostgreSQL (\textit{backend} de la BDD).
+		\item Django (backend).
+		\item PostgreSQL (backend de la BDD).
 \end{itemize}
-La comunicación entre estas se realizará mediante %TODO JAIME 
+Su arquitectura será la de un sistema desplegado en 3 niveles (o 4, según los 
+resultados del análisis de prestaciones), utilizando un contenedor para la
+base de datos, otro para el backend y la lógica y otro para el frontend (o 2).
 
-El despliegue del sistema se realizará en un servidor de la compañía MATINFO, ofreciendo el
-servicio durante un periodo de prueba de 3 meses tras el que se podrá prorrogar anualmente.
-El código fuente del sistema será proporcionado al cliente, en el momento posterior al periodo de
-prueba en el que el cliente decidiera asumir el despliegue del sistema. 
+La tecnología utilizada para el despliegue serán contenedores Docker.
+Se ha tomado esta decisión dada su amplia compatibilidad, tanto para sistemas
+Windows como Linux.
 
-El sistema será compatible para su despliegue con un sistema operativo %TODO MARIO
-.
-El hardware necesario para su despliegue comprende %TODO MARIO
+El código fuente estará disponible para el cliente. 
+Se pondrá a disposición del cliente un archivo tar.gz con los archivos de
+configuración Dockercompose para desplegar los contenedores del sistema
+en cualquier sistema compatible con Docker. 
+Se hará un despliegue en los servidores de nuestra empresa, la compañía 
+08 -- Roberta Williams, para la demostración del sistema resultante.
+Tras este despliegue inicial, el cliente
+podrá decidir continuir con el despliegue en nuestros servidores o
+desplegar el sistema en AWS o cualquier plataforma cloud compatible con 
+Dockercompose, o con Kubernetes, 
+y realizar cualquier extensión adicional que considere a las funcionalidades,
+siempre bajo un nuevo presupuesto.
 
+Las necesidades de software y hardware para el despliegue se han intentado
+minimizar.
+El sistema operativo de los contenedores proporcionados
+será Debian o Alpine Linux. Se eligen estos sistemas de código abierto, 
+para los que no hay que pagar licencias, como consideración al coste por 
+parte del cliente. 
+En cuanto al hardware, con una máquina con 4GB de RAM bastará para realizar
+una demostración del sistema completo con la carga de una base de datos
+mínima. Las necesidades en memoria crecerán conforme se escalen las bases de
+datos, recomendando contar para empezar con una máquina con 8GB de RAM.
 
 \section{Plan de trabajo}
-En el desarrollo del sistema, se marcan los siguientes hitos de relevancia al cliente:
+\label{sec:plan}
+En el desarrollo del sistema, se marcan las siguientes fechas e hitos de relevancia al cliente:
 \begin{itemize}
 		\item 10 de febrero: Entrega de este documento (propuesta técnica y económica).
-		\item 13 de marzo: Demostración de una primera versión funcional del sistema con la jugabilidad 
-				básica del juego y tratamiento básico de los usuarios.
 		\item 15 de marzo: Entrega del Plan de gestión, análisis y diseño y memoria del proyecto (versión preliminar). 
 		\item 6 de abril: Entrega de la Evaluación del estado del proyecto.
-		\item 10 de abril: Demostración de una segunda versión del sistema con las funcionalidades de
-				red social implementadas.
-		\item 1 de mayo: Entrega del Plan de gestión, análisis y diseño y memoria del proyecto (versión final).
-		\item 11 de mayo: Demostración del juego completo desplegado con todas las funcionalidades
+		\item 10 de abril -- HITO 1: Demostración de una primera versión funcional del sistema con la jugabilidad 
+				básica del juego y tratamiento básico de los usuarios (RF1-5).
+		\item 11 de mayo: Entrega del Plan de gestión, análisis y diseño y memoria del proyecto (versión final).
+		\item Semana del 11 de mayo -- HITO 2: Demostración del juego completo desplegado con todas las funcionalidades
 				especificadas.
 \end{itemize}
 
 \section{Equipo técnico encargado del proyecto}
-Los encargados del proyecto son la totalidad de la empresa MATINFO, que conformamos los estudiantes de
-5º curso del Programa Conjunto en Matemáticas-Informática de la Universidad de Zaragoza. 
+\label{sec:equipo}
+Los encargados del proyecto son la totalidad de la empresa 08 -- Roberta Williams, que conformamos los estudiantes de
+5º curso del Programa Conjunto en Matemáticas e Ingeniería Informática de la Universidad de Zaragoza. 
 La conformación del equipo de trabajo surge de manera natural tras las experiencias compartidas a lo
 largo del grado, que refuerzan nuestra confianza y seguridad en nosotros mismos como equipo y como
-profesionales. Como portfolio de presentación a nuestros futuros clientes para que compartan nuestra
-opinión, podemos poner en valor nuestro trabajo realizado en las siguientes asignaturas y por los
-siguientes equipos:
-\begin{itemize}
-		\item Cooktale. (Sistemas de información. Julia, Cris y Nico.)
-		\item Experiencia laboral de Nico (si compete).
-		\item La web de Jaime \&co.
-		\item Luquín y Naudín, a venderse.
-		\item OSUZ xd (Julia, tareas de organización y gestión. Mario, fotografía @mariostellfotos).
-\end{itemize}
+profesionales. 
 
 Basándonos en nuestras habilidades y experiencia previa, se ha decidido conjuntamente el siguiente 
-reparto de cargos y tareas entre todos:
+reparto de cargos y tareas principales, 
+recogido en la Tabla \ref{tab:cargos}.
+
+\begin{table}[h]
+		\centering
+		\begin{tabular}{|l|c|c|c|c|c|}
+				\hline
+				\textbf{Hugo}
+& \multirow{5}{*}{backend} 
+& 
+& IA 
+& apoyo docu. 
+& \\ \cline{1-1}\cline{3-6}
+
+				\textbf{Jaime} 
+& 
+& \multirow{3}{*}{despliegue} 
+& \makecell{encargado\\despliegue}
+& apoyo docu. 
+& \makecell{coordinador\\backend} \\ \cline{1-1}\cline{4-6}
+
+				\textbf{Mario}
+& 
+& 
+& \makecell{lógica del\\juego}
+& \multirow{4}{*}{\makecell{diseño de\\marca}} 
+& \\ \cline{1-4} \cline{6-6} 
+
+				\textbf{Miguel Royo}
+& \multirow{10}{*}{frontend} 
+& \multirow{5}{*}{web} 
+& \makecell{coordinador\\frontend}
+& 
+				& \multirow{3}{*}{\makecell{diseño\\interfaz}} \\ \cline{1-1} \cline{4-5}
+
+				\textbf{Cristina}
+& 
+& 
+& \makecell{encargada\\calidad web}
+& apoyo docu. 
+& \\ \cline{1-1}\cline{4-6}
+
+				\textbf{Julia} 
+& 
+& 
+& calidad 
+& documentación 
+& \makecell{gestión del\\proyecto} \\ \cline{1-1}\cline{3-6}
+
+				\textbf{Nicolás} 
+& 
+& \multirow{4}{*}{escritorio} 
+& \makecell{encargado\\escritorio}
+& apoyo docu. 
+& \multirow{4}{*}{\makecell{diseño\\interfaz}}\\ \cline{1-1}\cline{4-5}
+
+				\textbf{Miguel Luquín} 
+& 
+& 
+& \makecell{encargado\\calidad\\escritorio}
+& diagramas 
+&  \\ 
+				\hline
+		\end{tabular}
+		\caption{Relación de cargos y tareas principales en la empresa 08 -- Roberta Williams.}
+		\label{tab:cargos}
+\end{table}
+
+\subsection{Portfolio}
+Como portfolio de presentación a nuestros futuros clientes
+queremos poner en valor los siguientes trabajos realizados por cada miembro y
+su experiencia.
+
+Hugo Naudín es un desarrollador backend con experiencia en el desarrollo web,
+destacando Geogym, un buscador de gimnasios en la ciudad de Zaragoza en base
+a unos filtros y mapa de ubicación. Puede verse el diseño de la web, sencillo,
+directo y estilizado, realizado por Miguel Ángel Luquín, en la Figura 
+\ref{fig:geogym}.
+
+\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.9\textwidth]{img/geogym.jpeg}
+		\caption{Buscador de la página Geogym.}
+		\label{fig:geogym}
+\end{figure}
+
+Hugo además cuenta con experiencia en el desarrollo de IAs (chatbots,
+aprendizaje no supervisado), 
+lo que permitirá mejorar la calidad de la IA del juego.
+Miguel, por su parte, también participa en la administración de una cuenta
+de Instagram que comunica sobre la actualidad musical. Puede encontrarse en
+\href{https://www.instagram.com/tracktreze/}{@tracktreze}.
+
+Miguel Ángel Royo fue asignado como jefe de frontend dada su experiencia 
+previa en el diseño de interfaces y en el desarrollo e implementación de 
+aplicaciones web y nativas (tanto en Android como en iOS). Entre sus trabajos
+destacan la aplicación web Jumperr, la aplicación web WolfApp  
+y la aplicación Android RestauranteApp (una aplicación móvil
+que permite que el propietario de una tienda de preparación de comdias pueda
+gestionar los pedidos que le solicitan sus clientes por teléfono, desarrollada
+en el contexto de la asignatura Ingeniería del Software. Todos los miembros
+realizamos aplicaciones similares).
+Jumperr, cuya pantalla de ajustes puede verse en la Figura \ref{fig:jumperr}, 
+es una herramienta local de gestión de contenido multimedia. La aplicación web
+ WolfApp es un sistema gestor
+de partituras musicales, desarrollada en el contexto de la asignatura Sistemas
+de información, junto con Mario Casado y Jaime Alconchel en el backend, 
+trabajando con el formato específico de partituras MusicXML. En la Figura 
+\ref{fig:wolfapp} puede verse la página principal.
+
+\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.9\textwidth]{img/jumperr.jpeg}
+		\caption{Página de ajustes de la aplicación web Jumperr.}
+		\label{fig:jumperr}
+\end{figure}
+
+\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.9\textwidth]{img/wolfapp.jpeg}
+		\caption{Página principal de la aplicación web WolfApp.}
+		\label{fig:wolfapp}
+\end{figure}
+
+Jaime Alconchel asumió el puesto de encargado de despliegue y coordinador de
+backend dada su larga experiencia probando sistemas Unix a lo largo de su
+vida. Mario Casado completa el equipo backend, al haber tomado la
+rama de Hardware y haber dedicado parte de su tiempo libre a la configuración
+de su servidor personal, en el que se desplegará el sistema. Además de sus
+habilidades para el backend, Mario tiene experiencia en la gestión de equipos,
+dada su partición activa en el Desafío Alto Jalón (la carrera de relevos más
+larga de España, con fines solidarios contra la despoblación en Soria), es
+un comunicador consagrado, al contar con más de 185k suscriptores en su canal
+de YouTube
+\href{https://www.youtube.com/channel/UCpbIuaBhHFPCmj9jc70ymxQ/}{NinTricks}
+y es un fotógrafo con gran sensibilidad y sentido de la estética, como puede
+verse en su cuenta de Instagram 
+\href{https://www.instagram.com/mariostellfotos}{@mariostellfotos},
+además de manejar programas de diseño y edición como Photoshop e Illustrator.
+
+Uno de los trabajos habituales de Mario como fotógrafo es fotografiar los
+ensayos y conciertos de la Orquesta Sinfónica Universitaria de Zaragoza, un
+proyecto universitario orquestal nacido en mayo de 2022 de Julia Quero y unos
+amigos del conservatorio, que actúa regularmente en la Sala Mozart del
+Auditorio de Zaragoza y presenta otros formatos de conciertos en espacios de
+la Universidad de Zaragoza. Julia lleva encargándose de la gestión y 
+organización del proyecto desde su fundación, bajo el cargo de presidenta de 
+la asociación de estudiantes. Esta experiencia motiva su designación como
+gestora del proyecto. 
+
+Julia realizó con sus compañeros Cristina Embid y Nicolás de Rivas la 
+aplicación web CookTale en el contexto de la asignatura Sistemas de 
+Información. Esta web es una red social para compartir recetas. En la
+Figura \ref{fig:cooktale} puede verse un comentario del diseño de la vista
+de una receta.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{img/cooktale_receta.png}
+	\caption{Vista de una receta en la aplicación web CookTale.}
+	\label{fig:cooktale}
+\end{figure}
+
+La labor de Cristina en la implementación y en el diseño de las pruebas de 
+CookTale apoyan su decisión de tomar el cargo de encargada de calidad en la
+web. La adaptabilidad de Nicolás y conocimientos full-stack le motivó a ser 
+el encargado principal del desarrollo de la aplicación de escritorio, 
+al ser una tecnología y plataforma nueva para todos.
+
+\newpage
 
 \section{Propuesta económica}
+\label{sec:propuesta}
+\hfill{Factura nº: M-26001}
+
+\hfill{Fecha: 10/02/2026}
+
+08 -- Roberta Williams
+
+Cliente: Francisco Javier Zarazaga Soria
+
+% tablita wapa
+\begin{tabularx}{\textwidth}{Xlr}
+\hline
+		\textbf{Módulo} & & \textbf{Precio} \\
+		\hline
+		Cliente 1 web & & 7.000,00 €\\
+		Cliente 2 escritorio & & 7.000,00 €\\
+		Backend & & 8.400,00 € \\ 
+		Despliegue & & 3.050,00 € \\ 
+		\hline 
+		& & \\ \cline{2-3}
+
+		& Base imponible: & 25.450,00 € \\ 
+		& Tipo IVA: & 21,00\% \\ 
+		& Importe IVA: & 5.344,50 € \\ 
+	 \cline{2-3}
+		& \textbf{Total} & 30.794,50 € \\ 
+	 \cline{2-3}
+\end{tabularx}
+
+\textbf{Condiciones y forma de pago}
+
+El pago se realizará en tres pagos mensuales de igual cantidad la primera semana de los meses de marzo, abril y mayo.
 
 \newpage
 
@@ -152,10 +502,37 @@ reparto de cargos y tareas entre todos:
 \appendix
 
 \section{Glosario}
+\label{sec:glosario}
 \begin{itemize}
 		\item BDD: Base de datos.
+		\item AWS: Amazon Web Services.
 \end{itemize}
 
 \section{Estimación de costes}
+\label{sec:costes}
+A continuación se incluye la hoja de cálculo correspondiente a la estimación
+de los gastos en los que incurrirá la empresa relativos al proyecto. 
+De forma orientativa, se incluye también en la Figura \ref{fig:presupuesto}
+el cálculo exacto del importe por conceptos para cubrir el máximo gasto
+estimado en dicha hoja.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{img/propuesta_exacta.png}
+	\caption{Cálculo exacto para cubrir el gasto máximo estimado.}
+	\label{fig:presupuesto}
+\end{figure}
+
+
+\begin{sidewaysfigure}
+		\includegraphics[width=\textwidth]{img/gastos1.png}
+		\includegraphics[width=\textwidth]{img/gastos2.png}
+\end{sidewaysfigure}
+
+\newpage 
+
+\section{Reglas del juego}
+\label{sec:reglas}
+\input{normas}
 
 \end{document}

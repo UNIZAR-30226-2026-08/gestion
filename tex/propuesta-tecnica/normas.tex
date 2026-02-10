@@ -1,64 +1,4 @@
-% File: lab-report.tex
-\documentclass[11pt]{article}
-
-\usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
-\usepackage[T1]{fontenc}
-
-\usepackage{amssymb} % AMS fonts
-\usepackage{amsmath}
-\usepackage{amsthm}
-
-\usepackage{../common/file-config}
-\usepackage{../common/colours}
-\usepackage{../common/listings-config}
-
-\usepackage{graphicx}
-% \graphicspath{{res/}}
-
-% Tables
-\usepackage{booktabs}
-\usepackage{multirow}
-
-% Algorithms
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\floatname{algorithm}{}
-\renewcommand{\thealgorithm}{}
-
-\usepackage{url}
-\usepackage[pdftex, colorlinks=true, citecolor=cyan, linkcolor=black, 
-urlcolor=black]{hyperref}
-
-\usepackage[backend=biber, style=numeric]{biblatex}
-\addbibresource{references.bib}
-
-\begin{document}
-    
-\begin{titlepage}
-	\centering
-    % \includegraphics[width=0.5\textwidth]{logo.pdf} \par \vspace{1cm}
-	{\scshape \LARGE Proyecto Software \par}
-	\vspace{1cm}
-	{\huge\bfseries Normas MAGNATE \par}
-	\vspace{2cm}
-	{\Large Roberta Williams} \par
-    \texttt{Grupo 08} \par
-	\vspace{2cm}
-	Por el amor de dios que alguien mejore esta portada TODO:
-    \vfill
-    {\Large \today \par}
-\end{titlepage}
-
-% \clearemptydoublepage
-
-\thispagestyle{empty}
-\tableofcontents
-
-\newpage
-% \clearemptydoublepage
-
-\section{Introducción}
+\subsection{Introducción}
 En este documento se definirán las mecánicas y reglas del juego \textit{Magnate}.
 Se explicarán las diferentes fases del juego, las acciones que pueden realizar 
 los jugadores y las condiciones de victoria. 
@@ -71,7 +11,7 @@ tomando inspiración adicional de la saga de videojuegos Mario Party.
 Magnate busca ser un juego dinámico con alto grado de aleatoriedad, pero
 sin perder la estrategia del Monopoly original.
 
-\section{Objetivo del juego}
+\subsection{Objetivo del juego}
 El objetivo del juego es ser el jugador con mayor valor neto al final de la
 partida, limitada por un número de rondas. El valor neto de un jugador se calcula
 mediante la suma de su dinero en efectivo más el valor de venta
@@ -80,7 +20,7 @@ el valor de venta de sus construcciones.
 
 
 
-\section{Equipamiento}
+\subsection{Equipamiento}
 A continuación está la lista de elementos para una partida.
 \begin{itemize}
 	\item Tablero
@@ -93,7 +33,7 @@ A continuación está la lista de elementos para una partida.
 	\item Cartas de evento fantasía
 \end{itemize}
 
-\subsection{Los dados: definición y funcionamiento}
+\subsubsection{Los dados: definición y funcionamiento}
 En el juego hay 3 dados en juego, 2 normales de 6 caras numerados del 1 al 
 6 y uno especial llamado \textit{Dado bus}. El Dado bus está compuesto de 6
 caras, 3 de ellas con el dibujo de un bus y las otras 3 numeradas del 1 al 3.
@@ -116,7 +56,7 @@ convencional. Después de sacar un triple no se vuelve a tirar (como si de unos
 dobles se tratara). Los triples no cuentan en la racha de dobles, por lo que no 
 te pueden mandar a la cárcel.
 
-\subsection{Tablero}
+\subsubsection{Tablero}
 El tablero está compuesto de 2 pistas cuadradas concéntricas:
 el anillo exterior tiene 36 casillas y 4 esquinas y el anillo 
 interior tiene 12 casillas y 4 esquinas. La particularidad
@@ -124,11 +64,11 @@ de las casillas para transición y cómo afectan al tablero
 se comentará con las casillas de puentes.
 
 
-\section{Casillas}
+\subsection{Casillas}
 En esta sección se definirán todos los distintos tipos de casilla 
 que hay en el tablero y sus efectos y mecánicas.
 
-\subsection{Propiedades}
+\subsubsection{Propiedades}
 Las propiedades son casillas que se pueden comprar, vender e hipotecar,
 y por las que se cobra alquiler a jugadores rivales. Si un jugador 
 cae en una de estas casillas pueden pasar varias cosas en función del 
@@ -143,14 +83,14 @@ estado de compra de la propiedad:
 	\item La casilla es del propio jugador. No ocurre nada.
 \end{itemize}
 
-\subsection{Grupos de propiedades}
+\subsubsection{Grupos de propiedades}
 Las propiedades están divididas en grupos de color. Un jugador que posea
 todas las propiedades de un mismo grupo, podrá cobrar el doble de alquiler
 por las propiedades sin construcciones
 y obtendrá derecho a construir en ellas.
 
 
-\subsection{Puentes}
+\subsubsection{Puentes}
 Los puentes son un tipo especial de propiedad. En el juego tienen
 una función doble: poder ganar dinero por alquiler (como el resto de 
 propiedades), y habilitar la transición entre el cuadrado interior y el 
@@ -173,12 +113,12 @@ Las casillas puente, a pesar de ocupar el espacio de 2 casillas convencionales
 mantenerse en el cuadrado como en el caso de transicionar al otro
 cuadrado.
 
-\subsection{Servidores}
+\subsubsection{Servidores}
 Los servidores son otro tipo especial de propiedad. El valor de su 
 alquiler viene determinado por la cantidad de servidores que 
 el jugador posea.
 
-\subsection{Casillas fantasía}
+\subsubsection{Casillas fantasía}
 Al caer en una casilla fantasía, aparecerán 2 cartas, una desvelada y 
 una oculta. La carta desvelada tendrá un evento fantasía aleatorio, que se podrá 
 aplicar por el precio indicado en la carta. El evento fantasía de la 
@@ -192,12 +132,12 @@ Los eventos fantasía tendrán acciones positivas (como ganar dinero),
 negativas (como perder propiedades) o neutras (como mover a otro 
 jugador a cualquier casilla del mapa).
 
-\subsection{Vas a la cárcel}
+\subsubsection{Vas a la cárcel}
 Si caes en esta casilla vas directamente a la cárcel y acaba tu turno.
 En el caso de que el jugador deba dinero al banco se le permitirá realizar
 las gestiones necesarias para saldar su deuda.
 
-\subsection{Cárcel}
+\subsubsection{Cárcel}
 Un jugador en la cárcel tiene derecho al principio de su turno a 
 tirar los dados. Si saca dobles puede salir de la cárcel usando 
 el valor de la tirada y jugar su turno con normalidad (pero sin repetir turno por ser dobles).
@@ -213,25 +153,25 @@ Los turnos en los que un jugador acabe en la cárcel acaban cuando se
 entre en la cárcel sin tener oportunidad de hacer gestiones (excepto
 el caso en el que tenga que saldar deudas con el banco).
 
-\subsection{Salida}
+\subsubsection{Salida}
 En esta casilla comienza la partida y cada vez que un jugador pasa por
 ella recibe una cantidad fija de dinero. Si por algún motivo un jugador 
 decide mantenerse en el cuadrado interior y no pasar por salida, no recibirá
 dinero.
 
-\subsection{Tranvías}
+\subsubsection{Tranvías}
 Hay 4 estaciones de tranvía repartidas por las esquinas del tablero. Si un 
 jugador cae en una de estas casillas podrá moverse directamente a otra 
 estación de tranvía de su elección pagando un precio por el desplazamiento.
 
 
-\subsection{Párking}
+\subsubsection{Párking}
 Durante la partida, las multas, pagos de impuestos y demás ingresos 
 a la banca en general,
 se acumularán en un bote. El jugador que caiga en el parking se llevará
 el bote completo. Si el bote está vacío, no ocurre nada.
 
-\section{Preparación}
+\subsection{Preparación}
 Cada jugador comienza con una cantidad de dinero determinada.
 El turno se elige tirando un único dado, el que obtenga mayor valor empieza.
 En caso de empate se vuelven a lanzar los dados para desempatar.
@@ -239,7 +179,7 @@ El orden de valores indica el orden de juego
 de mayor a menor.
 
 
-\section{Turno de juego}
+\subsection{Turno de juego}
 Al comienzo del turno, el jugador lanzará los dados y moverá en función de lo 
 que salga. Al caer en una casilla, se aplicará su efecto correspondiente.
 Tras todos los efectos de casilla, el jugador podrá realizar acciones de 
@@ -249,7 +189,7 @@ deshipotecar propiedades y comprar o vender propiedades a otros jugadores.
 Haga lo que haga el jugador, su balance debe quedar positivo al final de su turno,
 de lo contrario será declarado en bancarrota y eliminado de la partida.
 
-\section{Subastas}
+\subsection{Subastas}
 Las subastas serán pujas abiertas de valor oculto. Es decir, cada jugador
 participante en la puja decidirá si participar o no, y en caso de participar
 elegirá el valor por el que puja. El resto de jugadores no sabrá en ningún 
@@ -259,7 +199,7 @@ el ganador de la puja. En caso de empate la propiedad no se dará a nadie.
 
 Los jugadores que provocan una subasta no podrán participar en ella.
 
-\section{Alquileres}
+\subsection{Alquileres}
 Si un jugador cae en una propiedad de otro jugador, deberá pagar el alquiler
 correspondiente. El alquiler se calcula en función de si el dueño tiene el grupo 
 de propiedades completo y de las construcciones que haya en la propiedad.
@@ -269,7 +209,7 @@ el banco pagará el alquiler y al final del turno, el jugador deberá saldar
 su deuda con el banco mediante el hipotecado de propiedades o la venta de
 construcciones o propiedades tanto al banco como a otros jugadores.
 
-\section{Construcciones}
+\subsection{Construcciones}
 Una vez un jugador tiene el grupo completo de un color, podrá construir
 casas en las propiedades de este grupo. El coste de construcción de cada 
 casa vendrá marcado en cada propiedad. Las casas deben construirse de forma 
@@ -286,7 +226,7 @@ sino que primero se pasará de hotel a 4 casas.
 El jugador recibirá la mitad del precio de compra de las construcciones demolidas.
 
 
-\section{Bonificaciones finales}
+\subsection{Bonificaciones finales}
 Al final de la partida, antes de desvelar al ganador, se aplicarán 3
 bonificaciones finales aleatorias. Las bonificaciones darán una cantidad
 de dinero determinada por un porcentaje del valor total de todos los jugadores 
@@ -295,7 +235,7 @@ Estas bonificaciones vienen determinadas por estadísticas de la partida,
 como el jugador que más se haya desplazado o el que más alquileres ha 
 tenido que pagar al resto de jugadores, entre otras.
 
-\section{Bancarrota}
+\subsection{Bancarrota}
 Si un jugador no logra acabar su turno con balance positivo,
 incluso después de hipotecar sus propiedades,
 de vender todas sus construcciones y en general después de hacer 
@@ -307,12 +247,3 @@ Esto se aplicará también a los jugadores que se rindan, cuyo dinero en
 metálico quedará además absorbido por el banco sin ir al párking gratuito.
 
 
-
-\newpage
-\thispagestyle{empty}
-\nocite{*}
-\printbibliography
-
-
-
-\end{document}
