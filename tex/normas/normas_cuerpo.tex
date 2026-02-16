@@ -141,8 +141,8 @@ las gestiones necesarias para saldar su deuda.
 Un jugador en la cárcel tiene derecho al principio de su turno a 
 tirar los dados. Si saca dobles puede salir de la cárcel usando 
 el valor de la tirada y jugar su turno con normalidad (pero sin repetir turno por ser dobles).
-Si no saca dobles, puede pagar una fianza de valor fijo o usar
-una carta de salir de la cárcel. Si al tercer turno en la cárcel no ha 
+Si no saca dobles, puede pagar una fianza de valor fijo. 
+Si al tercer turno en la cárcel no ha 
 salido, será obligado a pagar la fianza.
 
 Los jugadores en la cárcel tienen derecho a cobrar alquileres y a realizar
@@ -155,7 +155,11 @@ el caso en el que tenga que saldar deudas con el banco).
 
 \subsubsection{Salida}
 En esta casilla comienza la partida y cada vez que un jugador pasa por
-ella recibe una cantidad fija de dinero. Si por algún motivo un jugador 
+ella (al caer justo sobre ella o la primera tirada en la que la dejas atrás
+de la vuelta al cuadrado correspondiente) 
+recibe una cantidad fija de dinero. 
+
+Si por algún motivo un jugador 
 decide mantenerse en el cuadrado interior y no pasar por salida, no recibirá
 dinero.
 
@@ -184,7 +188,7 @@ Al comienzo del turno, el jugador lanzará los dados y moverá en función de lo
 que salga. Al caer en una casilla, se aplicará su efecto correspondiente.
 Tras todos los efectos de casilla, el jugador podrá realizar acciones de 
 gestión. Estas acciones son: comprar o vender construcciones, hipotecar o 
-deshipotecar propiedades y comprar o vender propiedades a otros jugadores.
+deshipotecar propiedades y comprar o vender propiedades a otros jugadores (intercambios, ver la Sección \ref{sec:intercambios}).
 
 Haga lo que haga el jugador, su balance debe quedar positivo al final de su turno,
 de lo contrario será declarado en bancarrota y eliminado de la partida.
@@ -225,6 +229,15 @@ sentido inverso. En el caso particular de los hoteles, no se demolerán de golpe
 sino que primero se pasará de hotel a 4 casas.
 El jugador recibirá la mitad del precio de compra de las construcciones demolidas.
 
+\subsection{Intercambios}
+\label{sec:intercambios}
+Cada turno, el jugador podrá proponer intercambios a otros jugadores. Un 
+intercambio se hará entre el jugador que lo propone y otro que podrá elegir.
+Se podrán intercambiar dinero y cartas (propiedades, servidores y puentes)
+por dinero y cartas. 
+
+No se podrán intercambiar propiedades de un grupo de propiedades en el que
+alguna de las propiedades tengan construcciones.
 
 \subsection{Bonificaciones finales}
 Al final de la partida, antes de desvelar al ganador, se aplicarán 3
@@ -245,5 +258,6 @@ poniéndolas inmediatamente a la venta por su valor original.
 
 Esto se aplicará también a los jugadores que se rindan, cuyo dinero en 
 metálico quedará además absorbido por el banco sin ir al párking gratuito.
+
 
 
