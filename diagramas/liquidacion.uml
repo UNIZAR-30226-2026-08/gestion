@@ -1,0 +1,11 @@
+@startuml
+
+state "Venta" as sell
+state "Fin de partida" as end
+
+[*] --> sell
+sell --> sell : Tiene propiedades y dinero negativo
+sell --> end : Se rinde
+sell --> [*] : Dinero positivo
+
+@enduml

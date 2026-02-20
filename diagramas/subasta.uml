@@ -1,0 +1,9 @@
+@startuml
+
+state "Esperar precios" as wait
+
+[*] --> wait
+wait --> [*] : Todos han elegido
+' Timeout: Subastar 0
+
+@enduml

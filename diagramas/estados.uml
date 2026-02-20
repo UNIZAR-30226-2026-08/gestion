@@ -1,12 +1,5 @@
 @startuml
-' skinparam monochrome true
-' skinparam handwritten true
-' skinparam state {
-'     BackgroundColor White
-'     BorderColor Black
-' }
 
-' Define all states and aliases first to avoid parsing errors
 state "Inicial" as ini
 state "Elección" as elec
 state "Casilla" as cas
@@ -22,6 +15,7 @@ state buy_decision <<choice>>
 [*] --> ini
 
 ' Main branch from "inicial"
+' Timeout de no tirar dados: pierdes
 ini --> elec : triple (triples = true)
 ini --> elec : doble bus (dobles = true, streak++)
 ini --> cas : dobles (dobles = true, streak++)
@@ -46,40 +40,5 @@ fork_propiedad --> subasta : No compra
 gest --> liq 
 
 liq --> [*]
-
-' ' Loops back to inicial
-' elec_triple --> ini
-' elec_bus_doble --> ini
-' casilla_doble --> ini
-' cas --> ini
-' 
-' ' Central "casilla" state and direct outputs
-' elec_compra --> cas
-' cas --> carcel : carcel
-' carcel --> liq_izq
-' 
-' ' Fantasía branch
-' cas --> elec_fantasia : fantasía
-' elec_fantasia --> gest_fantasia : (aplicar fantasía)
-' gest_fantasia --> liq_der
-' 
-' ' Propiedad (Property) complex branch
-' cas --> fork_propiedad : propiedad
-' 
-' fork_propiedad -right-> gest_main : owned
-' fork_propiedad -right-> gest_main : owned\n(by other) / pagar
-' fork_propiedad -right-> buy_decision : not owned
-' 
-' buy_decision --> gest_main : comprar
-' buy_decision --> subasta : no comprar
-' subasta --> gest_main
-' 
-' ' Exits from main Gestión
-' gest_main -right-> liq_sup
-' 
-' ' Terminal states
-' liq_izq --> [*]
-' liq_sup --> [*]
-' liq_der --> [*]
 
 @enduml

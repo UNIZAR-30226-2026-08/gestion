@@ -1,0 +1,11 @@
+@startuml
+
+state "Esperar respuesta" as wait
+
+[*] --> wait : Proponer transacción
+
+wait --> [*] : Acepta (aplicar transacción)
+' Timeout: Rechazas
+wait --> [*] : Rechaza 
+
+@enduml
