@@ -1,0 +1,85 @@
+@startuml
+' skinparam monochrome true
+' skinparam handwritten true
+' skinparam state {
+'     BackgroundColor White
+'     BorderColor Black
+' }
+
+' Define all states and aliases first to avoid parsing errors
+state "Inicial" as ini
+state "Elección" as elec
+state "Casilla" as cas
+state "Liquidación" as liq
+state "Gestión" as gest
+state "Subasta" as subasta
+state "Elección fantasía" as elec_fantasia
+
+state fork_propiedad <<fork>>
+state buy_decision <<choice>>
+
+' Start point
+[*] --> ini
+
+' Main branch from "inicial"
+ini --> elec : triple (triples = true)
+ini --> elec : doble bus (dobles = true, streak++)
+ini --> cas : dobles (dobles = true, streak++)
+ini --> cas : normal (not cárcel)
+ini --> liq : normal (cárcel)
+
+' Elección
+elec --> ini : dobles
+elec --> cas : not dobles
+
+' Casilla
+cas --> fork_propiedad : propiedad
+cas --> elec_fantasia : fantasía
+
+' Propiedad
+fork_propiedad --> gest : Propiedad del jugador
+fork_propiedad --> gest : Propiedad ajena 
+fork_propiedad --> gest : Compra
+fork_propiedad --> subasta : No compra
+
+' Gestión
+gest --> liq 
+
+liq --> [*]
+
+' ' Loops back to inicial
+' elec_triple --> ini
+' elec_bus_doble --> ini
+' casilla_doble --> ini
+' cas --> ini
+' 
+' ' Central "casilla" state and direct outputs
+' elec_compra --> cas
+' cas --> carcel : carcel
+' carcel --> liq_izq
+' 
+' ' Fantasía branch
+' cas --> elec_fantasia : fantasía
+' elec_fantasia --> gest_fantasia : (aplicar fantasía)
+' gest_fantasia --> liq_der
+' 
+' ' Propiedad (Property) complex branch
+' cas --> fork_propiedad : propiedad
+' 
+' fork_propiedad -right-> gest_main : owned
+' fork_propiedad -right-> gest_main : owned\n(by other) / pagar
+' fork_propiedad -right-> buy_decision : not owned
+' 
+' buy_decision --> gest_main : comprar
+' buy_decision --> subasta : no comprar
+' subasta --> gest_main
+' 
+' ' Exits from main Gestión
+' gest_main -right-> liq_sup
+' 
+' ' Terminal states
+' liq_izq --> [*]
+' liq_sup --> [*]
+' liq_der --> [*]
+
+@enduml
