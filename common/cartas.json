@@ -1,0 +1,480 @@
+{
+  "propiedades": [
+    {
+      "id": "001",
+      "grupo": "1",
+      "precio": 60,
+      "nombre": "Conserjería del Ada Byron"
+    },
+    {
+      "id": "003",
+      "grupo": "1",
+      "precio": 60,
+      "nombre": "Sala de estudios Ada Byron"
+    },
+    {
+      "id": "006",
+      "grupo": "2",
+      "precio": 100,
+      "nombre": "Lab 0.05b"
+    },
+    {
+      "id": "008",
+      "grupo": "2",
+      "precio": 100,
+      "nombre": "Lab 0.06b"
+    },
+    {
+      "id": "009",
+      "grupo": "2",
+      "precio": 120,
+      "nombre": "Lab 1.02"
+    },
+    {
+      "id": "011",
+      "grupo": "3",
+      "precio": 140,
+      "nombre": "Microondas Ada Byron"
+    },
+    {
+      "id": "013",
+      "grupo": "3",
+      "precio": 140,
+      "nombre": "Máquinas expendedoras del edificio Ada Byron"
+    },
+    {
+      "id": "014",
+      "grupo": "3",
+      "precio": 160,
+      "nombre": "Cafetería Ada Byron"
+    },
+    {
+      "id": "016",
+      "grupo": "4",
+      "precio": 180,
+      "nombre": "Macetas apadrinadas"
+    },
+    {
+      "id": "018",
+      "grupo": "4",
+      "precio": 10,
+      "nombre": "Máquinas expendedoras del edificio Torres Quevedo"
+    },
+    {
+      "id": "019",
+      "grupo": "4",
+      "precio": 200,
+      "nombre": "Cafetería del Torres Quevedo"
+    },
+    {
+      "id": "021",
+      "grupo": "5",
+      "precio": 220,
+      "nombre": "Secretaría EINA"
+    },
+    {
+      "id": "023",
+      "grupo": "5",
+      "precio": 220,
+      "nombre": "Laboratorio de Física y Electrónica"
+    },
+    {
+      "id": "024",
+      "grupo": "5",
+      "precio": 240,
+      "nombre": "Salón de Actos Torres Quevedo"
+    },
+    {
+      "id": "026",
+      "grupo": "6",
+      "precio": 260,
+      "nombre": "Aula 1.18 Torres Quevedo"
+    },
+    {
+      "id": "027",
+      "grupo": "6",
+      "precio": 260,
+      "nombre": "Aula 1.19 Torres Quevedo"
+    },
+    {
+      "id": "029",
+      "grupo": "6",
+      "precio": 280,
+      "nombre": "Aula 1.20 Torres Quevedo"
+    },
+    {
+      "id": "031",
+      "grupo": "7",
+      "precio": 300,
+      "nombre": "Microondas Betancourt"
+    },
+    {
+      "id": "032",
+      "grupo": "7",
+      "precio": 300,
+      "nombre": "Sala de estudio Tomás Pollán"
+    },
+    {
+      "id": "034",
+      "grupo": "7",
+      "precio": 320,
+      "nombre": "Cafetería Betancourt"
+    },
+    {
+      "id": "037",
+      "grupo": "8",
+      "precio": 350,
+      "nombre": "Sala de trabajo 2"
+    },
+    {
+      "id": "039",
+      "grupo": "8",
+      "precio": 400,
+      "nombre": "Biblioteca Hypatia de Alejandría"
+    },
+    {
+      "id": "101",
+      "grupo": "9",
+      "precio": 260,
+      "nombre": "Biblioteca de Geología"
+    },
+    {
+      "id": "103",
+      "grupo": "9",
+      "precio": 280,
+      "nombre": "Baño de chicas con terraza"
+    },
+    {
+      "id": "105",
+      "grupo": "10",
+      "precio": 300,
+      "nombre": "Aula Magna Facultad de Ciencias"
+    },
+    {
+      "id": "106",
+      "grupo": "10",
+      "precio": 180,
+      "nombre": "Secretaría Facultad de Ciencias"
+    },
+    {
+      "id": "108",
+      "grupo": "11",
+      "precio": 200,
+      "nombre": "Exposición de instrumentos científicos"
+    },
+    {
+      "id": "110",
+      "grupo": "11",
+      "precio": 220,
+      "nombre": "Biblioteca Química"
+    },
+    {
+      "id": "112",
+      "grupo": "12",
+      "precio": 280,
+      "nombre": "Biblioteca Matemáticas"
+    },
+    {
+      "id": "113",
+      "grupo": "12",
+      "precio": 240,
+      "nombre": "Aula 11"
+    },
+    {
+      "id": "005",
+      "grupo": "server",
+      "precio": 150,
+      "nombre": "Pilgor"
+    },
+    {
+      "id": "025",
+      "grupo": "server",
+      "precio": 150,
+      "nombre": "Hendrix"
+    },
+    {
+      "id": "015",
+      "grupo": "puente",
+      "precio": 200,
+      "nombre": "Puente de Santiago"
+    },
+    {
+      "id": "035",
+      "grupo": "puente",
+      "precio": 200,
+      "nombre": "Puente del Tercer Milenio"
+    },
+    {
+      "id": "010",
+      "grupo": "tranvía",
+      "precio": 0,
+      "nombre": "Campus Río Ebro"
+    },
+    {
+      "id": "030",
+      "grupo": "tranvía",
+      "precio": 0,
+      "nombre": "La Chimenea"
+    },
+    {
+      "id": "100",
+      "grupo": "tranvía",
+      "precio": 0,
+      "nombre": "Plaza San Francisco"
+    },
+    {
+      "id": "107",
+      "grupo": "tranvía",
+      "precio": 0,
+      "nombre": "Gran Vía"
+    }
+  ],
+  "tarjetas_fantasia": [
+    {
+      "tipo": "win_plain_money",
+      "valor": 20,
+      "coste_carta": 130,
+      "lore": "Ganaste el concurso anual de postales navideñas de la EINA. Tu premio: 150€."
+    },
+    {
+      "tipo": "win_plain_money",
+      "valor": 60,
+      "coste_carta": 130,
+      "lore": "Rompiste tu promesa a Gerardo y ganaste una línea en un bingo. Línea 60€."
+    },
+    {
+      "tipo": "win_plain_money",
+      "valor": 120,
+      "coste_carta": 130,
+      "lore": "¡Enhorabuena, has calificado MH en la asignatura Sistemas Operativos!"
+    },
+    {
+      "tipo": "win_plain_money",
+      "valor": 150,
+      "coste_carta": 130,
+      "lore": "Ganaste el concurso anual de postales navideñas de la EINA. Tu premio: 150€."
+    },
+    {
+      "tipo": "win_plain_money",
+      "valor": 200,
+      "coste_carta": 130,
+      "lore": "Ganaste el primer premio en el concurso de relatos científicos por San Alberto Magno de la Facultad de Ciencias. Tu premio: 200€"
+    },
+    {
+      "tipo": "win_ratio_money",
+      "valor": 1,
+      "coste_carta": 500,
+      "lore": "Un fallo electrónico te cobró la matrícula de este curso con los créditos a precio de ciencias. Supone un ahorro de un 1% de tu capital. "
+    },
+    {
+      "tipo": "win_ratio_money",
+      "valor": 2,
+      "coste_carta": 500,
+      "lore": "Has conseguido sacarte un dinerillo haciendo tu TFG de informática en empresa. Supone un 2% sobre tu capital. "
+    },
+    {
+      "tipo": "win_ratio_money",
+      "valor": 5,
+      "coste_carta": 500,
+      "lore": "Tu servidor albergando tu trabajo de Proyecto Software lo está reventando. Estás ganando un 5% sobre tu capital."
+    },
+    {
+      "tipo": "win_ratio_money",
+      "valor": 10,
+      "coste_carta": 500,
+      "lore": "Tras 10 años en el fondo de inversión has obtenido los beneficios prometidos por el basado. Ganas un 10% sobre tu capital. "
+    },
+    {
+      "tipo": "loose_plain_money",
+      "valor": 40,
+      "coste_carta": 80,
+      "lore": "Las chicas morenas que escuchan Camarón se han hecho con tu mochila cuando la dejaste sin vigilancia. Por suerte nunca llevas nada para apuntar en clase, pierdes solo 40€. "
+    },
+    {
+      "tipo": "loose_plain_money",
+      "valor": 80,
+      "coste_carta": 80,
+      "lore": "Después de oír a la profesora Villate no te parece que puedas oír a nadie más. Tu nuevo audífono te cuesta 80€."
+    },
+    {
+      "tipo": "loose_plain_money",
+      "valor": 120,
+      "coste_carta": 80,
+      "lore": "Tuviste que ir al oculista después de trabajar tanto en tus prácticas de informática gráfica. Tus gafas nuevas te cuestan 120€"
+    },
+    {
+      "tipo": "loose_plain_money",
+      "valor": 150,
+      "coste_carta": 80,
+      "lore": "Suspendiste la recuperación de Estructuras Algebraicas. A por tu segunda matrícula. "
+    },
+    {
+      "tipo": "loose_plain_money",
+      "valor": 200,
+      "coste_carta": 80,
+      "lore": "Suspendiste de nuevo la recuperación de EDO. ¡A la tercera va la vencida!"
+    },
+    {
+      "tipo": "loose_ratio_money",
+      "valor": 1,
+      "coste_carta": 30,
+      "lore": "Han vuelto a subir el precio de los menús en la cafetería. Va a suponer unas pérdidas de un 1% en tu capital actual."
+    },
+    {
+      "tipo": "loose_ratio_money",
+      "valor": 2,
+      "coste_carta": 30,
+      "lore": "La Universidad ha escuchado tus quejas: ya no pagarás lo créditos de Matinf a precio de informática, sino que te han puesto un precio especial de Matinf. Pierdes un 2% de tu capital."
+    },
+    {
+      "tipo": "loose_ratio_money",
+      "valor": 5,
+      "coste_carta": 30,
+      "lore": "El partido X ha modificado la política de educación, derivando en que la matrícula de Unizar se encarezca. Supone una pérdida del 5% de tu capital."
+    },
+    {
+      "tipo": "loose_ratio_money",
+      "valor": 10,
+      "coste_carta": 30,
+      "lore": "Tu inversión de criptomonedas ha fracasado. Pierdes un 10% de tu capital."
+    },
+    {
+      "tipo": "break_opponent_house",
+      "valor": 0,
+      "coste_carta": 150,
+      "lore": "Le dices a tu colega de hacer una fiesta en su casa. Invita a tanta gente que se rompe el suelo. Puedes destruir la casa de un oponente."
+    },
+    {
+      "tipo": "break_own_house",
+      "valor": 0,
+      "coste_carta": 30,
+      "lore": "Te apetece hacer reformas en casa y crees que puedes hacerlo solo. Oh sorpresa, has tirado el techo de tu casa. Elige una de tus propiedades que se destruirá."
+    },
+    {
+      "tipo": "shuffle_positions",
+      "valor": 0,
+      "coste_carta": 50,
+      "lore": "Primer día de clase en matemáticas y nadie vio dónde eran las clases, ni se ve en el teléfono… la opción más rápida es buscar el aula. Os dispersáis."
+    },
+    {
+      "tipo": "move_anywhere_random",
+      "valor": 0,
+      "coste_carta": 50,
+      "lore": "La manifestación por Palestina ha trastocado tu viaje a la EINA. Te mueves a una posición aleatoria."
+    },
+    {
+      "tipo": "move_opponent_anywhere_random",
+      "valor": 0,
+      "coste_carta": 60,
+      "lore": "10 minutos tras empezar la práctica, tus compañeros te preguntan dónde está el laboratorio de físicas. Los demás oponentes se mueven a localizaciones aleatorias."
+    },
+    {
+      "tipo": "share_money_all",
+      "valor": 20,
+      "coste_carta": 5,
+      "lore": "Te toca pagar el bono de comidas de la cafetería. Das 20€ a cada jugador."
+    },
+    {
+      "tipo": "share_money_all",
+      "valor": 30,
+      "coste_carta": 5,
+      "lore": "Perdiste la apuesta: la cucaracha no sobrevivió a la clase de Grafos y Combinatoria. Das 30€ a cada jugador."
+    },
+    {
+      "tipo": "share_money_all",
+      "valor": 50,
+      "coste_carta": 5,
+      "lore": "Invitas a los demás jugadores a unas cuantas rondas de cerveza hasta que ahoguen sus penas. Da 50€ a cada jugador."
+    },
+    {
+      "tipo": "dont_pay_next_turn_rent",
+      "valor": 0,
+      "coste_carta": 35,
+      "lore": "Un amigo tuyo te ha dicho que puedes ocupar propiedades. No pagas renta el siguiente turno."
+    },
+    {
+      "tipo": "all_your_rents_x2_one_turn",
+      "valor": 0,
+      "coste_carta": 100,
+      "lore": "Estás cansado de que las previas se hagan siempre en tu casa. Durante el siguiente turno las rentas de tus casas cobran el doble."
+    },
+    {
+      "tipo": "free_house",
+      "valor": 0,
+      "coste_carta": 80,
+      "lore": "¿Crees que por saber hacer un lego, puedes construir una casa? Tienes razón, obtienes una casa gratis."
+    },
+    {
+      "tipo": "go_to_jail",
+      "valor": 0,
+      "coste_carta": 25,
+      "lore": "Tenemos pruebas contra ti: has dicho que FISMAT era mejor que MATINF. A la cárcel."
+    },
+    {
+      "tipo": "send_to_jail",
+      "valor": 0,
+      "coste_carta": 80,
+      "lore": "Mira que chivarse de que tus compañeros copiaron en el último examen… Todos los demás jugadores van a la cárcel."
+    },
+    {
+      "tipo": "everybody_to_jail",
+      "valor": 0,
+      "coste_carta": 50,
+      "lore": "Tener solo una hora para comer e ir de Ciencias a la EINA debería ser ilegal. Y lo es: todos a la cárcel."
+    },
+    {
+      "tipo": "double_or_nothing",
+      "valor": 0,
+      "coste_carta": 50,
+      "lore": "(Te dejas todo para julio, que no septiembre)"
+    },
+    {
+      "tipo": "get_parking_money",
+      "valor": 0,
+      "coste_carta": 500,
+      "lore": "Siguiendo las indicaciones de un correo de la EINA sobre un coche en estado de peligro has conseguido una suma de dinero. Recoge el parking gratuito."
+    },
+    {
+      "tipo": "revive_property",
+      "valor": 0,
+      "coste_carta": 100,
+      "lore": "Se han perdido los papeles de tu hipoteca. Puedes deshipotecar una propiedad gratis."
+    },
+    {
+      "tipo": "earthquake",
+      "valor": 0,
+      "coste_carta": 200,
+      "lore": "Desastre natural de escala 6. Todas las calles pierden una casa."
+    },
+    {
+      "tipo": "everybody_sends_you_money",
+      "valor": 20,
+      "coste_carta": 120,
+      "lore": "Tienes la clave para resolver la práctica de Procesadores  de Lenguaje. Tus compañeros la adquieren por 20€ cada uno."
+    },
+    {
+      "tipo": "everybody_sends_you_money",
+      "valor": 30,
+      "coste_carta": 120,
+      "lore": "Has conseguido una tutoría con la profesora Peña. Los demás jugadores han perdido su apuesta, cada uno te paga los 30€ que les dicta su palabra de honor."
+    },
+    {
+      "tipo": "everybody_sends_you_money",
+      "valor": 50,
+      "coste_carta": 120,
+      "lore": "Bloquear el Drive de Matinf fue una jugada sucia pero eficaz: todos los demás jugadores te dan 50€ a cambio de recuperar el acceso."
+    },
+    {
+      "tipo": "magnetism ",
+      "valor": 0,
+      "coste_carta": 100,
+      "lore": "Has comprado una bolsa de chocoboms blancos."
+    },
+    {
+      "tipo": "go_to_start",
+      "valor": 0,
+      "coste_carta": 90,
+      "lore": "Deja atrás la costumbre: ya eres todo un matemático que solo tiene que ir a la EINA. Avanza a la casilla de salida."
+    }
+  ]
+}
