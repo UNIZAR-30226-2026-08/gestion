@@ -11,6 +11,8 @@ state "Elección fantasía" as elec_fantasia
 state fork_propiedad <<fork>>
 state buy_decision <<choice>>
 
+state post_fork_propiedad <<fork>>
+
 ' Start point
 [*] --> ini
 
@@ -30,11 +32,21 @@ elec --> cas : not dobles
 cas --> fork_propiedad : propiedad
 cas --> elec_fantasia : fantasía
 
+elec_fantasia --> ini : dobles == true
+elec_fantasia --> gest : dobles == false
+
 ' Propiedad
-fork_propiedad --> gest : Propiedad del jugador
-fork_propiedad --> gest : Propiedad ajena 
-fork_propiedad --> gest : Compra
+fork_propiedad --> post_fork_propiedad : Propiedad del jugador
+fork_propiedad --> post_fork_propiedad : Propiedad ajena 
+fork_propiedad --> post_fork_propiedad : Compra
 fork_propiedad --> subasta : No compra
+
+post_fork_propiedad --> gest : dobles == false
+post_fork_propiedad --> ini : dobles == true
+
+subasta --> ini : dobles == true
+subasta --> gest : dobles == false
+
 
 ' Gestión
 gest --> liq 
