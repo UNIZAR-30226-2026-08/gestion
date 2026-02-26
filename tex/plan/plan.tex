@@ -1,0 +1,528 @@
+% File: lab-report.tex
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amssymb} % AMS fonts
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{../common/file-config}
+\usepackage{../common/colours}
+\usepackage{../common/listings-config}
+
+\usepackage{graphicx}
+% \graphicspath{{res/}}
+
+% Tables
+\usepackage{booktabs}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{tabularx}
+
+% Images
+\usepackage{rotating}
+
+% Algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\floatname{algorithm}{}
+\renewcommand{\thealgorithm}{}
+
+\usepackage{url}
+\usepackage[pdftex, colorlinks=true, citecolor=cyan, linkcolor=black, 
+urlcolor=blue]{hyperref}
+
+\usepackage[backend=biber, style=numeric]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+    
+\begin{titlepage}
+	\centering
+    \includegraphics[width=0.5\textwidth]{../logo/logo_rw.jpg} 
+
+		08 -- Roberta Williams 
+\par \vspace{1cm}
+
+
+	{\Large Contacto} \par
+    %\texttt{NIP} \par
+		\begin{table}[h]
+				\centering
+				\begin{tabular}{cl} 
+						845977 & Jaime Alconchel Gallego \\ 
+						844699 & Mario Casado Fontana \\
+						842102 & Cristina Embid Martínez \\ 
+						844472 & Hugo Naudín López \\ 
+						844459 & Miguel Ángel Luquín Guerrero  \\ 
+						792310 & Julia Quero Pérez  \\
+						843740 & Nicolás Eugenio de Rivas Morillo \\ 
+						844487 & Miguel Ángel Royo Miguel  \\
+			\end{tabular}
+		\end{table}
+	\vspace{2cm}
+	{\huge\bfseries Plan de gestión, análisis, diseño y memoria del proyecto\par}
+    \includegraphics[width=0.9\textwidth]{../logo/logo.png} \par \vspace{1cm}
+    \vfill
+    {\Large \today \par}
+\end{titlepage}
+
+% \clearemptydoublepage
+
+\thispagestyle{empty}
+\tableofcontents
+
+\newpage
+% \clearemptydoublepage
+
+\section{Introducción} % TODO JULIA
+El presente documento recoge el plan de gestión, análisis, diseño y memoria
+del proyecto Magnate.
+Magnate es un sistema 
+que consiste en un juego multiplataforma, para escritorio
+y web, online y multijugador, con funcionalidades de tipo de red social.
+Tendrá un diseño sencillo, estético y lúdico. 
+Magnate es un juego de mesa por turnos basado en el
+popular juego Monopoly, tomando inspiración adicional de la saga de 
+videojuegos Mario Party. Magnate busca ser un juego dinámico con alto grado
+de aleatoriedad, pero sin perder la estrategia del Monopoly original,
+al que añade más reglas que esperan hacer de la 
+experiencia de juego novedosa y emocionante.
+Estas incluyen un tablero en dos niveles, un nuevo sistema de tarjetas,
+más formas de desplazamiento a lo largo del tablero y un nuevo sistema de
+puntuación.
+
+El sistema permitirá dos modos de juego: partidas online y
+partidas locales. Las partidas online se realizarán en salas públicas con 
+4 usuarios interesados en jugar partidas online. Las partidas locales
+permitirán el juego de varios jugadores en local y bots, sumando hasta
+4 jugadores. 
+
+Los principales objetivos del sistema, ordenados según los hitos de desarrollo,
+son los siguientes:
+\begin{itemize}
+		\item El sistema permitirá jugar a Magnate, un juego que incorpore
+				a las mecánicas habituales del Monopoly nuevas reglas de
+				desplazamiento y acumulación de efectos, y que será 
+				dinámico, aleatorio, divertido y fácil de usar.
+		\item Las partidas podrán pausarse y reanudarse entre dispositivos.
+		\item El sistema permitirá asociar cuentas de usuario con la 
+				información de las partidas y características de red social.
+		\item Desarrollar un sistema de emparejamiento para las partidas
+				online.
+		\item Implementar bots que jueguen a Magnate con usuarios en local.
+		\item El juego ofrecerá una experiencia atractiva y personalizable,
+				incluyendo una tienda de cosméticos.
+		\item Garantizar la seguridad y privacidad de los usuarios.
+\end{itemize}
+
+El sistema será compatible con el navegador web Chromium 144.0.7559.96 y
+para aplicaciones de escritorio con el sistema operativo Arch Linux 6.18.6.
+Se desplegará en varios 
+contenedores Docker en un servidor de la empresa 08 -- Roberta Williams.
+Las tecnologías a utilizar abarcan Godot 4.6, React, Django y PostgreSQL.
+
+El desarrollo del sistema se realizará a lo largo de los meses de febrero,
+marzo, abril y mayo. Los hitos principales son:
+\begin{itemize}
+		\item 10 de abril. Demostración de una primera versión funcional del
+				sistema con la jugabilidad básica del juego y
+				tratamiento básico de los usuarios. (RF)
+		\item 4 o 5 de mayo. Presentación del producto a los clientes.
+		\item Semana del 11 de mayo. Demostración del juego completo
+				desplegado con todas las funcionalidades especificadas.
+		\item 27 de mayo. Entrega del Plan de gestión, análisis y diseño y
+				memoria del proyecto. Entrega del código al cliente.
+				Cierre del proyecto.
+\end{itemize}
+
+El precio del sistema y el proyecto suman 30795,50 €. 
+Por dicho precio se entregará lo siguiente a la finalización del proyecto:
+\begin{itemize}
+		\item Todo el código desarrollado.
+		\item Documentación de despliegue y ficheros de configuración y Docker Compose para el despliegue.
+		\item El presente documento. 
+		\item Un exec con la versión escritorio.
+\end{itemize}
+
+Los apéndices incluyen 
+la sección \ref{sec:glosario}, que recoge las abreviaciones utilizadas
+en el documento; y
+la sección \ref{sec:reglas}, donde se detallan las reglas del juego Magnate.
+
+\newpage
+
+\section{Organización del proyecto}
+\label{sec:equipo}
+Los encargados del proyecto son la totalidad de la empresa 08 -- Roberta Williams, que conformamos los estudiantes de
+5º curso del Programa Conjunto en Matemáticas e Ingeniería Informática de la Universidad de Zaragoza. 
+La conformación del equipo de trabajo surge de manera natural tras las experiencias compartidas a lo
+largo del grado, que refuerzan nuestra confianza y seguridad en nosotros mismos como equipo y como
+profesionales. 
+
+Basándonos en nuestras habilidades y experiencia previa, se ha decidido conjuntamente el siguiente 
+reparto de cargos y tareas principales, 
+recogido en la Tabla \ref{tab:cargos}.
+
+\begin{table}[h]
+		\centering
+		\begin{tabular}{|l|c|c|c|c|c|}
+				\hline
+				\textbf{Hugo}
+& \multirow{5}{*}{backend} 
+& 
+& IA 
+& apoyo docu. 
+& \\ \cline{1-1}\cline{3-6}
+
+				\textbf{Jaime} 
+& 
+& \multirow{3}{*}{despliegue} 
+& \makecell{encargado\\despliegue}
+& apoyo docu. 
+& \makecell{coordinador\\backend} \\ \cline{1-1}\cline{4-6}
+
+				\textbf{Mario}
+& 
+& 
+& \makecell{lógica del\\juego}
+& \multirow{4}{*}{\makecell{diseño de\\marca}} 
+& \\ \cline{1-4} \cline{6-6} 
+
+				\textbf{Miguel Royo}
+& \multirow{10}{*}{frontend} 
+& \multirow{5}{*}{web} 
+& \makecell{coordinador\\frontend}
+& 
+				& \multirow{3}{*}{\makecell{diseño\\interfaz}} \\ \cline{1-1} \cline{4-5}
+
+				\textbf{Cristina}
+& 
+& 
+& \makecell{encargada\\calidad web}
+& apoyo docu. 
+& \\ \cline{1-1}\cline{4-6}
+
+				\textbf{Julia} 
+& 
+& 
+& calidad 
+& documentación 
+& \makecell{gestión del\\proyecto} \\ \cline{1-1}\cline{3-6}
+
+				\textbf{Nicolás} 
+& 
+& \multirow{4}{*}{escritorio} 
+& \makecell{encargado\\escritorio}
+& apoyo docu. 
+& \multirow{4}{*}{\makecell{diseño\\interfaz}}\\ \cline{1-1}\cline{4-5}
+
+				\textbf{Miguel Luquín} 
+& 
+& 
+& \makecell{encargado\\calidad\\escritorio}
+& diagramas 
+&  \\ 
+				\hline
+		\end{tabular}
+		\caption{Relación de cargos y tareas principales en la empresa 08 -- Roberta Williams.}
+		\label{tab:cargos}
+\end{table}
+
+De los roles recogidos en la Tabla \ref{tab:cargos}, queremos
+destacar las siguientes responsabilidades:
+\begin{itemize}
+\item Directora de proyecto: Julia Quero Pérez
+\item Coordinador de fronend: Miguel Ángel Royo Miguel
+\item Coordinador de backend: Jaime Alconchel Gallego
+\item Coordinadora de calidad: Cristina Embid Martínez
+\item Coordinador de despliegue: Jaime Alconchel Gallego
+\end{itemize}
+
+% PREGUNTAR ¿tengo que detallar más cada tarea?
+% Aunque no sea por cada uno, por "desarrollador web" tal vez, aunque para
+% eso prefiero hacerlo para cada uno...
+
+\section{Plan de gestión del proyecto}
+\label{sec:plan}
+En esta sección se describe cómo se llevarán a cabo los distintos procesos o
+tareas a realizar a lo largo del tiempo, su temporalidad, los recursos a
+emplear y quién son sus responsables.
+
+\subsection{Inicio del proyecto} % htas y metodología
+Se ha priorizado el uso de herramientas abiertas o de software libre para la
+realización del proyecto, por lo que los recursos materiales y software 
+se reducen a los ya accesibles a los miembros del equipo. Estos incluyen los
+ordenadores portátiles de cada miembro del equipo y el servidor que posee
+Mario.
+
+La formación inicial necesaria para los miembros del equipo, por tecnología
+utilizada, se detalla a continuación:
+\begin{itemize}
+		\item Godot 4.6 (implementación del sistema para aplicación de escritorio): Miguel, Miguel y Nicolás buscarían por su cuenta tutoriales de la aplicación.
+		\item React (implementación del sistema para navegador web): Miguel Royo buscaría información al respecto, y Cristina le ayudaría a buscar tutoriales y proyectos de la librería Phaser para el juego.
+		\item Django (backend): Los miembros del equipo ya tenían experiencia con la tecnología.
+		\item PostgreSQL (gestor de BDD): Los miembros el equipo ya tenían
+				experiencia con la tecnología.
+\end{itemize}
+
+\subsubsection{Mitigación de riesgos}
+Se han detectado los siguientes riesgos del proyecto:
+\begin{itemize}
+		\item[Ri1] Hay integrantes del equipo que tienen muchos proyectos (y/o asignaturas a la vez).
+		\item[Ri2] La falta de experiencia trabajando juntos puede afectar al éxito del proyecto.
+		\item[Ri3] La toma de decisiones se puede bloquear por no estar dispuestos los miembros del equipo a asumir las responsabilidades.
+		\item[Ri4] Nunca se ha trabajado en un grupo tan grande.
+		\item[Ri5] El desconocimiento del cliente.
+		\item[Ri6] El proyecto cuenta con unas funcionalidades que no están muy claramente definidas.
+		\item[Ri7] Nunca se ha construido un sistema tan complejo como el propuesto.
+		\item[Ri8] Se ha elegido una tecnología que se conoce poco o nada.
+		\item[Ri9] Se ha trabajado, o no, con el entorno de despliegue elegido.
+		\item[Ri10]La fecha de entrega está muy lejos en el tiempo.
+		\item[Ri11]El proyecto hay que desarrollarlo en dos fases.
+\end{itemize}
+
+Para ellos se proponen las siguientes estrategias de mitigación:
+\begin{itemize}
+		\item[Ri1] Promover la organización individual, evitar el solapamiento en la definición de las tareas y fijar fechas internas para todas las pequeñas tareas. Responsables: Julia, Cristina.
+		\item[Ri2] Favorecer la comunicación inmediata en los grupos de WhatsApp y Discord. Responsable: Julia.
+		\item[Ri3] Repartir las tareas conforme surgen. Responsables: Julia, Jaime y Miguel Royo.
+		\item[Ri4] Fomentar el uso de herramientas y metodologías para la comunicación fluida (WhatsApp, Discord), realizar un reparto de trabajo a nivel
+				de los grupos de trabajo y posteriormente ponerlo en común y
+				conjunto en las sesiones de prácticas con el equipo al completo. Responsables: Julia, Jaime y Miguel Royo.
+		\item[Ri5] Aprovechar las sesiones de prácticas para consultar el estado del proyecto y solicitar retroalimentación. Responsable: Julia.
+		\item[Ri6] Establecer requisitos claros. Responsable: Julia.
+		\item[Ri7] Dividir el proyecto en tareas pequeñas y autocontenidas por equipos y establecer fechas para juntar los resultados. Responsable: Julia.
+		\item[Ri8] Fomentar la consulta y realización de tutoriales al
+				comienzo del proyecto, previo al desarrollo.
+				Responsable: Miguel Luquín.
+		\item[Ri9] Revisar proyectos ya realizados con esa misma tecnología y
+				hacer alguna prueba menor antes de configurar el sistema
+				completo. Responsable: Jaime.
+		\item[Ri10]Poner fechas internas con un margen suficiente para entregar a tiempo el proyecto en las fechas de entrega con el cliente. 
+				Responsable: Julia.
+		\item[Ri11]Establecer fechas intermedias (hitos en Github issues).
+				Responsables: Cristina, Nicolás, Mario.
+\end{itemize}
+
+\subsection{Control de configuraciones, construcción del software y aseguramiento de la calidad del producto}
+Las \textbf{herramientas} a utilizar en el proyecto se han elegido por ser
+aquellas que aportan más profesionalidad y por contar cada miembro con
+experiencia en su uso.
+
+El código del proyecto se ha desarrollado en el entorno de desarrollo
+(VisualStudio Code o vim) de la preferencia de cada integrante, y se ha
+integrado en la plataforma GitHub, utilizando
+la herramienta git de control de versiones, así como la documentación
+escrita con LaTeX. 
+
+Adicionalmente se ha utilizado la plataforma de gestión
+de archivos Google Drive y sus filiales Google Sheets y Google Docs para 
+el seguimiento del desempeño, la realización de presupuestos o análisis
+y compartir de forma preliminar cierta información bibliográfica o de gestión.
+Para la creación de diagramas arquitecturales se ha seguido la notación
+UMLS, y se ha utilizado % TODO LUQUIN
+Para los diagramas de tareas, por otro lado, se ha utilizado una hoja de cálculo de Google Sheets.
+Para el diseño de la GUI, por un lado se concretó una guía de estilo general
+de los elementos de la interfaz, y posteriormente se realizan a papel los
+bocetos de cada pantalla, que tienen su primer prototipo directamente en la
+tecnología escritorio o web utilizada en el proyecto. Los diseños se hacen
+siguiendo el sentido estético del equipo de frontend, más desarrollados por
+algunos de sus miembros que otros, que se centran en las cuestiones de 
+usabilidad. Como referencia para la interfaz se siguen Las 8 reglas de oro
+de Schneiderman, y se intentan minimizar la interacción del usuario sin
+comprometer su comprensión. En el diseño estético se eligieron un
+número reducido de colores principales y secundarios y se consensuaron los
+formatos de los elementos básicos (botones, fondos...) para la consistencia.
+
+Por último, las herramientas de despliegue engloban
+% TODO @BACKEND Htas despliegue alguien de backend porfa
+
+Los \textbf{responsables} de supervisar la corrección de las configuraciones,
+construcción del software y calidad del producto son para el código del
+backend Jaime (el coordinador del backend) y para el código del frontend
+Miguel (el coordinador del frontend).
+
+La convención de nombrar ficheros y documentos y 
+\textbf{estándares de código} %TODO JAIME TODO MIGUEL TODO NICO
+% también mencionar qué herramientas lo pueden sacar de forma automática
+
+El código se ha organizado en 4 \textbf{repositorios} de GitHub: uno para el backend,
+otro para el frontend del cliente web, otro para el frontend del cliente 
+escritorio y otro para la gestión y documentación. Todos los miembros del
+equipo tienen acceso a todos los repositorios, y respetan el workflow
+consensuado en el equipo. 
+Las issues se crean tras una reunión entre los miembros del equipo 
+correspondiente en la que se identifican, definen y reparten las tareas a
+realizar. Se designa un encargado que cree en Github las issues 
+correspondientes. Para realizar un commit en el repositorio compartido, se
+ha de obtener el permiso de los demás usuarios habituales del repositorio
+(los miembros del equipo correspondiente) para minimizar las posibles 
+incongruencias (aunque ya se definen las tareas teniendo esto en cuenta), y
+no se han de revisar los commits ya que se confía en la capacidad y buen
+criterio de los miembros del equipo.
+
+Ante la detección de \textbf{incidencias}, el que la haya detectado tiene la
+responsabilidad de encontrar a la persona que haya generado la incidencia,
+que llamaremos a partir de ahora el incidente. Será responsabilidad del
+incidente decidir el plan de actuación para solventar la incidencia, en tanto
+a si puede ser el único responsable y si es más prioritario o no que el
+trabajo actual que haya que realizar.
+
+% otras cosas de pruebas TODO CRIS 
+Las actividades de \textbf{control de calidad} serán variadas. En primera 
+instancia, se comprobará manualmente la correcta inclusión del código en
+el sistema existente. 
+Para el código a alto nivel, se contrastará con el
+diagramador y los autores del código correspondiente que el comportamiento
+del sistema coincide con lo expresado en el diagrama.
+% faltaría test automáticos o manuales, si ...
+
+% scripts automatización TODO CRIS JAIME?? 
+
+% cómo se hará la entrega de resultados al cliente
+Se entregará al cliente lo siguiente a la finalización del proyecto:
+\begin{itemize}
+		\item Todo el código desarrollado.
+		\item Documentación de despliegue y ficheros de configuración y Docker Compose para el despliegue.
+		\item El presente documento. 
+		\item Un exec con la versión escritorio.
+\end{itemize}
+
+
+\subsection{Calendario del proyecto, división del trabajo, coordinación, comunicaciones, monitorización y seguimiento}
+La responsable del calendario del proyecto, coordinación, y comunicaciones es 
+Julia, la directora del proyecto,
+apoyada en los coordinadores backend y frontend para una mejor descripción y
+ordenación de las tareas, la división del trabajo y la monitorización y 
+seguimiento de las tareas.
+
+% Lo de las issues lo puse en 3.2 porque no sé qué son las incidencias
+
+Para la \textbf{comunicación interna}, se han creado grupos de WhatsApp por proyecto
+y por equipios, así como un canal de Discord análogo para comunicaciones y
+cuestiones de rápida resolución o inmediatas, y se realizarán reuniones de 
+seguimiento entre todos los equipos durante las sesiones de prácticas, así
+como las reuniones dentro del equipo cuando los miembros lo estimen
+oportuno. Las reuniones de las sesiones de prácticas servirán para
+actualizar los planes en caso de desviarse del inicial. 
+Las decisiones tomadas acabarán reflejadas en Github issues o en la 
+documentación (o en la carpeta compartida de Drive a modo de borrador, 
+de ser algo extenso, de forma provisional hasta aparecer en la documentación), 
+por lo que no se utilizan documentos adicionales con actas.
+
+Ante diferencias en la \textbf{gestión del equipo humano}, se plantea la 
+inclusión de
+mediadores imparciales o no involucrados en la disputa inicial para intentar
+consensuar a las partes. En caso de no resolverse el conflicto, se pospondrá
+la discusión a cuando se halla enfriado, no siendo más de 2 semanas.
+
+Para la \textbf{monitorización y medición del progreso}, 
+cada lunes y viernes se
+revisarán las tareas realizadas por los miembros del equipo correspondiente.
+Se mira la consecución de la tarea, y de haber quedado mucho por realizar,
+dado que confiamos en el buen trabajo de los miembros del equipo, concluiremos que el retraso se ha debido a un reparto no equitativo y se volverá a
+repartir la tarea faltante entre los miembros del equipo, para realizarse en
+esa semana, antes que las tareas de dicha semana. 
+
+Se ha intentado realizar
+un plan lo suficientemente holgado como para que estas desviaciones, de no
+prolongarse durante más de una semana, no supongan un problema.
+De darse continuadamente este retraso, a una semana vista de la entrega se
+replantearán las tareas a realizar, minimizando estas.
+
+Sobre el \textbf{reparto y definición de tareas} a más bajo nivel, estas se
+realizarán después de la monitorización del progreso, listando el desglose de
+tareas necesarias para consecuir los objetivos semanales expresados en el
+plan general interno. Una vez se hayan desglosado las tareas y concordado
+cómo se van a realizar (todo aquello que suponga cohesión, como interfaces
+consistentes o comunicación entre elementos), se repartirán entre los miembros
+del equipo, primando la equidad, los conocimientos y habilidades de
+los miembros, y sus preferencias. Cada uno informará de sus preferencias y al
+llegar al consenso entre todos se fijarán las tareas con su responsable como
+Github issues.
+
+% Aquí vuelve a poner que digamos de tareas % TODO JULIA
+
+\section{Análisis y diseño del sistema}
+En esta sección se detallan los requisitos y diseño del sistema.
+
+\subsection{Análisis de requisitos} % requisitos TODO JULIA
+En la siguientes tablas se recogen la relación de requisitos, agrupados
+por funcionalidades más generales.
+
+\subsection{Diseño del sistema} 
+% TODO LUQUIN diagramas
+
+% decisiones de diseño
+\subsubsection{Decisiones de diseño}
+Las primeras decisiones de diseño se tomaron sobre las \textbf{tecnologías}
+a usar en el proyecto.
+Para las tecnologías web se barajaron html con css y React. Aunque los
+miembros del equipo tenían experiencia con html y css, la dificultad de 
+realizar un proyecto tan complejo en estos lenguajes nos llevó a decidirnos
+por React, cuya curva de aprendizaje es bastante menor una vez conocidas
+estas tecnologías, y cuenta con una forma fácil de incluir paquetes de
+componentes. Además, React cuenta con numerosas librerías sobre las que 
+construir un juego. Se desestimó la librería para juegos boardgame.io ya
+que esta supliría el trabajo del que se encarga el backend,
+pero sí se utilizó Phaser para gráficos, componentes y elementos del juego, 
+ya que tras dos días en los que Cristina y Miguel
+sopesaron la decisión de utilizarla descubrieron que el aprendizaje merecería
+la pena para el trabajo futuro a ahorrarnos.
+
+Como segundo cliente se decidió el escritorio sobre el móvil porque 
+facilitaría las labores de interfaz, al no tener que conciliar diseños
+horizontales y verticales, y porque la tecnología para el desarrollo móvil
+Android Studio ya era conocida por los miembros del equipo y se negaban a
+volver a utilizarla. Así que como nueva tecnología para el escritorio se
+optó por Godot, que tiene una interfaz para el desarrollo intuitiva y cuenta
+con portabilidad a una amplia gama de dispositivos, por lo que se presentaba
+como una buena herramienta para aprender.
+% TODO JAIME alguna más propuso para escritorio, por nombrarla
+
+Como tecnologías de backend se barajaron Django, Flask, NextJS y FastAPI, y se
+decidió usar Django por tener experiencia previa en la tecnología y tener
+todas prestaciones similares. Para la representación de la información se
+utilizan ficheros JSON por su uso extendido y generalizado.
+% TODO JAIME o alguien de backend en verdad no me enteré jajajajjaj
+
+Para la base de datos, por motivos similares, se decidió la versátil y
+básica base de datos SQL PostgreSQL.
+
+% TODO decisiones sobre el diseño de la arquitectura, if any
+
+\section{Memoria del proyecto} % TODO JULIA
+En este capítulo se describe el ajuste a la realidad de lo previsto en
+el plan de la Sección \ref{sec:plan}.
+% comparar lo propuesto en el apartado 3 con lo que hemos hecho de verdad
+\subsection{Inicio del proyecto} % 3.1 
+
+\subsection{Ejecución y control del proyecto} % 3.2 y 3.3
+
+\subsection{Cierre del proyecto} % vibes de conclusiones pero más curro
+
+%\section{Conclusiones} % Solo para la entrega final...
+%personales, mejorar los procesos... si no nos quejamos nos pone un 0
+
+\newpage
+
+\appendix
+
+\section{Glosario}
+\label{sec:glosario}
+
+%\section{Resultados de la revisión intermedia}
+
+%\section{Presentación final}
+% copia de las transparencias y explicar cómo ha tenido en cuenta lo visto
+% en teoría de cómo hacer presentaciones
+
+\section{Análisis de riesgos}
+% TODO JULIA pegar excel :d
+
+\end{document}
