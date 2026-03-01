@@ -350,6 +350,7 @@ Miguel (el coordinador del frontend).
 La convención de nombrar ficheros y documentos y 
 \textbf{estándares de código} %TODO JAIME TODO MIGUEL TODO NICO
 % también mencionar qué herramientas lo pueden sacar de forma automática
+Clases con CamelCase y el resto con snake\_case.
 
 El código se ha organizado en 4 \textbf{repositorios} de GitHub: uno para el backend,
 otro para el frontend del cliente web, otro para el frontend del cliente 
@@ -373,24 +374,36 @@ incidente decidir el plan de actuación para solventar la incidencia, en tanto
 a si puede ser el único responsable y si es más prioritario o no que el
 trabajo actual que haya que realizar.
 
-% otras cosas de pruebas TODO CRIS 
-Las actividades de \textbf{control de calidad} serán variadas. En primera 
-instancia, se comprobará manualmente la correcta inclusión del código en
-el sistema existente. 
+% otras cosas de pruebas: rellenar con lo dicho en la p3 
+Las actividades de \textbf{control de calidad} serán variadas. 
+Se realizan pruebas por separado de frontend y backend y posteriormente se
+realizarán pruebas de la conjunción de ambos.
+Para las pruebas del backend se cuenta en primera instancia con test para
+comprobar el correcto funcionamiento de las funciones. Para probar el juego
+completo, se propone:
+\begin{enumerate}
+		\item Probar todos los arcos del grafo de juego forzando los escenarios correspondientes y eliminando el azar.
+		\item Simular partidas con dos agentes jugando entre ellos.
+\end{enumerate}
+Para las pruebas del frontend, 
+\begin{enumerate}
+		\item En primera instancia, se comprobará manualmente la correcta inclusión del código en el sistema existente. 
+		\item Se documentará mínimamente las entradas y salidas esperadas
+				para la interacción con el juego (tirada de dados,
+				compra de propiedad, pago de alquiler...) y se comprobará
+				sistemáticamente la corrección del cliente correspondiente.
+\end{enumerate}
 Para el código a alto nivel, se contrastará con el
 diagramador y los autores del código correspondiente que el comportamiento
 del sistema coincide con lo expresado en el diagrama.
-% faltaría test automáticos o manuales, si ...
+% scripts automatización NO, HACER COMO QUE NO EXISTEN
 
-% scripts automatización TODO CRIS JAIME?? 
-
-% cómo se hará la entrega de resultados al cliente
+% cómo se hará la entrega de resultados al cliente % TODO JAIME CHECK
 Se entregará al cliente lo siguiente a la finalización del proyecto:
 \begin{itemize}
 		\item Todo el código desarrollado.
 		\item Documentación de despliegue y ficheros de configuración y Docker Compose para el despliegue.
-		\item El presente documento. 
-		\item Un exec con la versión escritorio.
+		\item Un executable con la versión escritorio.
 \end{itemize}
 
 
@@ -421,6 +434,14 @@ mediadores imparciales o no involucrados en la disputa inicial para intentar
 consensuar a las partes. En caso de no resolverse el conflicto, se pospondrá
 la discusión a cuando se halla enfriado, no siendo más de 2 semanas.
 
+\begin{sidewaysfigure}[hbtp]
+\centering
+		\includegraphics[width=\textwidth]{img/gantt.png}
+		\caption{Diagrama de Gantt con la planificación del proyecto.}
+		\label{fig:gantt}
+\end{sidewaysfigure}
+
+
 Para la \textbf{monitorización y medición del progreso}, 
 cada lunes y viernes se
 revisarán las tareas realizadas por los miembros del equipo correspondiente.
@@ -435,10 +456,16 @@ prolongarse durante más de una semana, no supongan un problema.
 De darse continuadamente este retraso, a una semana vista de la entrega se
 replantearán las tareas a realizar, minimizando estas.
 
-Sobre el \textbf{reparto y definición de tareas} a más bajo nivel, estas se
+Sobre el \textbf{reparto y definición de tareas}, primero se ha realizado una
+planificación global por requisitos como expresado en el diagrama de Gantt de
+la Figura \ref{fig:gantt}. Para ello, se ha entendido que las etapas de 
+calidad se producirán cada vez que se suba código a los repositorios y se ha
+planificado un diseño iterativo y gradual por requisito.
+A más bajo nivel, estas se
 realizarán después de la monitorización del progreso, listando el desglose de
-tareas necesarias para consecuir los objetivos semanales expresados en el
-plan general interno. Una vez se hayan desglosado las tareas y concordado
+tareas necesarias para consecuir los objetivos semanales correspondientes al
+diagrama de Gantt de la Figura \ref{fig:gantt}. 
+Una vez se hayan desglosado las tareas y concordado
 cómo se van a realizar (todo aquello que suponga cohesión, como interfaces
 consistentes o comunicación entre elementos), se repartirán entre los miembros
 del equipo, primando la equidad, los conocimientos y habilidades de
@@ -446,15 +473,150 @@ los miembros, y sus preferencias. Cada uno informará de sus preferencias y al
 llegar al consenso entre todos se fijarán las tareas con su responsable como
 Github issues.
 
-% Aquí vuelve a poner que digamos de tareas % TODO JULIA
+\newpage
 
 \section{Análisis y diseño del sistema}
 En esta sección se detallan los requisitos y diseño del sistema.
 
-\subsection{Análisis de requisitos} % requisitos TODO JULIA
-En la siguientes tablas se recogen la relación de requisitos, agrupados
-por funcionalidades más generales.
+\subsection{Análisis de requisitos}
+En la Tabla \ref{tab:rf} se recoge la relación de requisitos funcionales del
+sistema, y en la Tabla \ref{tab:rnf} se recogen los requisitos no
+funcionales del sistema.
+\begin{table}[htbp]
+		\centering
+\begin{tabularx}{\textwidth}{|l|X|l|}
+		\hline
+		ID & Descripción & Prioridad \\
+		\hline
+		RF-1.1 & 
+		El sistema permitirá jugar a Magnate, siguiendo las reglas descritas
+		en el Apéndice \ref{app:normas}. &
+		M \\
+		\hline
+		RF-1.2 &
+		El sistema mostrará los resultados de una partida una vez finalizada, incluyendo el capital final de los jugadores y los beneficiarios de los bonus finales aplicados. &
+		M \\
+		\hline
+		RF-2.1 &
+		El sistema debe permitir a los usuarios registrarse con un nombre de usuario único y una contraseña. 
+		& M \\
+		\hline
+		RF-2.2 &
+		El sistema exige para el registro de una cuenta de usuario nueva que se confirme la contraseña.
+		& M \\
+		\hline
+		RF-2.3 &
+		El sistema debe permitir a los usuarios iniciar sesión introduciendo su nombre de usuario y su contraseña.
+		& M \\
+		\hline
+		RF-3 &
+		El sistema guardará la información de las partidas en curso necesaria
+		para reanudarlas.
+		& M \\
+		\hline
+		RF-4.1 &
+		El sistema almacenará el historial de partidas de los usuarios.
+		& M \\
+		\hline
+		RF-4.2 &
+		El sistema permitirá a los usuarios consultar su historial de partidas completas.
+		& M \\
+		\hline
+		RF-4.3 &
+		El historial de partidas recogerá para cada partida la posición en
+		la que quedó el usuario tras jugarla y las monedas que ganó.
+		& M \\
+		\hline
+		RF-5 &
+		Las partidas se pueden pausar y reanudar en otra plataforma.
+		& M \\
+		\hline
+		RF-6.1 &
+		El sistema permitirá a los usuarios que hayan iniciado sesión observar su propia información ligada a un usuario.
+		& M \\
+		\hline
+		RF-6.2 &
+		La información ligada a un usuario incluye: nombre de usuario, skin de ficha predeterminada para jugar y estadísticas de sus partidas.
+		& M \\
+		\hline
+		RF-6.3 &
+		Las estadísticas de las partidas ligadas a un usuario incluyen: nº partidas jugadas, nº partidas vencidas, monedas para la tienda.
+		& M \\
+		\hline
+		RF-6.4 &
+		El sistema permitirá al usuario elegir su skin de ficha predeterminada entre las que posea.
+		& M \\
+		\hline
+		RF-7.1 &
+		El sistema permite jugar partidas en dos modalidades: partida pública y partida privada.
+		& S \\
+		\hline
+		RF-7.2 &
+		Las partidas privadas permitirán que jueguen los poseedores de un código de la sala privada y/o con bots, sumando hasta 4 jugadores.
+		& S \\
+		\hline
+		RF-7.3 &
+		Las partidas públicas realizan un emparejamiento entre los usuarios por orden de llegada, agrupando 4 jugadores siempre que haya suficientes en línea.
+		& S \\
+		\hline
+		RF-7.4 &
+		La moneda del juego se recibe tras jugar cada partida como el capital remanente al terminar la partida y aplicar los bonus.
+		& S \\
+		\hline
+		RF-8.1 &
+		El sistema permitirá a los usuarios intercambiar mensajes en lenguaje natural durante el transcurso de una partida.
+		& C \\
+		\hline
+		RF-8.2 &
+		El sistema permitirá a los usuarios incluir emoticonos en los mensajes del chat durante el transcurso de una partida.
+		& C \\
+		\hline
+		RF-9.1 &
+		Se pueden adquirir distintos skins para las fichas del juego en la tienda.
+		& S \\
+		\hline
+		RF-9.2 &
+		El sistema permitirá a los usuarios adquirir distintos skins para las fichas de las partidas de Magnate en la tienda, intercambiando la moneda del juego, que se obtiene jugando partidas.
+		& S \\
+		\hline
+		RF-9.3 &
+		Se pueden adquirir distintos emoticonos para emplear en el chat del juego en la tienda.
+		& C \\
+		\hline
+		RF-9.4 &
+		El sistema permitirá a los usuarios adquirir distintos emoticonos para el chat de las partidas de Magnate en la tienda, intercambiando la moneda del juego, que se obtiene jugando partidas.
+		& C \\
+		\hline
+		RF-10 &
+		Se diseñará una IA o bots contra la que jugar en las partidas privadas.
+		& C \\
+		\hline
 
+\end{tabularx}
+		\caption{Requisitos funcionales del sistema.}
+		\label{tab:rf}
+\end{table}
+
+\begin{table}[hbtp]
+		\centering
+\begin{tabularx}{\textwidth}{|l|X|}
+		\hline
+		RNF-1 &
+		El cliente de escritorio debe funcionar en un computador con sistema operativo Arch Linux 6.18.6.
+		\\
+		\hline
+		RNF-2 &
+		El cliente web debe funcionar en un navegador con versión Chromium 144.0.7559.96.
+		\\
+		\hline
+		RNF-3 &
+		El sistema es seguro a usos malintencionados de las plataformas.
+		\\
+		\hline
+		\end{tabularx}
+		\caption{Requisitos no funcionales del sistema.}
+		\label{tab:rnf}
+\end{table}
 \subsection{Diseño del sistema} 
 % TODO LUQUIN diagramas
 
@@ -523,6 +685,19 @@ el plan de la Sección \ref{sec:plan}.
 % en teoría de cómo hacer presentaciones
 
 \section{Análisis de riesgos}
-% TODO JULIA pegar excel :d
+En la Figura \ref{fig:riesgo} se recoge el análisis de riesgos detallado
+realizado por la empresa.
+
+\begin{sidewaysfigure}
+		\includegraphics[width=\textwidth]{img/riesgos.png}
+		\caption{Análisis de riesgos.}
+		\label{fig:riesgo}
+\end{sidewaysfigure}
+
+\newpage
+
+\section{Reglas}
+\label{app:normas}
+\input{../normas/normas_cuerpo}
 
 \end{document}
