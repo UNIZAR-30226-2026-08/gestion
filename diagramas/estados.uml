@@ -1,10 +1,10 @@
 @startuml
 
-state "Inicial" as ini
-state "Elección" as elec
-state "Casilla" as cas
+state "Tirar dados" as ini
+state "Elección casilla" as elec
+state "Gestión casilla" as cas
+state "Negocios" as gest
 state "Liquidación" as liq
-state "Gestión" as gest
 state "Subasta" as subasta
 state "Elección fantasía" as elec_fantasia
 

@@ -2,7 +2,7 @@
 participant "Proponente" as P
 participant "Receptor" as R
 
-loop "money < 0 or not surrenders"
+loop "not next_phase"
 
     P -> R : Proponer transacción
     activate P

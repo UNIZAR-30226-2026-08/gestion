@@ -1,4 +1,4 @@
-all: estados.png gestion.png liquidacion.png subasta.png
+all: estados.png negocios.png liquidacion.png subasta.png
 
 %.png: %.uml
 	plantuml $<
