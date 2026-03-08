@@ -176,14 +176,14 @@ recogido en la Tabla \ref{tab:cargos}.
 & \multirow{5}{*}{backend} 
 & 
 & IA 
-& apoyo docu. 
+& 
 & \\ \cline{1-1}\cline{3-6}
 
 				\textbf{Jaime} 
 & 
 & \multirow{3}{*}{despliegue} 
 & \makecell{encargado\\despliegue}
-& apoyo docu. 
+& diagramas
 & \makecell{coordinador\\backend} \\ \cline{1-1}\cline{4-6}
 
 				\textbf{Mario}
@@ -204,7 +204,7 @@ recogido en la Tabla \ref{tab:cargos}.
 & 
 & 
 & \makecell{encargada\\calidad web}
-& apoyo docu. 
+&
 & \\ \cline{1-1}\cline{4-6}
 
 				\textbf{Julia} 
@@ -218,14 +218,14 @@ recogido en la Tabla \ref{tab:cargos}.
 & 
 & \multirow{4}{*}{escritorio} 
 & \makecell{encargado\\escritorio}
-& apoyo docu. 
+& diagramas
 & \multirow{4}{*}{\makecell{diseño\\interfaz}}\\ \cline{1-1}\cline{4-5}
 
 				\textbf{Miguel Luquín} 
 & 
 & 
 & \makecell{encargado\\calidad\\escritorio}
-& diagramas 
+& 
 &  \\ 
 				\hline
 		\end{tabular}
@@ -325,7 +325,7 @@ de archivos Google Drive y sus filiales Google Sheets y Google Docs para
 el seguimiento del desempeño, la realización de presupuestos o análisis
 y compartir de forma preliminar cierta información bibliográfica o de gestión.
 Para la creación de diagramas arquitecturales se ha seguido la notación
-UMLS, y se ha utilizado % TODO LUQUIN
+UMLS, y se ha utilizado PlantUML.
 Para los diagramas de tareas, por otro lado, se ha utilizado una hoja de cálculo de Google Sheets.
 Para el diseño de la GUI, por un lado se concretó una guía de estilo general
 de los elementos de la interfaz, y posteriormente se realizan a papel los
@@ -339,8 +339,12 @@ comprometer su comprensión. En el diseño estético se eligieron un
 número reducido de colores principales y secundarios y se consensuaron los
 formatos de los elementos básicos (botones, fondos...) para la consistencia.
 
-Por último, las herramientas de despliegue engloban
-% TODO @BACKEND Htas despliegue alguien de backend porfa
+Por último, las herramientas de despliegue engloban, a nivel software, 
+contenedores Docker que desplieguen un sistema operativo Debian o Alpine Linux;
+y a nivel hardware, para el despliegue de los contenedores, una máquina 
+propiedad de Mario Casado con las siguientes especificaciones: 
+UGREEN DXP2800 con procesador Intel n100,
+8TB de HDD, 1TB de SSD m2 y 16GB de RAM DDR5.
 
 Los \textbf{responsables} de supervisar la corrección de las configuraciones,
 construcción del software y calidad del producto son para el código del
@@ -348,9 +352,13 @@ backend Jaime (el coordinador del backend) y para el código del frontend
 Miguel (el coordinador del frontend).
 
 La convención de nombrar ficheros y documentos y 
-\textbf{estándares de código} %TODO JAIME TODO MIGUEL TODO NICO
-% también mencionar qué herramientas lo pueden sacar de forma automática
-Clases con CamelCase y el resto con snake\_case.
+\textbf{estándares de código} se sigue según los estándares de los lenguajes empleados.
+A nivel general y común a todos ellos, puede especificarse que
+el código está escrito en inglés (nombres de variables y comentarios pertinentes),
+utilizando el nombrado con camelCase para las clases y el resto de variables 
+con snake\_case.
+Para la generación de la documentación se 
+% TODO mencionar qué herramientas lo pueden sacar de forma automática
 
 El código se ha organizado en 4 \textbf{repositorios} de GitHub: uno para el backend,
 otro para el frontend del cliente web, otro para el frontend del cliente 
@@ -393,17 +401,21 @@ Para las pruebas del frontend,
 				compra de propiedad, pago de alquiler...) y se comprobará
 				sistemáticamente la corrección del cliente correspondiente.
 \end{enumerate}
-Para el código a alto nivel, se contrastará con el
-diagramador y los autores del código correspondiente que el comportamiento
+Para el código a alto nivel, se contrastará con la persona que realice los
+diagramas y los autores del código correspondiente que el comportamiento
 del sistema coincide con lo expresado en el diagrama.
-% scripts automatización NO, HACER COMO QUE NO EXISTEN
+Tanto la realización de las pruebas como el despliegue del sistema se realizará
+durante días designados para la conciliación entre backend y frontend, como
+expresado en el diagrama de Gantt de la Figura \ref{fig:gantt}.
+Se especificarán las fechas concretas para realizar las actividades al comienzo
+de la semana correspondiente a estas actividades. Por tanto, descartamos tanto
+metodologías de integración como de despliegue continuos.
 
-% cómo se hará la entrega de resultados al cliente % TODO JAIME CHECK
 Se entregará al cliente lo siguiente a la finalización del proyecto:
 \begin{itemize}
 		\item Todo el código desarrollado.
 		\item Documentación de despliegue y ficheros de configuración y Docker Compose para el despliegue.
-		\item Un executable con la versión escritorio.
+		\item Un AppImagen con la versión escritorio, ya compilado.
 \end{itemize}
 
 
@@ -618,12 +630,46 @@ funcionales del sistema.
 		\label{tab:rnf}
 \end{table}
 \subsection{Diseño del sistema} 
-% TODO LUQUIN diagramas
+% TODO diagramas: poner las foticos de los diagramas en sí.
+El sistema ofrece un cliente web y un cliente escritorio, para los que
+utiliza una arquitectura en 4 y 3 niveles, como puede verse en la
+Figura \ref{fig:arquitectura}.
+El sistema cuenta con un servidor de bases de datos PostgreSQL, un
+servidor con el backend para la lógica del juego y demás peticiones, y
+para el caso del cliente escritorio, basta con un único cliente, mientras
+que para la web necesita un servidor web y sobre este el cliente web con
+nuestra aplicación.
 
-% decisiones de diseño
+El despliegue del sistema se realizará en una misma máquina, utilizando
+varios contenedores, sin perjuicio a que se pudiera realizar en varias
+máquinas distintas cada contenedor, según lo especificado en el 
+diagrama de despliegue de la Figura \ref{fig:despliegue}.
+El diagrama de componentes de la Figura \ref{fig:componentes} nos aporta
+la semántica de las comunicaciones entre los elementos desplegados. 
+La comunicación se realiza a través de web sockets para el juego y de
+API Rest para el resto de la aplicación. 
+Esto simplifica y generaliza los diagramas de
+secuencia y comunicación. Destacamos los diagramas de de las Figuras %TODO
+
+Además aportamos, para explicar la lógica y secuenciación del juego, el
+diagrama de estados de la Figura \ref{fig:estados}, que representa un
+turno de juego y sus fases. El turno comienza con la fase de tirar los dados y
+después de resolverse lo ocurrido en la casilla a la que se cayó se pasa a la
+fase de gestión, en la que pueden realizarse opcionalmente y en cualquier orden
+el resto de operaciones del juego (intercambio, y administrar propiedades:
+construcción, derruir casas e hipotecar).
+
+El proyecto está organizado en 3 grandes repositorios de código: el
+backend, el cliente web y el cliente escritorio. La estructura de
+estos repositorios, en cuanto a diagramas y vistas de módulos, siguen la
+estructura habitual de proyectos con estas tecnologías, y pueden consultarse
+en los diagramas de las Figuras 
+\ref{fig:modbackend}, \ref{fig:modweb} y \ref{fig:modesc}, respectivamente.
+
 \subsubsection{Decisiones de diseño}
 Las primeras decisiones de diseño se tomaron sobre las \textbf{tecnologías}
-a usar en el proyecto.
+a usar en el proyecto. Las posibles candidatas consideradas son todas
+tecnologías libres y sin licencia comercial.
 Para las tecnologías web se barajaron html con css y React. Aunque los
 miembros del equipo tenían experiencia con html y css, la dificultad de 
 realizar un proyecto tan complejo en estos lenguajes nos llevó a decidirnos
@@ -639,24 +685,45 @@ la pena para el trabajo futuro a ahorrarnos.
 
 Como segundo cliente se decidió el escritorio sobre el móvil porque 
 facilitaría las labores de interfaz, al no tener que conciliar diseños
-horizontales y verticales, y porque la tecnología para el desarrollo móvil
-Android Studio ya era conocida por los miembros del equipo y se negaban a
-volver a utilizarla. Así que como nueva tecnología para el escritorio se
-optó por Godot, que tiene una interfaz para el desarrollo intuitiva y cuenta
+horizontales y verticales. Como nueva tecnología para el escritorio se
+optó por Godot, un motor orientado al desarrollo de juegos
+que tiene una interfaz para el desarrollo intuitiva y cuenta
 con portabilidad a una amplia gama de dispositivos, por lo que se presentaba
-como una buena herramienta para aprender.
-% TODO JAIME alguna más propuso para escritorio, por nombrarla
+como una buena herramienta para aprender. Otras tecnologías consideradas
+fueron Draft y Flutter, que se descartaron por no estar dirigidas a juegos.
 
 Como tecnologías de backend se barajaron Django, Flask, NextJS y FastAPI, y se
-decidió usar Django por tener experiencia previa en la tecnología y tener
-todas prestaciones similares. Para la representación de la información se
-utilizan ficheros JSON por su uso extendido y generalizado.
-% TODO JAIME o alguien de backend en verdad no me enteré jajajajjaj
+decidió usar Django por tener experiencia previa en la tecnología. 
+Además, salvo Flask, excesivamente sencilla,
+las tecnologías mencionadas ofrecen funcionalidades similares.
+Para la representación de la información se
+consideraron los formatos yaml, xml y JSON, y finalmente se decidió
+utilizar ficheros JSON por su uso extendido y generalizado, y la experiencia
+previa trabajando con ellos.
+Para la base de datos, se barajaron bases de datos SQL, que son con las
+que tenemos experiencia, y nos decantamos por PostgreSQL por ser
+compleja, potente y eficiente.
 
-Para la base de datos, por motivos similares, se decidió la versátil y
-básica base de datos SQL PostgreSQL.
+Otra decisión de diseño tomada fue utilizar el servidor de Mario Casado para
+el despliegue. Se optó por esta opción sobre cualquier otra plataforma online
+para el despliegue debido a su acceso gratuito y sin condiciones, y a la
+familiaridad de algunos de los miembros del equipo con dicho entorno.
 
-% TODO decisiones sobre el diseño de la arquitectura, if any
+La decisión sobre el diseño de la arquitectura viene directamente motivadas
+por las tecnologías empleadas y los flujos de trabajo habituales necesarios
+para desplegar aplicaciones que utilizan dichas tecnologías.
+Como servidor web sobre el que desplegar nuestro cliente web se decidió
+utilizar nginx en lugar de Apache, ya que contábamos con experienca previa
+en dicho servidor y sus prestaciones son suficientes para el proyecto.
+
+Sobre los protocolos de comunicación entre los componentes del sistema,
+se optó por una API Rest para las comunicaciones no realcionadas con el
+juego, ya que son más sencillas, y web sockets para poder almacenar el
+estado del juego y tratar las comunicaciones de frontend a backend
+(con los objetos responses) y de backend a frontend (con actions, enviando
+el contenido en un JSON serializado para facilitar el tratamiento en el
+frontend).
+% TODO poner bien los nombritos cuando estén los diagramas.
 
 \section{Memoria del proyecto} % TODO JULIA
 En este capítulo se describe el ajuste a la realidad de lo previsto en
