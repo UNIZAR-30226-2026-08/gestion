@@ -1,0 +1,47 @@
+@startuml
+title Diagrama de Despliegue - (Arquitectura de cuatro capas con Kubernetes)
+
+skinparam nodesep 40
+skinparam ranksep 60
+skinparam nodeStyle uml2
+
+node "Host Cliente 1 (Linux)" as BrowserClientNode {
+    component "Navegador (Chromium)" as Browser
+}
+
+node "Host Cliente 2 (Linux)" as DesktopClientNode {
+    artifact "Cliente de Escritorio (Godot)" as DesktopApp
+}
+
+node "Cluster Kubernetes" as K8sCluster {
+    
+    node "Capa de Presentación (Frontend Tier)" as FrontendTier {
+        node "Pod Web (Alpine)" as WebPod {
+            component "NGINX" as Nginx
+        }
+    }
+    
+    node "Capa de Aplicación (Backend Tier)" as BackendTier {
+        node "Pod API (Alpine)" as ApiPod {
+            component "Servidor Gunicorn" as Gunicorn
+            component "Django" as Django
+            Gunicorn -- Django
+        }
+    }
+    
+    node "Capa de Datos (Data Tier)" as DataTier {
+        node "Pod BD (StatefulSet)" as DbPod {
+            database "PostgreSQL" as Postgres
+        }
+    }
+}
+
+' Conectamos componente con componente directamente usando --> (hacia abajo)
+Browser -- FrontendTier : "HTTPS"
+DesktopApp -- BackendTier : "HTTPS"
+
+' Conexiones de red internas
+Nginx -- BackendTier : " HTTPS "
+Django -- DataTier : "TCP"
+
+@enduml

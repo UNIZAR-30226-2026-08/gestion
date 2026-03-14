@@ -1,0 +1,39 @@
+@startuml
+title Diagrama de Despliegue (Arquitectura de dos capas)
+skinparam nodeStyle uml2
+
+node "Host Cliente (Linux)" as ClientNode {
+    component "Navegador (Chromium)" as Browser
+}
+
+node "Host Cliente (Linux)" as ClientNode {
+    artifact "Cliente de Escritorio (Godot)" as DesktopApp
+}
+
+node "Host Servidor" as ServerNode {
+    
+    node "Entorno Docker (docker-compose)" as DockerEnv {
+        
+        node "Contenedor Web (Alpine)" as WebContainer {
+            component "Servidor NGINX" as Nginx
+        }
+        
+        node "Contenedor API (Alpine)" as ApiContainer {
+            component "Servidor Gunicorn" as Gunicorn
+            component "Django" as Django
+            Gunicorn -- Django
+        }
+        
+        node "Contenedor BD (Alpine)" as DbContainer {
+            database "PostgreSQL" as Postgres
+        }
+    }
+}
+
+' Conexiones de red
+Browser -- WebContainer : "HTTPS"
+DesktopApp -- ApiContainer : "HTTPS"
+Nginx -- ApiContainer : "HTTPS"
+Django -- DbContainer : "TCP"
+
+@enduml

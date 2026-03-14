@@ -1,0 +1,36 @@
+@startuml
+skinparam componentStyle uml2
+
+package "Lado del Cliente" {
+    component "Cliente Web\n(Navegador Chromium)" as WebClient
+    component "Cliente de Escritorio" as DesktopClient
+}
+
+package "Infraestructura del Servidor" {
+    
+    component "Servidor NGINX Frontend" as NginxServer {
+        port "431" as pNginx
+    }
+    interface "Servir Contenido Web" as IWeb
+    
+    component "Servidor Django Backend" as DjangoServer {
+        port "431 HTTPS" as pDjango
+    }
+    interface "Procesar Lógica y API" as IApi
+    
+    database "Servidor de Base de Datos PostgreSQL" as DbServer
+}
+
+' Enlazar las interfaces a los puertos (sintaxis segura sin direcciones)
+IWeb -- pNginx
+IApi -- pDjango
+
+' Conexiones de los clientes hacia las interfaces
+WebClient ..> IWeb : "Navega y solicita vistas"
+DesktopClient ..> IApi : "Consulta y envía datos"
+
+' Conexiones internas
+NginxServer ..> IApi : "Redirige peticiones (Proxy)"
+DjangoServer --> DbServer : "Persiste y recupera información"
+
+@enduml

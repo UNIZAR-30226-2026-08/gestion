@@ -25,8 +25,7 @@ ini --> cas : normal (not cárcel)
 ini --> liq : normal (cárcel)
 
 ' Elección
-elec --> ini : dobles
-elec --> cas : not dobles
+elec --> cas
 
 ' Casilla
 cas --> fork_propiedad : propiedad
