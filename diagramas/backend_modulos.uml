@@ -8,18 +8,18 @@ package "Backend Django" {
         [WebSockets (websockets.py)] as WebSockets
     }
 
-    package "Serialization" {
-        [Serializers (serializers.py)] as Serializers
+    package "Serialización" {
+        [Serializadores (serializers.py)] as Serializers
     }
 
-    package "Internal Logic Layer" {
+    package "Capa lógica interna" {
         [Capa de tienda] as ShopLogic
         [Lógica de usuarios] as RegisterLogic
         [Lógica del juego] as GameLogic
     }
 
     package "Acceso a datos" {
-        [models.py (ORM)] as Models
+        [ORM (models.py)] as Models
     }
 
     ' --- Serialization Usage ---
