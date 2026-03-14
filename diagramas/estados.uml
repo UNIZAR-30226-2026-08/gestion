@@ -9,7 +9,6 @@ state "Subasta" as subasta
 state "Elección fantasía" as elec_fantasia
 
 state fork_propiedad <<fork>>
-state buy_decision <<choice>>
 
 state post_fork_propiedad <<fork>>
 
