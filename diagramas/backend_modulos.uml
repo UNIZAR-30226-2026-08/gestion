@@ -1,0 +1,55 @@
+@startuml
+skinparam componentStyle uml2
+
+package "Backend Django" {
+
+    package "Capa de presentación" {
+        [REST (views.py)] as REST
+        [WebSockets (websockets.py)] as WebSockets
+    }
+
+    package "Serialization" {
+        [Serializers (serializers.py)] as Serializers
+    }
+
+    package "Internal Logic Layer" {
+        [Capa de tienda] as ShopLogic
+        [Lógica de usuarios] as RegisterLogic
+        [Lógica del juego] as GameLogic
+    }
+
+    package "Acceso a datos" {
+        [models.py (ORM)] as Models
+    }
+
+    ' --- Serialization Usage ---
+    ' Serializers are used by the presentation layer, not internal modules
+    REST .down.> Serializers
+    WebSockets .down.> Serializers
+    
+    ' Serializers generally interact with models to map data
+    Serializers .down.> Models : mapeo
+
+    ' --- Event Routing ---
+    ' REST API handles shop and user registering
+    REST -down-> ShopLogic
+    REST -down-> RegisterLogic
+
+    ' Websockets handle game events
+    WebSockets -down-> GameLogic
+
+    ' --- Data Access ---
+    ' Internal logic layers interact with the underlying ORM
+    ShopLogic -down-> Models : acceso
+    RegisterLogic -down-> Models : acceso
+    GameLogic -down-> Models : acceso
+
+}
+
+' Optional: External context for clarity
+cloud "Clientes" {
+    [Cliente HTTP] --> REST : HTTP Requests
+    [Cliente WS] --> WebSockets : Mensajes WebSocket
+}
+
+@enduml
