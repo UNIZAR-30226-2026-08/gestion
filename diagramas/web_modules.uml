@@ -1,0 +1,69 @@
+@startuml
+
+skinparam ranksep 15
+skinparam nodesep 20
+skinparam padding 5
+
+package "Cliente" {
+    rectangle "Cliente WebSocket" as WS
+    rectangle "Cliente REST" as REST
+	REST -[hidden]right- WS
+}
+
+package "Navegación" {
+    rectangle "main.tsx"
+    rectangle "App.tsx"
+}
+
+package "Páginas" {
+  rectangle "Landing Page"
+  rectangle "Login y Signup"
+  rectangle "Home"
+  rectangle "Lobbys"
+  rectangle "PhaserGame.tsx" 
+  rectangle "Perfil"
+  rectangle "Tienda"
+  package "UI General" {
+	rectangle "Button"
+  }
+}
+
+package "Motor de juego (Phaser)" {
+  folder "Tablero" {
+    rectangle "Piezas y jugadores"
+    rectangle "Casillas"
+    rectangle "Dados"
+    rectangle "Sistema de cámara"
+    rectangle "Efectos"
+  }
+  folder "Interfaz" {
+    rectangle "HUD"
+    rectangle "Overlays"
+    rectangle "Cartas"
+  } 
+}
+
+package "Estado" {
+    rectangle "Contexto de audio" as Audio
+    rectangle "Bus" as Bus
+	rectangle "utils.ts" as utils
+	Audio -[hidden]right- Bus
+	Bus -[hidden]right- utils
+}
+
+' Relationships
+WS -- [Motor de juego (Phaser)] : Intercambian eventos
+[PhaserGame.tsx] -- [Motor de juego (Phaser)] : Mostrar el juego
+' [Interfaz] -- Audio : Sonidos de interfaz
+' [Tablero] -- Audio : Sonidos de partida
+[Navegación] -- REST
+[Navegación] -- [Páginas] 
+' [Navegación] -- Audio
+' [UI General] -- Audio
+
+' Force spatial arangement
+' [Páginas] -[hidden]- Estado
+[Páginas] -[hidden]right- [Navegación]
+[Navegación] -[hidden]right- Cliente
+
+@enduml

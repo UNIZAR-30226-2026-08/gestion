@@ -1,4 +1,5 @@
 @startuml
+hide empty description
 
 state "Tirar dados" as ini
 state "Elección casilla" as elec

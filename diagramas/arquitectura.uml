@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+!theme plain
+skinparam nodesep 50
+skinparam ranksep 50
+
+node "Cliente Web" as WebClient
+
+node "Cliente de Godot" as GodotClient
+node "Servidor Web" as WebServer
+
+node "Servidor de Backend" as Backend
+
+database "Servidor de Base de Datos" as DB
+
+WebClient --> WebServer : HTTP/HTTPS
+WebServer --> Backend : Rest API / WebSockets
+GodotClient --> Backend : Rest API / WebSockets
+
+Backend --> DB : Persiste y recupera información
+
+@enduml

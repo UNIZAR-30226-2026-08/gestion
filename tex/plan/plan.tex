@@ -79,20 +79,19 @@ urlcolor=blue]{hyperref}
 \newpage
 % \clearemptydoublepage
 
-\section{Introducción} % TODO JULIA
+\section{Introducción} 
 El presente documento recoge el plan de gestión, análisis, diseño y memoria
 del proyecto Magnate.
 Magnate es un sistema 
 que consiste en un juego multiplataforma, para escritorio
-y web, online y multijugador, con funcionalidades de tipo de red social.
-Tendrá un diseño sencillo, estético y lúdico. 
+y web, online y multijugador, con un diseño sencillo, estético y lúdico. 
 Magnate es un juego de mesa por turnos basado en el
 popular juego Monopoly, tomando inspiración adicional de la saga de 
 videojuegos Mario Party. Magnate busca ser un juego dinámico con alto grado
 de aleatoriedad, pero sin perder la estrategia del Monopoly original,
 al que añade más reglas que esperan hacer de la 
 experiencia de juego novedosa y emocionante.
-Estas incluyen un tablero en dos niveles, un nuevo sistema de tarjetas,
+Estas incluyen un tablero en dos niveles, un nuevo sistema de cartas,
 más formas de desplazamiento a lo largo del tablero y un nuevo sistema de
 puntuación.
 
@@ -102,20 +101,11 @@ partidas locales. Las partidas online se realizarán en salas públicas con
 permitirán el juego de varios jugadores en local y bots, sumando hasta
 4 jugadores. 
 
-Los principales objetivos del sistema, ordenados según los hitos de desarrollo,
-son los siguientes:
+Otros objetivos del sistema son:
 \begin{itemize}
-		\item El sistema permitirá jugar a Magnate, un juego que incorpore
-				a las mecánicas habituales del Monopoly nuevas reglas de
-				desplazamiento y acumulación de efectos, y que será 
-				dinámico, aleatorio, divertido y fácil de usar.
-		\item Las partidas podrán pausarse y reanudarse entre dispositivos.
-		\item El sistema permitirá asociar cuentas de usuario con la 
-				información de las partidas y características de red social.
-		\item Desarrollar un sistema de emparejamiento para las partidas
-				online.
-		\item Implementar bots que jueguen a Magnate con usuarios en local.
-		\item El juego ofrecerá una experiencia atractiva y personalizable,
+		\item Pausar y reanudar partidas entre dispositivos.
+		\item Asociar cuentas de usuario con la información de las partidas.
+		\item Ofrecer una experiencia atractiva y personalizable,
 				incluyendo una tienda de cosméticos.
 		\item Garantizar la seguridad y privacidad de los usuarios.
 \end{itemize}
@@ -129,15 +119,12 @@ Las tecnologías a utilizar abarcan Godot 4.6, React, Django y PostgreSQL.
 El desarrollo del sistema se realizará a lo largo de los meses de febrero,
 marzo, abril y mayo. Los hitos principales son:
 \begin{itemize}
-		\item 10 de abril. Demostración de una primera versión funcional del
-				sistema con la jugabilidad básica del juego y
-				tratamiento básico de los usuarios. (RF)
-		\item 4 o 5 de mayo. Presentación del producto a los clientes.
-		\item Semana del 11 de mayo. Demostración del juego completo
-				desplegado con todas las funcionalidades especificadas.
-		\item 27 de mayo. Entrega del Plan de gestión, análisis y diseño y
-				memoria del proyecto. Entrega del código al cliente.
-				Cierre del proyecto.
+		\item Entrega intermedia: 6 de abril de 2026. Prototipos sin integración.
+		%\item Comienzo de la integración: 3 de abril de 2026.
+		%\item Comienzo del despliegue: 15 de abril de 2026.
+		\item Presentación del sistema: 4 o 5 de mayo de 2026.
+		\item Muestra del sistema al cliente: semana del 11 de mayo de 2026.
+		\item Entrega final y cierre de proyecto: 27 de mayo de 2026.
 \end{itemize}
 
 El precio del sistema y el proyecto suman 30795,50 €. 
@@ -145,14 +132,25 @@ Por dicho precio se entregará lo siguiente a la finalización del proyecto:
 \begin{itemize}
 		\item Todo el código desarrollado.
 		\item Documentación de despliegue y ficheros de configuración y Docker Compose para el despliegue.
-		\item El presente documento. 
-		\item Un exec con la versión escritorio.
+		\item Un AppImagen con la versión escritorio, ya compilado.
 \end{itemize}
 
+
+El cuerpo del documento se estructura como sigue: en la Sección \ref{sec:equipo}
+se especifican los integrantes, roles y tareas de la empresa; en la Sección
+\ref{sec:plan} se describe la planificación inicial del proyecto, en cuanto a
+los recursos necesarios, temporalidad, procedimientos
+y responsables de las tareas; en la Sección \ref{sec:disennio} se describe el sistema,
+enumerando los requisitos, especificando el diseño y tecnologías y justificando
+las decisiones de diseño tomadas; y en la Sección \ref{sec:memoria} se recoge
+la memoria del proyecto.
 Los apéndices incluyen 
-la sección \ref{sec:glosario}, que recoge las abreviaciones utilizadas
-en el documento; y
-la sección \ref{sec:reglas}, donde se detallan las reglas del juego Magnate.
+el Apéndice \ref{app:diagramas}, donde se incluyen algunos diagramas;
+%el Apéndice \ref{app:glosario}, que recoge las abreviaciones utilizadas
+%en el documento; 
+el Apéndice \ref{app:riesgos}, con la información complementaria del análisis de
+riesgos realizado;
+y el Apéndice \ref{app:normas}, donde se detallan las reglas del juego Magnate.
 
 \newpage
 
@@ -160,7 +158,7 @@ la sección \ref{sec:reglas}, donde se detallan las reglas del juego Magnate.
 \label{sec:equipo}
 Los encargados del proyecto son la totalidad de la empresa 08 -- Roberta Williams, que conformamos los estudiantes de
 5º curso del Programa Conjunto en Matemáticas e Ingeniería Informática de la Universidad de Zaragoza. 
-La conformación del equipo de trabajo surge de manera natural tras las experiencias compartidas a lo
+La creaación del equipo de trabajo surge de manera natural tras las experiencias compartidas a lo
 largo del grado, que refuerzan nuestra confianza y seguridad en nosotros mismos como equipo y como
 profesionales. 
 
@@ -263,8 +261,8 @@ Mario.
 La formación inicial necesaria para los miembros del equipo, por tecnología
 utilizada, se detalla a continuación:
 \begin{itemize}
-		\item Godot 4.6 (implementación del sistema para aplicación de escritorio): Miguel, Miguel y Nicolás buscarían por su cuenta tutoriales de la aplicación.
-		\item React (implementación del sistema para navegador web): Miguel Royo buscaría información al respecto, y Cristina le ayudaría a buscar tutoriales y proyectos de la librería Phaser para el juego.
+		\item Godot 4.6 (implementación del sistema para aplicación de escritorio): Miguel, Miguel y Nicolás buscarán por su cuenta tutoriales de la aplicación.
+		\item React (implementación del sistema para navegador web): Miguel Royo buscará información al respecto, y Cristina le ayudará a buscar tutoriales y proyectos de la librería Phaser para el juego. Julia se encargará de incluir el sonido.
 		\item Django (backend): Los miembros del equipo ya tenían experiencia con la tecnología.
 		\item PostgreSQL (gestor de BDD): Los miembros el equipo ya tenían
 				experiencia con la tecnología.
@@ -320,14 +318,16 @@ integrado en la plataforma GitHub, utilizando
 la herramienta git de control de versiones, así como la documentación
 escrita con LaTeX. 
 
-Adicionalmente se ha utilizado la plataforma de gestión
+Se ha utilizado la plataforma de gestión
 de archivos Google Drive y sus filiales Google Sheets y Google Docs para 
 el seguimiento del desempeño, la realización de presupuestos o análisis
 y compartir de forma preliminar cierta información bibliográfica o de gestión.
+
 Para la creación de diagramas arquitecturales se ha seguido la notación
 UMLS, y se ha utilizado PlantUML.
 Para los diagramas de tareas, por otro lado, se ha utilizado una hoja de cálculo de Google Sheets.
-Para el diseño de la GUI, por un lado se concretó una guía de estilo general
+
+Para el diseño de la GUI, en primer lugar se concretó una guía de estilo general
 de los elementos de la interfaz, y posteriormente se realizan a papel los
 bocetos de cada pantalla, que tienen su primer prototipo directamente en la
 tecnología escritorio o web utilizada en el proyecto. Los diseños se hacen
@@ -335,16 +335,19 @@ siguiendo el sentido estético del equipo de frontend, más desarrollados por
 algunos de sus miembros que otros, que se centran en las cuestiones de 
 usabilidad. Como referencia para la interfaz se siguen Las 8 reglas de oro
 de Schneiderman, y se intentan minimizar la interacción del usuario sin
-comprometer su comprensión. En el diseño estético se eligieron un
+comprometer su comprensión. Para la guía de estilo se eligieron un
 número reducido de colores principales y secundarios y se consensuaron los
 formatos de los elementos básicos (botones, fondos...) para la consistencia.
 
 Por último, las herramientas de despliegue engloban, a nivel software, 
-contenedores Docker que desplieguen un sistema operativo Debian o Alpine Linux;
+contenedores Docker que desplieguen un sistema operativo Alpine Linux;
 y a nivel hardware, para el despliegue de los contenedores, una máquina 
 propiedad de Mario Casado con las siguientes especificaciones: 
 UGREEN DXP2800 con procesador Intel n100,
 8TB de HDD, 1TB de SSD m2 y 16GB de RAM DDR5.
+Como todo el despliegue se realizará en la misma máquina, los puertos
+y rutas necesarios para el despliegue aparecerán como variables de
+entorno en los ficheros yaml, y no será necesario especificar nada más.
 
 Los \textbf{responsables} de supervisar la corrección de las configuraciones,
 construcción del software y calidad del producto son para el código del
@@ -352,13 +355,32 @@ backend Jaime (el coordinador del backend) y para el código del frontend
 Miguel (el coordinador del frontend).
 
 La convención de nombrar ficheros y documentos y 
-\textbf{estándares de código} se sigue según los estándares de los lenguajes empleados.
+\textbf{estándares de código} se sigue según los estándares de los lenguajes empleados,
+y según las especificaciones de las herramientas de generación automática de documentación
+empleadas.
 A nivel general y común a todos ellos, puede especificarse que
-el código está escrito en inglés (nombres de variables y comentarios pertinentes),
+el código está escrito en inglés (nombres de variables y comentarios),
 utilizando el nombrado con camelCase para las clases y el resto de variables 
 con snake\_case.
-Para la generación de la documentación se 
-% TODO mencionar qué herramientas lo pueden sacar de forma automática
+Para la generación de la documentación se contemplaron distintas herramientas 
+para cada módulo (backend, web, escritorio). 
+Para los módulos del backend: el código interno y los websockets utilizan
+mkdocs con docstrings, y el código de API Rest utiliza swagger.
+Para los módulos del cliente web se utiliza TypeDoc.
+Para los módulos del cliente escritorio se utiliza Godoct (ver \cite{godoct}).
+
+Para el desarrollo de la aplicación para entornos de escritorio se seguirán
+las buenas prácticas explicadas en \cite{godot_best_practices}. Entre estas,
+se destacan algunos detalles específicos a las herramientas:
+\begin{itemize}
+		\item Signal up call down: Aplicar el patrón de diseño Publicación-Subscripción
+				mediante señales de Godot, manteniendo la jerarquía de nodos.
+		\item Estilo: El lenguaje de programación de la herramienta,
+				GDScript, es muy similar a Python, se recomienda el uso del
+				estándar PEP8 (ver \cite{pep8}).
+		\item Evitar clases pesadas: Se heredará de clases más ligeras que la
+				clase Node, como RefCounted.
+\end{itemize}
 
 El código se ha organizado en 4 \textbf{repositorios} de GitHub: uno para el backend,
 otro para el frontend del cliente web, otro para el frontend del cliente 
@@ -382,11 +404,10 @@ incidente decidir el plan de actuación para solventar la incidencia, en tanto
 a si puede ser el único responsable y si es más prioritario o no que el
 trabajo actual que haya que realizar.
 
-% otras cosas de pruebas: rellenar con lo dicho en la p3 
 Las actividades de \textbf{control de calidad} serán variadas. 
-Se realizan pruebas por separado de frontend y backend y posteriormente se
+Se realizarán pruebas por separado de frontend y backend y posteriormente se
 realizarán pruebas de la conjunción de ambos.
-Para las pruebas del backend se cuenta en primera instancia con test para
+Para las pruebas del backend se cuenta en primera instancia con tests para
 comprobar el correcto funcionamiento de las funciones. Para probar el juego
 completo, se propone:
 \begin{enumerate}
@@ -426,26 +447,6 @@ apoyada en los coordinadores backend y frontend para una mejor descripción y
 ordenación de las tareas, la división del trabajo y la monitorización y 
 seguimiento de las tareas.
 
-% Lo de las issues lo puse en 3.2 porque no sé qué son las incidencias
-
-Para la \textbf{comunicación interna}, se han creado grupos de WhatsApp por proyecto
-y por equipios, así como un canal de Discord análogo para comunicaciones y
-cuestiones de rápida resolución o inmediatas, y se realizarán reuniones de 
-seguimiento entre todos los equipos durante las sesiones de prácticas, así
-como las reuniones dentro del equipo cuando los miembros lo estimen
-oportuno. Las reuniones de las sesiones de prácticas servirán para
-actualizar los planes en caso de desviarse del inicial. 
-Las decisiones tomadas acabarán reflejadas en Github issues o en la 
-documentación (o en la carpeta compartida de Drive a modo de borrador, 
-de ser algo extenso, de forma provisional hasta aparecer en la documentación), 
-por lo que no se utilizan documentos adicionales con actas.
-
-Ante diferencias en la \textbf{gestión del equipo humano}, se plantea la 
-inclusión de
-mediadores imparciales o no involucrados en la disputa inicial para intentar
-consensuar a las partes. En caso de no resolverse el conflicto, se pospondrá
-la discusión a cuando se halla enfriado, no siendo más de 2 semanas.
-
 \begin{sidewaysfigure}[hbtp]
 \centering
 		\includegraphics[width=\textwidth]{img/gantt.png}
@@ -476,18 +477,52 @@ planificado un diseño iterativo y gradual por requisito.
 A más bajo nivel, estas se
 realizarán después de la monitorización del progreso, listando el desglose de
 tareas necesarias para consecuir los objetivos semanales correspondientes al
-diagrama de Gantt de la Figura \ref{fig:gantt}. 
+diagrama de Gantt de la Figura \ref{fig:gantt}. Los responsables de las tareas
+son como lo descrito en la Tabla \ref{tab:cargos}. Del diagrama de Gantt podemos
+destacar los siguientes hitos internos:
+\begin{itemize}
+		\item Entrega intermedia: 6 de abril de 2026. Para esta no se planea haber
+				conseguido completar ningún requisito, pero sí tener listo a falta de
+				integración y despliegue la implementación correspondiente a los
+				requisitos 1, 2, 3, 4, 6 y 9.
+		\item Comienzo de la integración: 3 de abril de 2026.
+		\item Comienzo del despliegue: 15 de abril de 2026.
+		\item Presentación del sistema: 4 o 5 de mayo de 2026.
+		\item Muestra del sistema al cliente: semana del 11 de mayo de 2026.
+		\item Entrega final: 27 de mayo de 2026.
+\end{itemize}
+
 Una vez se hayan desglosado las tareas y concordado
 cómo se van a realizar (todo aquello que suponga cohesión, como interfaces
 consistentes o comunicación entre elementos), se repartirán entre los miembros
-del equipo, primando la equidad, los conocimientos y habilidades de
+del equipo (backend, web y escritorio), primando la equidad, los conocimientos y habilidades de
 los miembros, y sus preferencias. Cada uno informará de sus preferencias y al
 llegar al consenso entre todos se fijarán las tareas con su responsable como
 Github issues.
 
+Para la \textbf{comunicación interna}, se han creado grupos de WhatsApp por módulo
+y por equipios, así como un canal de Discord análogo para comunicaciones y
+cuestiones de rápida resolución o inmediatas, y se realizarán reuniones de 
+seguimiento entre todos los equipos durante las sesiones de prácticas, así
+como las reuniones dentro del equipo cuando los miembros lo estimen
+oportuno. Las reuniones de las sesiones de prácticas servirán para
+actualizar los planes en caso de desviarse del inicial. 
+Las decisiones tomadas acabarán reflejadas en Github issues o en la 
+documentación (o en la carpeta compartida de Drive a modo de borrador, 
+de ser algo extenso, de forma provisional hasta aparecer en la documentación), 
+por lo que no se utilizan documentos adicionales con actas.
+
+Ante diferencias en la \textbf{gestión del equipo humano}, se plantea la 
+inclusión de
+mediadores imparciales o no involucrados en la disputa inicial para intentar
+consensuar a las partes. En caso de no resolverse el conflicto, se pospondrá
+la discusión a cuando se halla enfriado, no siendo más de 2 semanas.
+
+
 \newpage
 
 \section{Análisis y diseño del sistema}
+\label{sec:disennio}
 En esta sección se detallan los requisitos y diseño del sistema.
 
 \subsection{Análisis de requisitos}
@@ -629,42 +664,93 @@ funcionales del sistema.
 		\caption{Requisitos no funcionales del sistema.}
 		\label{tab:rnf}
 \end{table}
+
 \subsection{Diseño del sistema} 
-% TODO diagramas: poner las foticos de los diagramas en sí.
+\label{ss:arquitectura}
 El sistema ofrece un cliente web y un cliente escritorio, para los que
-utiliza una arquitectura en 4 y 3 niveles, como puede verse en la
-Figura \ref{fig:arquitectura}.
+utiliza una arquitectura en 4 y 3 niveles, como puede verse en el diagrama
+simplificado de la Figura \ref{fig:arquitectura}.
+
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[width=\textwidth]{../../diagramas/arquitectura.png}
+		\caption{Diagramas de la arquitectura a alto nivel.}
+		\label{fig:arquitectura}
+\end{figure}
+
+
 El sistema cuenta con un servidor de bases de datos PostgreSQL, un
 servidor con el backend para la lógica del juego y demás peticiones, y
 para el caso del cliente escritorio, basta con un único cliente, mientras
 que para la web necesita un servidor web y sobre este el cliente web con
 nuestra aplicación.
-
-El despliegue del sistema se realizará en una misma máquina, utilizando
-varios contenedores, sin perjuicio a que se pudiera realizar en varias
-máquinas distintas cada contenedor, según lo especificado en el 
-diagrama de despliegue de la Figura \ref{fig:despliegue}.
-El diagrama de componentes de la Figura \ref{fig:componentes} nos aporta
-la semántica de las comunicaciones entre los elementos desplegados. 
+El diagrama de componentes y conectores
+de la Figura \ref{fig:componentes} (ver Apéndice \ref{app:diagramacompo}) 
+nos concreta el diagrama de la
+Figura \ref{fig:arquitectura} y 
+las comunicaciones entre los elementos desplegados. 
 La comunicación se realiza a través de web sockets para el juego y de
 API Rest para el resto de la aplicación. 
-Esto simplifica y generaliza los diagramas de
-secuencia y comunicación. Destacamos los diagramas de de las Figuras %TODO
 
 Además aportamos, para explicar la lógica y secuenciación del juego, el
 diagrama de estados de la Figura \ref{fig:estados}, que representa un
 turno de juego y sus fases. El turno comienza con la fase de tirar los dados y
 después de resolverse lo ocurrido en la casilla a la que se cayó se pasa a la
-fase de gestión, en la que pueden realizarse opcionalmente y en cualquier orden
-el resto de operaciones del juego (intercambio, y administrar propiedades:
-construcción, derruir casas e hipotecar).
+fase de negocios, en la que pueden realizarse opcionalmente y en cualquier orden
+las transacciones del juego (intercambio, y administrar propiedades:
+construcción, derruir casas e hipotecar), y por último hay una fase de
+liquidación análoga a la anterior para que el jugador evite quedarse en
+números rojos. Los diagramas de secuencia de estas dos últimas fases se 
+encuentran en la Figura \ref{fig:transacciones}. Estos muestran la transacción
+más general (la hipóteca), en la que proponente y receptor pueden ser 
+distintos. 
+
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[width=\textwidth]{../../diagramas/estados.png}
+		\caption{Diagrama de estados de un turno de juego con sus fases.}
+		\label{fig:estados}
+\end{figure}
+
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[width=0.4\textwidth]{../../diagramas/negocios.png}
+		\includegraphics[width=0.4\textwidth]{../../diagramas/liquidacion.png}
+		\caption{Diagramas de secuencia de las fases de negocios (izquierda) y liquidación (derecha).}
+		\label{fig:transacciones}
+\end{figure}
+
+Otro aspecto del turno por describir es la subasta, en la que se esperará
+a que todos los jugadores seleccionen el valor por el que subastar (o no
+participar) para continuar. El diagrama de estados es muy sencillo, se
+recoge en la Figura \ref{fig:subasta} (ver Apéndice \ref{app:diagramasubasta}).
 
 El proyecto está organizado en 3 grandes repositorios de código: el
 backend, el cliente web y el cliente escritorio. La estructura de
 estos repositorios, en cuanto a diagramas y vistas de módulos, siguen la
 estructura habitual de proyectos con estas tecnologías, y pueden consultarse
 en los diagramas de las Figuras 
-\ref{fig:modbackend}, \ref{fig:modweb} y \ref{fig:modesc}, respectivamente.
+\ref{fig:modbackend}, \ref{fig:modweb} y \ref{fig:modesc}, respectivamente
+(ver Apéndice \ref{app:diagramasmodulos}).
+
+El despliegue del sistema se realizará en una misma máquina, utilizando
+varios contenedores, con un sistema en dos capas,
+sin perjuicio a que se pudiera realizar en varias
+máquinas distintas cada contenedor, en cuatro capas,
+según lo especificado en los
+diagramas de despliegue de la Figura \ref{fig:despliegue}.
+
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[width=0.4\textwidth]{../../diagramas/deployment_one.png}
+		\includegraphics[width=0.55\textwidth]{../../diagramas/deployment_multi.png}
+		\caption{Diagramas de despliegue. A la izquierda, diagrama en 2 capas,
+		como se realizará el despliegue, y a la derecha, en 4 capas,
+		señalando las posibilidades de despliegue.}
+		\label{fig:despliegue}
+\end{figure}
+
+\newpage
 
 \subsubsection{Decisiones de diseño}
 Las primeras decisiones de diseño se tomaron sobre las \textbf{tecnologías}
@@ -679,9 +765,14 @@ componentes. Además, React cuenta con numerosas librerías sobre las que
 construir un juego. Se desestimó la librería para juegos boardgame.io ya
 que esta supliría el trabajo del que se encarga el backend,
 pero sí se utilizó Phaser para gráficos, componentes y elementos del juego, 
-ya que tras dos días en los que Cristina y Miguel
-sopesaron la decisión de utilizarla descubrieron que el aprendizaje merecería
-la pena para el trabajo futuro a ahorrarnos.
+ya que el aprendizaje merecería la pena frente a realizar todo en React. Por
+motivos similares, se desestimó utilizar directamente HTML Audio para gestionar
+el sonido y se utilizó la librería Howler, que parecía más sencilla que otras del
+estilo.
+Como herramienta para la documentación, se barajaron react-docgen,
+TypeDoc y Storybook, y se decidió usar TypeDoc
+por ofrecer documentación automática para todos los archivos
+(clases, interfaces, funciones y módulos además de los componentes).
 
 Como segundo cliente se decidió el escritorio sobre el móvil porque 
 facilitaría las labores de interfaz, al no tener que conciliar diseños
@@ -691,6 +782,12 @@ que tiene una interfaz para el desarrollo intuitiva y cuenta
 con portabilidad a una amplia gama de dispositivos, por lo que se presentaba
 como una buena herramienta para aprender. Otras tecnologías consideradas
 fueron Draft y Flutter, que se descartaron por no estar dirigidas a juegos.
+Para la herramienta para generación de documentación del proyecto
+en Godot se eligió Godoct por ser compatible con Godot 4,
+no como Doxygen, que tiene las mismas características, y por ser más automática 
+que las demás consideradas
+(MkDocs y Sphinx) y bastar con seguir el estilo y forma de poner comentarios
+para obtener la documentación.
 
 Como tecnologías de backend se barajaron Django, Flask, NextJS y FastAPI, y se
 decidió usar Django por tener experiencia previa en la tecnología. 
@@ -703,47 +800,196 @@ previa trabajando con ellos.
 Para la base de datos, se barajaron bases de datos SQL, que son con las
 que tenemos experiencia, y nos decantamos por PostgreSQL por ser
 compleja, potente y eficiente.
+La decisión de utilizar las herramientas automáticas de generación de 
+documentación vienen por haberse encontrado tras una pequeña búsqueda,
+ver que estas bastarían para el proyecto, estar familiarizados con el
+formato docstrings, poder integrarse y generar pdfs de forma sencilla y
+que mkdocs es moderno y fácil de configurar.
 
 Otra decisión de diseño tomada fue utilizar el servidor de Mario Casado para
 el despliegue. Se optó por esta opción sobre cualquier otra plataforma online
 para el despliegue debido a su acceso gratuito y sin condiciones, y a la
 familiaridad de algunos de los miembros del equipo con dicho entorno.
 
-La decisión sobre el diseño de la arquitectura viene directamente motivadas
+La decisión sobre el diseño de la \textbf{arquitectura} viene directamente motivadas
 por las tecnologías empleadas y los flujos de trabajo habituales necesarios
 para desplegar aplicaciones que utilizan dichas tecnologías.
 Como servidor web sobre el que desplegar nuestro cliente web se decidió
 utilizar nginx en lugar de Apache, ya que contábamos con experienca previa
 en dicho servidor y sus prestaciones son suficientes para el proyecto.
 
-Sobre los protocolos de comunicación entre los componentes del sistema,
+Sobre los \textbf{protocolos de comunicación} entre los componentes del sistema,
 se optó por una API Rest para las comunicaciones no realcionadas con el
 juego, ya que son más sencillas, y web sockets para poder almacenar el
 estado del juego y tratar las comunicaciones de frontend a backend
 (con los objetos responses) y de backend a frontend (con actions, enviando
 el contenido en un JSON serializado para facilitar el tratamiento en el
 frontend).
-% TODO poner bien los nombritos cuando estén los diagramas.
 
-\section{Memoria del proyecto} % TODO JULIA
+\newpage
+\section{Memoria del proyecto} 
+\label{sec:memoria}
 En este capítulo se describe el ajuste a la realidad de lo previsto en
 el plan de la Sección \ref{sec:plan}.
 % comparar lo propuesto en el apartado 3 con lo que hemos hecho de verdad
 \subsection{Inicio del proyecto} % 3.1 
+La elección inicial de tecnologías permitió que el proyecto avanzara a buen
+ritmo una vez nos familiarizamos con ellas, siguiendo el plan inicial. 
 
 \subsection{Ejecución y control del proyecto} % 3.2 y 3.3
+\label{ss:mem323}
+A día 15 de marzo, la comunicación interna se ha concentrado más
+en los grupos de mensajerías para los equipos reducidos (backend,
+cliente web y cliente escritorio) y en persona para la medición del
+progreso y la comunicación de la empresa al completo. Creemos que
+esto refleja las necesidades de las actividades que hemos estado
+realizando hasta el momento y el primer periodo de adaptación al 
+trabajo en un grupo tan grande, y que conforme avance el proyecto 
+usaremos el resto de herramientas que hemos preparado.
+Lo mismo sucede con las pruebas: de momento solo se han realizado
+tests automáticos para el backend, que han resultado muy útiles, y 
+pruebas manuales en el frontend.
+
+En cuanto al reparto de tareas, la duplicación del trabajo en frontend
+y ser la primera vez que trabajábamos juntos algunos de los integrantes
+hizo que nuestro planteamiento inicial del reparto de trabajo derivara
+en tener que repetir el trabajo por diferencias en diseños. Esto
+provocó que tuviéramos más trabajo durante un par de semanas, y nos 
+retrasásemos dos semanas con respecto al plan inicial, que era demasiado
+optimista. Tomamos medidas el 27 de febrero cambiando progresivamente
+nuestra manera de repartir el trabajo en el frontend: en vez de 
+asignar unas pantallas a web y otras a escritorio, decidimos asignarlas
+en primer lugar a web, ya que la plataforma es más restrictiva que
+escritorio, por si era necesario hacer algún pequeño cambio con 
+respecto al diseño inicial consensuado, y después escritorio copiaría
+las pantallas. El cambio debido a esta divergencia se dio por completo el
+13 de marzo, cuando revisamos el plan inicial, que tenía dos fases de
+integración y despliegue por requisitos, y lo cambiamos al plan actual,
+que se centra primero en el diseño e implementación y después en la integración y
+despliegue. El plan también favorece el reparto de los requisitos por
+persona, permitiendo el trabajo paralelo en mayor medida. Con estas
+medidas esperamos que no sucedan más retrasos.
+
+Las herramientas y tecnologías empleadas, así como los procesos para
+conocer el trabajo realizado y pendiente y sus encargados, y los 
+procesos para la implementación y procesos relacionados se han seguido 
+respecto al plan, con resultados satisfactorios.
+Destacar que todavía no se ha tenido oportunidad de probar los procesos
+de integración ni despliegue.
 
 \subsection{Cierre del proyecto} % vibes de conclusiones pero más curro
+A día 15 de marzo, el proyecto sigue el plan descrito en la Figura
+\ref{fig:gantt}, y los esfuerzos realizados están en torno al 33\% del
+proyecto, adecuado para el momento en el que nos encontramos. % TODO 
+
+Durante este tiempo se han implementado las estrategias de mitigación de
+riesgos como planteado. Los riesgos 3, 7, 9, 10 y 11 todavía no se han
+presentado, y los riesgos 1, 5, 8 y 4 se han presentado sin efectos 
+negativos (aunque todavía están a tiempo de mostrarlos, sobre todo el
+último). El riesgo 6 se presentó muy temprano en el proyecto, en torno
+al 23 de febrero, y fue solventado sin pasar más de una semana. Con
+respecto al riesgo 2, su aparición y efectos se explicaron en la
+subsección \ref{ss:mem323}.
+
+Además de los riesgos, surgió un pequeño imprevisto entre los miembros
+del equipo backend: al juntar código de distintos miembros en el
+entorno de desarrollo de Mario se veía algo de ruido en los ficheros
+(por cambio de formato y demás). Así que todos los miembros del
+equipo pasaron a usar el mismo entorno de desarollo (VisualStudio, de
+los que ya estaban contemplados). 
+No supuso un retraso de más de un día.
+Este imprevisto podría considerarse
+como riesgo en futuros proyectos, imponiendo como mitigación que las
+personas que editen los mismos ficheros lo hagan en el mismo entorno
+de desarollo. 
+
+Hemos aprendido las siguientes lecciones:
+\begin{itemize}
+		\item Usar el mismo entorno de desarrollo para editar los mismos
+				ficheros evita problemas menores pero molestos.
+		\item Al trabajar con distintas herramientas de forma que sea
+				necesario replicar el trabajo puede ser una buena práctica
+				ir más adelantado en una plataforma que en otra para evitar
+				repetir trabajo, si una de estas tecnologías es más
+				restrictiva que la otra.
+		\item La comunicación en el equipo depende de las actividades que
+				realicen, afectando tanto al contenido como a su forma.
+\end{itemize}
+
+\subsubsection{Dedicación por integrante} % TODO
+En la Tabla \ref{tab:dedicacion} recogemos las horas empleadas por cada
+miembro de la empresa en cada tarea. Podemos comprobar que estas se
+corresponden con las tareas que tenían asignadas en un principio, están
+equilibradas teniendo en cuenta las actividades realizadas hasta la
+fecha y suponen en torno a un \% del proyecto.
+
+\begin{table}[h]
+		\centering
+		\begin{tabular}{|l|r|}
+				\hline
+				Hugo Naudín &  \\
+				\hline
+				Coordinación backend & \\
+				\hline 
+				Lógica del juego & \\
+				\hline 
+				Bases de datos & \\
+				\hline 
+				Serialización & \\ 
+				\hline 
+				Documentación y diagramas & \\
+				\hline 
+				Despliegue & \\
+				\hline 
+				\hline 
+				Jaime Alconchel & 35 \\
+				\hline
+				Coordinación backend & 10 \\
+				\hline 
+				Lógica del juego & \\
+				\hline 
+				Bases de datos & \\
+				\hline 
+				Serialización & \\ 
+				\hline 
+				Documentación y diagramas & \\
+				\hline 
+				Despliegue & \\
+				\hline 
+				\hline 
+				Mario Casado &  \\
+				\hline
+				Coordinación backend & \\
+				\hline 
+				Lógica del juego & \\
+				\hline 
+				Bases de datos & \\
+				\hline 
+				Serialización & \\ 
+				\hline 
+				Documentación y diagramas & \\
+				\hline 
+				Despliegue & \\
+				\hline 
+				\hline 
+		\end{tabular}
+		\caption{Dedicación: horas y tareas realizadas por los integrantes de la empresa.}
+		\label{tab:dedicacion}
+\end{table}
 
 %\section{Conclusiones} % Solo para la entrega final...
 %personales, mejorar los procesos... si no nos quejamos nos pone un 0
 
 \newpage
 
+\printbibliography
+
+\newpage
+
 \appendix
 
-\section{Glosario}
-\label{sec:glosario}
+%\section{Glosario}
+%\label{app:glosario}
 
 %\section{Resultados de la revisión intermedia}
 
@@ -751,7 +997,57 @@ el plan de la Sección \ref{sec:plan}.
 % copia de las transparencias y explicar cómo ha tenido en cuenta lo visto
 % en teoría de cómo hacer presentaciones
 
+\section{Diagramas}
+\label{app:diagramas}
+\subsection{Diagrama de componentes y conectores.}
+\label{app:diagramacompo}
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[width=0.55\textwidth]{../../diagramas/componentes.png}
+		\caption{Diagrama de componentes y conectores.}
+		\label{fig:componentes}
+\end{figure}
+
+\newpage
+\subsection{Diagrama de estados de la fase de Subasta de un turno del juego Magnate}
+\label{app:diagramasubasta}
+
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[width=0.35\textwidth]{../../diagramas/subasta.png}
+		\caption{Diagrama de estados de la fase de Subasta de un turno del juego Magnates.}
+		\label{fig:subasta}
+\end{figure}
+
+\subsection{Diagramas de módulos}
+\label{app:diagramasmodulos}
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[width=0.8\textwidth]{../../diagramas/backend_modulos.png}
+		\caption{Diagrama de módulos del Backend.}
+		\label{fig:modbackend}
+\end{figure}
+
+\newpage
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[width=0.65\textwidth]{../../diagramas/desktop_modules.png}
+		\caption{Diagrama de módulos del cliente de escritorio.}
+		\label{fig:modesc}
+\end{figure}
+
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[width=\textwidth]{../../diagramas/web_modules.png}
+		\caption{Diagrama de módulos del cliente web.}
+		\label{fig:modweb}
+\end{figure}
+
+
+\newpage
+
 \section{Análisis de riesgos}
+\label{app:riesgos}
 En la Figura \ref{fig:riesgo} se recoge el análisis de riesgos detallado
 realizado por la empresa.
 
