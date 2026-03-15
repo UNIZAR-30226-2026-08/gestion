@@ -22,6 +22,8 @@
 \usepackage{multirow}
 \usepackage{makecell}
 \usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{siunitx} % align decimal point
 
 % Images
 \usepackage{rotating}
@@ -95,10 +97,11 @@ Estas incluyen un tablero en dos niveles, un nuevo sistema de cartas,
 más formas de desplazamiento a lo largo del tablero y un nuevo sistema de
 puntuación.
 
-El sistema permitirá dos modos de juego: partidas online y
-partidas locales. Las partidas online se realizarán en salas públicas con 
-4 usuarios interesados en jugar partidas online. Las partidas locales
-permitirán el juego de varios jugadores en local y bots, sumando hasta
+El sistema permitirá dos modos de juego: partidas públicas y
+partidas privadas. Las partidas públicas reunirán a
+4 usuarios interesados en jugar. Las partidas privadas
+permitirán el juego de varios jugadores que dispongan del código de 
+la sala y bots, sumando hasta
 4 jugadores. 
 
 Otros objetivos del sistema son:
@@ -235,7 +238,7 @@ De los roles recogidos en la Tabla \ref{tab:cargos}, queremos
 destacar las siguientes responsabilidades:
 \begin{itemize}
 \item Directora de proyecto: Julia Quero Pérez
-\item Coordinador de fronend: Miguel Ángel Royo Miguel
+\item Coordinador de frontend: Miguel Ángel Royo Miguel
 \item Coordinador de backend: Jaime Alconchel Gallego
 \item Coordinadora de calidad: Cristina Embid Martínez
 \item Coordinador de despliegue: Jaime Alconchel Gallego
@@ -249,7 +252,7 @@ destacar las siguientes responsabilidades:
 \label{sec:plan}
 En esta sección se describe cómo se llevarán a cabo los distintos procesos o
 tareas a realizar a lo largo del tiempo, su temporalidad, los recursos a
-emplear y quién son sus responsables.
+emplear y quiénes son sus responsables.
 
 \subsection{Inicio del proyecto} % htas y metodología
 Se ha priorizado el uso de herramientas abiertas o de software libre para la
@@ -323,9 +326,9 @@ de archivos Google Drive y sus filiales Google Sheets y Google Docs para
 el seguimiento del desempeño, la realización de presupuestos o análisis
 y compartir de forma preliminar cierta información bibliográfica o de gestión.
 
-Para la creación de diagramas arquitecturales se ha seguido la notación
+Para la creación de diagramas se ha seguido la notación
 UMLS, y se ha utilizado PlantUML.
-Para los diagramas de tareas, por otro lado, se ha utilizado una hoja de cálculo de Google Sheets.
+Para el diagrama de Gantt, por otro lado, se ha utilizado una hoja de cálculo de Google Sheets.
 
 Para el diseño de la GUI, en primer lugar se concretó una guía de estilo general
 de los elementos de la interfaz, y posteriormente se realizan a papel los
@@ -426,7 +429,7 @@ Para el código a alto nivel, se contrastará con la persona que realice los
 diagramas y los autores del código correspondiente que el comportamiento
 del sistema coincide con lo expresado en el diagrama.
 Tanto la realización de las pruebas como el despliegue del sistema se realizará
-durante días designados para la conciliación entre backend y frontend, como
+durante días designados para la integración entre backend y frontend, como
 expresado en el diagrama de Gantt de la Figura \ref{fig:gantt}.
 Se especificarán las fechas concretas para realizar las actividades al comienzo
 de la semana correspondiente a estas actividades. Por tanto, descartamos tanto
@@ -471,10 +474,11 @@ replantearán las tareas a realizar, minimizando estas.
 
 Sobre el \textbf{reparto y definición de tareas}, primero se ha realizado una
 planificación global por requisitos como expresado en el diagrama de Gantt de
-la Figura \ref{fig:gantt}. Para ello, se ha entendido que las etapas de 
-calidad se producirán cada vez que se suba código a los repositorios y se ha
-planificado un diseño iterativo y gradual por requisito.
-A más bajo nivel, estas se
+la Figura \ref{fig:gantt}. Para ello, se ha seguido un planteamiento
+incremental, encargándonos primeros de implementación, después de integración
+y por último de despliegue, realizando actividades de calidad tras cada una de
+estas fases.
+A más bajo nivel, las tareas se concretarán y 
 realizarán después de la monitorización del progreso, listando el desglose de
 tareas necesarias para consecuir los objetivos semanales correspondientes al
 diagrama de Gantt de la Figura \ref{fig:gantt}. Los responsables de las tareas
@@ -500,9 +504,10 @@ los miembros, y sus preferencias. Cada uno informará de sus preferencias y al
 llegar al consenso entre todos se fijarán las tareas con su responsable como
 Github issues.
 
-Para la \textbf{comunicación interna}, se han creado grupos de WhatsApp por módulo
-y por equipios, así como un canal de Discord análogo para comunicaciones y
-cuestiones de rápida resolución o inmediatas, y se realizarán reuniones de 
+Para la \textbf{comunicación interna}, se han creado grupos de WhatsApp para la
+empresa al completo, backend, frontend, frontend web y frontend escritorio,
+así como un canal de Discord análogo para comunicaciones y
+cuestiones de rápida resolución o inmediatas. Se realizarán reuniones de 
 seguimiento entre todos los equipos durante las sesiones de prácticas, así
 como las reuniones dentro del equipo cuando los miembros lo estimen
 oportuno. Las reuniones de las sesiones de prácticas servirán para
@@ -516,7 +521,7 @@ Ante diferencias en la \textbf{gestión del equipo humano}, se plantea la
 inclusión de
 mediadores imparciales o no involucrados en la disputa inicial para intentar
 consensuar a las partes. En caso de no resolverse el conflicto, se pospondrá
-la discusión a cuando se halla enfriado, no siendo más de 2 semanas.
+la discusión a cuando se haya enfriado, no siendo más de 2 semanas.
 
 
 \newpage
@@ -674,7 +679,7 @@ simplificado de la Figura \ref{fig:arquitectura}.
 \begin{figure}[hbtp]
 		\centering
 		\includegraphics[width=\textwidth]{../../diagramas/arquitectura.png}
-		\caption{Diagramas de la arquitectura a alto nivel.}
+		\caption{Diagrama de la arquitectura a alto nivel.}
 		\label{fig:arquitectura}
 \end{figure}
 
@@ -702,8 +707,7 @@ construcción, derruir casas e hipotecar), y por último hay una fase de
 liquidación análoga a la anterior para que el jugador evite quedarse en
 números rojos. Los diagramas de secuencia de estas dos últimas fases se 
 encuentran en la Figura \ref{fig:transacciones}. Estos muestran la transacción
-más general (la hipóteca), en la que proponente y receptor pueden ser 
-distintos. 
+más general (el intercambio), en la que proponente y receptor son distintos. 
 
 \begin{figure}[hbtp]
 		\centering
@@ -726,11 +730,11 @@ participar) para continuar. El diagrama de estados es muy sencillo, se
 recoge en la Figura \ref{fig:subasta} (ver Apéndice \ref{app:diagramasubasta}).
 
 El proyecto está organizado en 3 grandes repositorios de código: el
-backend, el cliente web y el cliente escritorio. La estructura de
+backend, el cliente escritorio y el cliente web. La estructura de
 estos repositorios, en cuanto a diagramas y vistas de módulos, siguen la
 estructura habitual de proyectos con estas tecnologías, y pueden consultarse
 en los diagramas de las Figuras 
-\ref{fig:modbackend}, \ref{fig:modweb} y \ref{fig:modesc}, respectivamente
+\ref{fig:modbackend}, \ref{fig:modesc} y \ref{fig:modweb}, respectivamente
 (ver Apéndice \ref{app:diagramasmodulos}).
 
 El despliegue del sistema se realizará en una misma máquina, utilizando
@@ -754,7 +758,7 @@ diagramas de despliegue de la Figura \ref{fig:despliegue}.
 
 \subsubsection{Decisiones de diseño}
 Las primeras decisiones de diseño se tomaron sobre las \textbf{tecnologías}
-a usar en el proyecto. Las posibles candidatas consideradas son todas
+a usar en el proyecto. Las candidatas consideradas son todas
 tecnologías libres y sin licencia comercial.
 Para las tecnologías web se barajaron html con css y React. Aunque los
 miembros del equipo tenían experiencia con html y css, la dificultad de 
@@ -859,7 +863,7 @@ retrasásemos dos semanas con respecto al plan inicial, que era demasiado
 optimista. Tomamos medidas el 27 de febrero cambiando progresivamente
 nuestra manera de repartir el trabajo en el frontend: en vez de 
 asignar unas pantallas a web y otras a escritorio, decidimos asignarlas
-en primer lugar a web, ya que la plataforma es más restrictiva que
+en primer lugar a web, ya que la plataforma es más restrictiva y limitada que
 escritorio, por si era necesario hacer algún pequeño cambio con 
 respecto al diseño inicial consensuado, y después escritorio copiaría
 las pantallas. El cambio debido a esta divergencia se dio por completo el
@@ -879,8 +883,8 @@ de integración ni despliegue.
 
 \subsection{Cierre del proyecto} % vibes de conclusiones pero más curro
 A día 15 de marzo, el proyecto sigue el plan descrito en la Figura
-\ref{fig:gantt}, y los esfuerzos realizados están en torno al 33\% del
-proyecto, adecuado para el momento en el que nos encontramos. % TODO 
+\ref{fig:gantt}, y los esfuerzos realizados están en torno al 40\% del
+proyecto, adecuado para el momento en el que nos encontramos.
 
 Durante este tiempo se han implementado las estrategias de mitigación de
 riesgos como planteado. Los riesgos 3, 7, 9, 10 y 11 todavía no se han
@@ -911,68 +915,137 @@ Hemos aprendido las siguientes lecciones:
 				necesario replicar el trabajo puede ser una buena práctica
 				ir más adelantado en una plataforma que en otra para evitar
 				repetir trabajo, si una de estas tecnologías es más
-				restrictiva que la otra.
+				limitada que la otra.
 		\item La comunicación en el equipo depende de las actividades que
 				realicen, afectando tanto al contenido como a su forma.
 \end{itemize}
 
-\subsubsection{Dedicación por integrante} % TODO
+\subsubsection{Dedicación por integrante} 
 En la Tabla \ref{tab:dedicacion} recogemos las horas empleadas por cada
 miembro de la empresa en cada tarea. Podemos comprobar que estas se
-corresponden con las tareas que tenían asignadas en un principio, están
+corresponden con las tareas que tenían asignadas en un principio y están
 equilibradas teniendo en cuenta las actividades realizadas hasta la
-fecha y suponen en torno a un \% del proyecto.
+fecha. En total se han realizado $381.25$ horas, que suponen en torno a un 40\% del proyecto.
 
-\begin{table}[h]
+\begin{table}[hbtp]
 		\centering
-		\begin{tabular}{|l|r|}
+		\begin{longtable}{|l|S[table-format=3.2]|}
 				\hline
-				Hugo Naudín &  \\
+				Responsable & Horas \\
 				\hline
-				Coordinación backend & \\
-				\hline 
-				Lógica del juego & \\
-				\hline 
-				Bases de datos & \\
-				\hline 
-				Serialización & \\ 
-				\hline 
-				Documentación y diagramas & \\
-				\hline 
-				Despliegue & \\
-				\hline 
-				\hline 
-				Jaime Alconchel & 35 \\
+				\endfirsthead
 				\hline
-				Coordinación backend & 10 \\
-				\hline 
-				Lógica del juego & \\
-				\hline 
-				Bases de datos & \\
-				\hline 
-				Serialización & \\ 
-				\hline 
-				Documentación y diagramas & \\
-				\hline 
-				Despliegue & \\
-				\hline 
-				\hline 
-				Mario Casado &  \\
+				\textbf{Hugo Naudín} & 43 \\
 				\hline
-				Coordinación backend & \\
+				Coordinación empresa & 3.75 \\
+				\hline
+				Coordinación backend & 5 \\
 				\hline 
-				Lógica del juego & \\
+				Lógica del juego & 16.75 \\
 				\hline 
-				Bases de datos & \\
+				Bases de datos & 4.25 \\
 				\hline 
-				Serialización & \\ 
+				Calidad & 9 \\ 
 				\hline 
-				Documentación y diagramas & \\
+				Serialización & 4.25 \\
+				\hline
 				\hline 
-				Despliegue & \\
+				\textbf{Jaime Alconchel} & 35.5 \\
+				\hline
+				Coordinación empresa & 3.75 \\
+				\hline
+				Coordinación backend & 6.25 \\
+				\hline 
+				Lógica del juego & 10 \\
+				\hline 
+				Bases de datos & 10 \\
+				\hline 
+				Serialización & 2 \\ 
+				\hline 
+				Documentación y diagramas & 3 \\
+				\hline 
+				Calidad & 0.5 \\
 				\hline 
 				\hline 
-		\end{tabular}
+				\textbf{Mario Casado} & 46 \\
+				\hline
+				Coordinación empresa & 2.75 \\
+				\hline
+				Coordinación backend & 4.25 \\
+				\hline 
+				Lógica del juego & 19.5 \\
+				\hline 
+				Bases de datos &1.5 \\
+				\hline 
+				Serialización &8.5 \\ 
+				\hline 
+				Diseño de marca & 1.5 \\
+				\hline 
+				Calidad & 8 \\
+				\hline 
+				\hline 
+				\textbf{Miguel Royo} & 52.25 \\ 
+				\hline
+				Coordinación equipo & 3.25 \\
+				\hline
+				Coordinación frontend & 2 \\
+				\hline
+				Diseño & 13.5 \\
+				\hline
+				Implementación & 33.5 \\ 
+				\hline
+				\hline
+				\textbf{Cristina} & 52.25 \\ 
+				\hline
+				Coordinación equipo & 3.25 \\
+				\hline
+				Coordinación frontend & 2 \\
+				\hline
+				Diseño & 11.5 \\
+				\hline
+				Implementación & 35.5 \\ 
+				\hline
+				\hline
+				\textbf{Julia} & 59 \\ 
+				\hline
+				Coordinación equipo & 5.5 \\
+				\hline
+				Coordinación frontend & 1 \\
+				\hline
+				Diseño & 5.5 \\
+				\hline
+				Implementación & 13.5 \\ 
+				\hline
+				Gamificación & 4.5 \\ 
+				\hline
+				Documentación & 29.5 \\
+				\hline
+				\hline
+				\textbf{Nicolás} & 47.75 \\ 
+				\hline
+				Coordinación equipo & 3.25 \\
+				\hline
+				Diseño & 15.5 \\
+				\hline
+				Implementación & 28 \\ 
+				\hline
+				Gamificación & 0.5 \\ 
+				\hline
+				Documentación y diagramas & 0.5 \\
+				\hline
+				\hline
+				\textbf{Miguel Luquín} & 45.5 \\ 
+				\hline
+				Coordinación equipo & 1.5 \\
+				\hline
+				Diseño & 13 \\
+				\hline
+				Implementación & 30 \\ 
+				\hline
+				Gamificación & 1 \\ 
+				\hline
+				\hline
+		\end{longtable}
 		\caption{Dedicación: horas y tareas realizadas por los integrantes de la empresa.}
 		\label{tab:dedicacion}
 \end{table}
@@ -1015,7 +1088,7 @@ fecha y suponen en torno a un \% del proyecto.
 \begin{figure}[hbtp]
 		\centering
 		\includegraphics[width=0.35\textwidth]{../../diagramas/subasta.png}
-		\caption{Diagrama de estados de la fase de Subasta de un turno del juego Magnates.}
+		\caption{Diagrama de estados de la fase de Subasta de un turno del juego Magnate.}
 		\label{fig:subasta}
 \end{figure}
 
