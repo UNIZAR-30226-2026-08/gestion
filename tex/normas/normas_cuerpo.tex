@@ -187,8 +187,11 @@ de mayor a menor.
 Al comienzo del turno, el jugador lanzará los dados y moverá en función de lo 
 que salga. Al caer en una casilla, se aplicará su efecto correspondiente.
 Tras todos los efectos de casilla, el jugador podrá realizar acciones de 
-gestión. Estas acciones son: comprar o vender construcciones, hipotecar o 
-deshipotecar propiedades y comprar o vender propiedades a otros jugadores (intercambios, ver la Sección \ref{sec:intercambios}).
+gestión o transacciones. Estas acciones son: administrar sus propiedades 
+(comprar o vender construcciones, hipotecar o deshipotecar propiedades), 
+realizar intercambios (comprar o vender propiedades a otros jugadores, 
+ver la Sección \ref{sec:intercambios}) y declararse en bancarrota 
+(rendirse, ver la Sección \ref{sec:bancarrota}).
 
 Haga lo que haga el jugador, su balance debe quedar positivo al final de su turno,
 de lo contrario será declarado en bancarrota y eliminado de la partida.
@@ -201,7 +204,7 @@ momento los jugadores que deciden participar en la puja ni los valores por los
 que pujan hasta el final de la subasta, donde se desvelarán los valores y 
 el ganador de la puja. En caso de empate la propiedad no se dará a nadie.
 
-Los jugadores que provocan una subasta no podrán participar en ella.
+Los jugadores que provoquen una subasta no podrán participar en ella.
 
 \subsection{Alquileres}
 Si un jugador cae en una propiedad de otro jugador, deberá pagar el alquiler
@@ -249,6 +252,7 @@ como el jugador que más se haya desplazado o el que más alquileres ha
 tenido que pagar al resto de jugadores, entre otras.
 
 \subsection{Bancarrota}
+\label{sec:bancarrota}
 Si un jugador no logra acabar su turno con balance positivo,
 incluso después de hipotecar sus propiedades,
 de vender todas sus construcciones y en general después de hacer 
@@ -258,6 +262,9 @@ poniéndolas inmediatamente a la venta por su valor original.
 
 Esto se aplicará también a los jugadores que se rindan, cuyo dinero en 
 metálico quedará además absorbido por el banco sin ir al párking gratuito.
+Un jugador puede rendirse (declarándose en bancarrota) como
+parte de las transacciones en las fases de su turno posteriores a tirar los
+dados.
 
 
 
