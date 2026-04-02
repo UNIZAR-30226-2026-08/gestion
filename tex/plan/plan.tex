@@ -22,6 +22,7 @@
 \usepackage{multirow}
 \usepackage{makecell}
 \usepackage{tabularx}
+\usepackage{xltabular}
 \usepackage{longtable}
 \usepackage{siunitx} % align decimal point
 
@@ -535,9 +536,7 @@ En esta sección se detallan los requisitos y diseño del sistema.
 En la Tabla \ref{tab:rf} se recoge la relación de requisitos funcionales del
 sistema, y en la Tabla \ref{tab:rnf} se recogen los requisitos no
 funcionales del sistema.
-\begin{table}[htbp]
-		\centering
-\begin{tabularx}{\textwidth}{|l|X|l|}
+\begin{xltabular}{\textwidth}{|l|X|l|}
 		\hline
 		ID & Descripción & Prioridad \\
 		\hline
@@ -646,10 +645,9 @@ funcionales del sistema.
 		& C \\
 		\hline
 
-\end{tabularx}
 		\caption{Requisitos funcionales del sistema.}
 		\label{tab:rf}
-\end{table}
+\end{xltabular}
 
 \begin{table}[hbtp]
 		\centering
@@ -660,7 +658,7 @@ funcionales del sistema.
 		\\
 		\hline
 		RNF-2 &
-		El cliente web debe funcionar en un navegador con versión Chromium 144.0.7559.96.
+		El cliente web debe funcionar en un navegador con versión Chromium 144.0.7559.96, en una resolución de pantalla de 1920x1080px.
 		\\
 		\hline
 		RNF-3 &
@@ -1063,9 +1061,6 @@ fecha. En total se han realizado $381.25$ horas, que suponen en torno a un 40\% 
 
 \appendix
 
-%\section{Glosario}
-%\label{app:glosario}
-
 %\section{Resultados de la revisión intermedia}
 
 %\section{Presentación final}
@@ -1137,5 +1132,11 @@ realizado por la empresa.
 \section{Reglas}
 \label{app:normas}
 \input{../normas/normas_cuerpo}
+
+%\section{Glosario}
+%\label{app:glosario}
+
+\listoffigures
+\listoftables
 
 \end{document}
