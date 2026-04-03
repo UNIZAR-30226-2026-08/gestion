@@ -3,7 +3,7 @@
 TEX = pdflatex
 BIB = biber
 SUBFILES = *.tex *.bib
-TEMP = *.aux *.log *.toc *.out *.ilg *.ind *.bbl *.blg *.idx *.run.xml *.bcf *.log
+TEMP = *.aux *.log *.toc *.out *.ilg *.ind *.bbl *.blg *.idx *.run.xml *.bcf *.lof *.lot
 
 FILE = plan
 

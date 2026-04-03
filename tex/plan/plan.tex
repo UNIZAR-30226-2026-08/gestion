@@ -418,6 +418,7 @@ completo, se propone:
 \begin{enumerate}
 		\item Probar todos los arcos del grafo de juego forzando los escenarios correspondientes y eliminando el azar.
 		\item Simular partidas con dos agentes jugando entre ellos.
+		\item Prueba de los serializadores.
 \end{enumerate}
 Para las pruebas del frontend, 
 \begin{enumerate}
@@ -425,8 +426,17 @@ Para las pruebas del frontend,
 		\item Se documentará mínimamente las entradas y salidas esperadas
 				para la interacción con el juego (tirada de dados,
 				compra de propiedad, pago de alquiler...) y se comprobará
-				sistemáticamente la corrección del cliente correspondiente.
+				sistemáticamente la corrección del cliente correspondiente
+				partiendo de un ejemplo de partida.
 \end{enumerate}
+Para las pruebas de integración, además de probar lo anteriormente especificado,
+tanto por separado como con pruebas conjuntas, se realizarán las siguientes pruebas:
+\begin{enumerate}
+		\item Prueba de websockets.
+		\item Pruebas con cliente manual de websockets para simular la interacción del frontend.
+\end{enumerate}
+Las pruebas de despliegue consistirán en realizar en el sistema en el que se 
+realizará finalmente el despliegue todas las pruebas mencionadas anteriormente.
 Para el código a alto nivel, se contrastará con la persona que realice los
 diagramas y los autores del código correspondiente que el comportamiento
 del sistema coincide con lo expresado en el diagrama.
@@ -756,6 +766,31 @@ diagramas de despliegue de la Figura \ref{fig:despliegue}.
 
 \newpage
 
+\subsubsection{Diseño de interfaz de usuario}
+En esta sección comentamos el diseño de la interfaz con el usuario. 
+Para ello, partimos del mapa de navegación de las pantallas de la
+aplicación. % TODO pegar y comentar
+
+\subsubsection{Diseño de elementos del juego}
+En esta sección concretamos el diseño de algunos skins
+o emoticonos de la tienda como ejemplo.
+
+Los emoticonos a usar en el chat pueden encontrarse en \cite{kenney_emotes_pack}, 
+y los skins de las fichas de las partidas serán diseños en 3D que tomen el color
+que tenga el jugador en la partida. Puede verse algún diseño de skin de ficha
+en la Figura \ref{fig:skins}.
+
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[width=0.2\textwidth]{img/skins/f1_closeup.png}
+		\includegraphics[width=0.2\textwidth]{img/skins/sombrero_closeup.png}
+		\includegraphics[width=0.2\textwidth]{img/skins/barco_closeup.png}
+		\includegraphics[width=0.2\textwidth]{img/skins/burguer_closeup.png}
+		\caption{Diseño de algunos skins para las fichas de los jugadores en el juego Magnate.}
+		\label{fig:skins}
+\end{figure}
+
+
 \subsubsection{Decisiones de diseño}
 Las primeras decisiones de diseño se tomaron sobre las \textbf{tecnologías}
 a usar en el proyecto. Las candidatas consideradas son todas
@@ -881,6 +916,12 @@ respecto al plan, con resultados satisfactorios.
 Destacar que todavía no se ha tenido oportunidad de probar los procesos
 de integración ni despliegue.
 
+La semana del 1 de abril se concretaron en el documento del plan las
+pruebas referentes a la integración y despliegue.
+También se decidió automatizar mediante Github actions la generación
+de la documentación del código, lo cual se implementó en la sesión
+de la práctica 5.
+
 \subsection{Cierre del proyecto} % vibes de conclusiones pero más curro
 A día 15 de marzo, el proyecto sigue el plan descrito en la Figura
 \ref{fig:gantt}, y los esfuerzos realizados están en torno al 40\% del
@@ -919,6 +960,14 @@ Hemos aprendido las siguientes lecciones:
 		\item La comunicación en el equipo depende de las actividades que
 				realicen, afectando tanto al contenido como a su forma.
 \end{itemize}
+
+El día 2 de abril resolvimos un malentendido entre el frontend y el backend
+por la interpretación distinta de una parte ambigua de las reglas. Ello
+supuso en torno a 1 hora de trabajo añadido para el backend, que por motivos
+de jugabilidad y esfuerzo se ajustaron a la versión propuesta por el frontend.
+Este es un ejemplo de manifestación del riesgo 6, ya que no definimos claramente
+esa parte de las reglas, que forma parte del requisito 1.
+% Aprendido: las reglas del juego también son requisitos que deberíamos consensuar
 
 \subsubsection{Dedicación por integrante} 
 En la Tabla \ref{tab:dedicacion} recogemos las horas empleadas por cada
