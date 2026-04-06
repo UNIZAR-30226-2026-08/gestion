@@ -650,8 +650,7 @@ funcionales del sistema.
 		& C \\
 		\hline
 		RF-10 &
-		Se diseñará una IA o bots contra la que jugar en las partidas privadas. Este bot tendrá especificadas las reglas del juego, y tomará decisiones sin aplicar ninguna estrategia preestablecida. 
-		% TODO cuando heurística, aplicando la estrategia establecida en ref sec diseño destinada.
+		Se diseñará una IA o bots contra la que jugar en las partidas privadas. Este bot tendrá especificadas las reglas del juego, y tomará decisiones aplicando la estrategia establecida en la Sección \ref{sec:heuristica}. 
 		& C \\
 		\hline
 
@@ -764,12 +763,61 @@ diagramas de despliegue de la Figura \ref{fig:despliegue}.
 		\label{fig:despliegue}
 \end{figure}
 
+\subsubsection{Estrategia de los bots de Magnate} 
+\label{sec:heuristica}
+Los bots que jueguen a Magnate seguirán una estrategia basada en heurísticas. 
+Para ello, tomarán el máximo de las opciones en cada escenario 
+(numerados con números positivos) según los valores
+esperados que calculen según lo descrito en el documento \cite{agent_heuristics}. 
+
 \newpage
 
 \subsubsection{Diseño de interfaz de usuario}
 En esta sección comentamos el diseño de la interfaz con el usuario. 
 Para ello, partimos del mapa de navegación de las pantallas de la
-aplicación. % TODO pegar y comentar
+aplicación, que puede verse repartido en las Figuras \ref{fig:mapnav1}, \ref{fig:mapnav2}
+y \ref{fig:mapnav3}. 
+
+De la pantalla inicial del sistema se pasa a las pantallas de registro o de
+inicio de sesión, tras las que se accede al menú principal del sistema.
+Desde esta, puede accederse a los ajustes del perfil, a la tienda, o a las
+partidas pública o privada, que llevan hasta el juego (ver Figura \ref{fig:mapnav1}).
+
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[trim={0mm 47mm 0mm 32mm},clip,width=0.9\textwidth]{img/mapa_1.pdf}
+		\caption{Mapa de navegación (menús).}
+		\label{fig:mapnav1}
+\end{figure}
+
+
+En el juego pueden seleccionarse las acciones principales desde los botones del
+overlay de la izquierda. Algunas máximas de diseño son:
+\begin{itemize}
+\item para seleccionar elementos del tablero se oscurece el
+resto de la pantalla (ver Figura \ref{fig:mapnav2}); 
+\item los overlays que guían el flujo de las acciones, como
+confirmaciones, se muestran en el centro de la pantalla con el tablero
+oscurecido (ver Figura \ref{fig:mapnav3}); 
+\item las acciones que resuelven las casillas en las que se cae se muestran
+poniendo en el centro las cartas u overlays correspondientes y difuminando el
+resto del tablero (ver Figura \ref{fig:mapnav3}).
+\end{itemize}
+
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[trim={0mm 47mm 0mm 47mm},clip,width=0.9\textwidth]{img/mapa_2.pdf}
+		\caption{Mapa de navegación (juego, acciones y negocios).}
+		\label{fig:mapnav2}
+\end{figure}
+
+\begin{figure}[hbtp]
+		\centering
+		\includegraphics[trim={0mm 7mm 0mm 12mm},clip,width=0.9\textwidth]{img/mapa_3.pdf}
+		\caption{Mapa de navegación (juego, caer en casillas y flujos).}
+		\label{fig:mapnav3}
+\end{figure}
+
 
 \subsubsection{Diseño de elementos del juego}
 En esta sección concretamos el diseño de algunos skins
@@ -922,6 +970,11 @@ También se decidió automatizar mediante Github actions la generación
 de la documentación del código, lo cual se implementó en la sesión
 de la práctica 5.
 
+El 6 de abril, comparando diseños de web y escritorio, se decidió que la
+primera plataforma tuviera más confirmaciones y la segunda menos, para
+poder estudiar en un futuro qué resulta más entretenido a usuarios
+nuevos y habituales.
+
 \subsection{Cierre del proyecto} % vibes de conclusiones pero más curro
 A día 15 de marzo, el proyecto sigue el plan descrito en la Figura
 \ref{fig:gantt}, y los esfuerzos realizados están en torno al 40\% del
@@ -971,7 +1024,7 @@ esa parte de las reglas, que forma parte del requisito 1.
 
 \subsubsection{Dedicación por integrante} 
 En la Tabla \ref{tab:dedicacion} recogemos las horas empleadas por cada
-miembro de la empresa en cada tarea. Podemos comprobar que estas se
+miembro de la empresa en cada tarea a día 15 de marzo. Podemos comprobar que estas se
 corresponden con las tareas que tenían asignadas en un principio y están
 equilibradas teniendo en cuenta las actividades realizadas hasta la
 fecha. En total se han realizado $381.25$ horas, que suponen en torno a un 40\% del proyecto.
