@@ -21,8 +21,9 @@ state post_fork_propiedad <<fork>>
 ini --> elec : triple (triples = true)
 ini --> elec : doble bus (dobles = true, streak++)
 ini --> cas : dobles (dobles = true, streak++)
-ini --> cas : normal (not cárcel)
-ini --> liq : normal (cárcel)
+ini --> cas : normal
+ini --> gest : normal (está en la cárcel y no sale)
+ini --> liq : normal (va a la cárcel en ese turno)
 
 ' Elección
 elec --> cas
