@@ -108,7 +108,7 @@ la sala y bots, sumando hasta
 
 Otros objetivos del sistema son:
 \begin{itemize}
-		\item Pausar y reanudar partidas entre dispositivos.
+		\item Reanudar partidas entre dispositivos.
 		\item Asociar cuentas de usuario con la información de las partidas.
 		\item Ofrecer una experiencia atractiva y personalizable,
 				incluyendo una tienda de cosméticos.
@@ -127,8 +127,8 @@ marzo, abril y mayo. Los hitos principales son:
 		\item Entrega intermedia: 6 de abril de 2026. Prototipos sin integración.
 		%\item Comienzo de la integración: 3 de abril de 2026.
 		%\item Comienzo del despliegue: 15 de abril de 2026.
-		\item Presentación del sistema: 4 o 5 de mayo de 2026.
-		\item Muestra del sistema al cliente: semana del 11 de mayo de 2026.
+		\item Presentación del sistema: 4 de mayo de 2026.
+		\item Muestra del sistema al cliente: 15 de mayo de 2026.
 		\item Entrega final y cierre de proyecto: 27 de mayo de 2026.
 \end{itemize}
 
@@ -147,9 +147,12 @@ se especifican los integrantes, roles y tareas de la empresa; en la Sección
 los recursos necesarios, temporalidad, procedimientos
 y responsables de las tareas; en la Sección \ref{sec:disennio} se describe el sistema,
 enumerando los requisitos, especificando el diseño y tecnologías y justificando
-las decisiones de diseño tomadas; y en la Sección \ref{sec:memoria} se recoge
-la memoria del proyecto.
+las decisiones de diseño tomadas; en la Sección \ref{sec:memoria} se recoge
+la memoria del proyecto, y por último en la Sección \ref{sec:con} se recogen las
+conclusiones y propuestas de mejora del proyecto.
 Los apéndices incluyen 
+el Apéndice \ref{app:resinter}, que recoge los resultados de la evaluación intermedia;
+el Apéndice \ref{app:presen}, con una revisión de la presentación realizada;
 el Apéndice \ref{app:diagramas}, donde se incluyen algunos diagramas;
 %el Apéndice \ref{app:glosario}, que recoge las abreviaciones utilizadas
 %en el documento; 
@@ -239,16 +242,12 @@ recogido en la Tabla \ref{tab:cargos}.
 De los roles recogidos en la Tabla \ref{tab:cargos}, queremos
 destacar las siguientes responsabilidades:
 \begin{itemize}
-\item Directora de proyecto: Julia Quero Pérez
-\item Coordinador de frontend: Miguel Ángel Royo Miguel
-\item Coordinador de backend: Jaime Alconchel Gallego
-\item Coordinadora de calidad: Cristina Embid Martínez
-\item Coordinador de despliegue: Jaime Alconchel Gallego
+\item Directora de proyecto: Julia Quero Pérez.
+\item Coordinador de frontend: Miguel Ángel Royo Miguel.
+\item Coordinador de backend: Jaime Alconchel Gallego.
+\item Coordinadora de calidad: Cristina Embid Martínez.
+\item Coordinador de despliegue: Jaime Alconchel Gallego.
 \end{itemize}
-
-% PREGUNTAR ¿tengo que detallar más cada tarea?
-% Aunque no sea por cada uno, por "desarrollador web" tal vez, aunque para
-% eso prefiero hacerlo para cada uno...
 
 \section{Plan de gestión del proyecto}
 \label{sec:plan}
@@ -353,6 +352,7 @@ UGREEN DXP2800 con procesador Intel n100,
 Como todo el despliegue se realizará en la misma máquina, los puertos
 y rutas necesarios para el despliegue aparecerán como variables de
 entorno en los ficheros yaml, y no será necesario especificar nada más.
+% TODO poner punteros y pequeña especificación (ver github issue)
 
 Los \textbf{responsables} de supervisar la corrección de las configuraciones,
 construcción del software y calidad del producto son para el código del
@@ -503,8 +503,8 @@ destacar los siguientes hitos internos:
 				requisitos 1, 2, 3, 4, 6 y 9.
 		\item Comienzo de la integración: 3 de abril de 2026.
 		\item Comienzo del despliegue: 15 de abril de 2026.
-		\item Presentación del sistema: 4 o 5 de mayo de 2026.
-		\item Muestra del sistema al cliente: semana del 11 de mayo de 2026.
+		\item Presentación del sistema: 5 de mayo de 2026.
+		\item Muestra del sistema al cliente: 15 de mayo de 2026.
 		\item Entrega final: 27 de mayo de 2026.
 \end{itemize}
 
@@ -770,7 +770,7 @@ Para ello, tomarán el máximo de las opciones en cada escenario
 (numerados con números positivos) según los valores
 esperados que calculen según lo descrito en el documento \cite{agent_heuristics}. 
 
-\newpage
+%\newpage
 
 \subsubsection{Diseño de interfaz de usuario}
 En esta sección comentamos el diseño de la interfaz con el usuario. 
@@ -1022,12 +1022,16 @@ Este es un ejemplo de manifestación del riesgo 6, ya que no definimos clarament
 esa parte de las reglas, que forma parte del requisito 1.
 % Aprendido: las reglas del juego también son requisitos que deberíamos consensuar
 
+% Gantt 
+
 \subsubsection{Dedicación por integrante} 
 En la Tabla \ref{tab:dedicacion} recogemos las horas empleadas por cada
 miembro de la empresa en cada tarea a día 15 de marzo. Podemos comprobar que estas se
 corresponden con las tareas que tenían asignadas en un principio y están
 equilibradas teniendo en cuenta las actividades realizadas hasta la
 fecha. En total se han realizado $381.25$ horas, que suponen en torno a un 40\% del proyecto.
+
+% líneas de código
 
 \begin{table}[hbtp]
 		\centering
@@ -1152,18 +1156,26 @@ fecha. En total se han realizado $381.25$ horas, que suponen en torno a un 40\% 
 		\label{tab:dedicacion}
 \end{table}
 
-%\section{Conclusiones} % Solo para la entrega final...
-%personales, mejorar los procesos... si no nos quejamos nos pone un 0
+\section{Conclusiones} % Solo para la entrega final...
+\label{sec:con}
+personales, mejorar los procesos... 
+Además de conclusiones personales (razonadas) sobre el transcurso del proyecto realizado, es
+importante plantear ideas para mejorar los procesos llevados a cabo: si hubiera que iniciar un
+nuevo proyecto inmediatamente usando una metodología de gestión basada en procesos, ¿qué
+cambios haríais respecto a los procesos que habéis seguido durante este proyecto? ¿Qué
+cosas está claro que haríais de otra forma? ¿Qué cosas seguiríais haciendo más o menos
+igual? Pensad que si la respuesta es “no cambiaríamos nada, todo nos parece que estuvo
+bien”, lo que estáis transmitiendo es que no habéis aprendido nada en la asignatura, lo que no
+suele ser una buena señal.
 
 \newpage
 
 \printbibliography
 
-\newpage
-
 \appendix
 
 \section{Resultados de la revisión intermedia}
+\label{app:resinter}
 La revisión intermedia se recoge en el siguiente Excel que se muestra en
 la Figura \ref{fig:autoev}.
 
@@ -1179,9 +1191,9 @@ la Figura \ref{fig:autoev}.
 
 \newpage
 
-%\section{Presentación final}
-% copia de las transparencias y explicar cómo ha tenido en cuenta lo visto
-% en teoría de cómo hacer presentaciones
+\section{Presentación final}
+\label{app:presen}
+\input{presen}
 
 \section{Diagramas}
 \label{app:diagramas}
@@ -1251,6 +1263,8 @@ realizado por la empresa.
 
 %\section{Glosario}
 %\label{app:glosario}
+
+\newpage 
 
 \listoffigures
 \listoftables
