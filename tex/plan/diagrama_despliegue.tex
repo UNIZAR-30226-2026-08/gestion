@@ -1,0 +1,453 @@
+%% ============================================================
+%%  Magnate – Docker Compose Architecture Diagrams
+%%
+%%  INSTRUCTIONS FOR USE:
+%%  1. Ensure the following packages and libraries are in your MAIN 
+%%     document's preamble (before \begin{document}):
+%%
+%%     \usepackage{tikz}
+%%     \usetikzlibrary{
+%%       arrows.meta,
+%%       backgrounds,
+%%       calc,
+%%       fit,
+%%       positioning,
+%%       shadows.blur,
+%%       shapes.geometric,
+%%       shapes.misc
+%%     }
+%%     \usepackage{xcolor}
+%%     \usepackage{helvet}
+%%
+%%  2. Include this file in your document body where you want the 
+%%     diagrams to appear:
+%%     \input{magnate_docker_diagrams}
+%% ============================================================
+
+%% ── Palette ──────────────────────────────────────────────────
+\definecolor{DockerBlue}{HTML}{1D63ED}
+\definecolor{PgGreen}   {HTML}{336791}
+\definecolor{RedisRed}  {HTML}{DC382C}
+\definecolor{NginxGreen}{HTML}{009639}
+\definecolor{CeleryTeal}{HTML}{37B24D}
+\definecolor{BackendPurple}{HTML}{7048E8}
+\definecolor{VolGray}   {HTML}{868E96}
+\definecolor{EnvYellow} {HTML}{F59F00}
+\definecolor{HostBg}    {HTML}{F1F3F5}
+\definecolor{GroupBg}   {HTML}{E9ECEF}
+\definecolor{ArrowGray} {HTML}{495057}
+\definecolor{TitleBg}   {HTML}{212529}
+
+%% ── Shared style definitions ─────────────────────────────────
+\tikzset{
+  %% Generic container box
+  svc/.style={
+    draw=#1!80!black, fill=#1!12, rounded corners=6pt,
+    minimum width=3.0cm, minimum height=1.8cm,
+    line width=1.0pt,
+    font=\small\bfseries, align=center,
+    blur shadow={shadow blur steps=5, shadow xshift=1pt, shadow yshift=-1pt,
+                 shadow opacity=25}
+  },
+  %% Sub-label inside a box
+  sublabel/.style={font=\fontsize{6.5}{8}\selectfont\ttfamily,
+                   text=#1!70!black, align=center},
+  %% Volume node
+  vol/.style={
+    draw=VolGray!80, fill=VolGray!15, rounded corners=3pt,
+    minimum width=2.4cm, minimum height=0.65cm,
+    font=\fontsize{6.8}{8}\selectfont\ttfamily, align=center,
+    line width=0.8pt
+  },
+  %% Port badge
+  port/.style={
+    draw=DockerBlue!70, fill=DockerBlue!15, rounded corners=2pt,
+    font=\fontsize{6}{7.5}\selectfont\ttfamily, inner sep=2pt,
+    line width=0.7pt
+  },
+  %% Arrows
+  dep/.style={-{Stealth[length=5pt]}, line width=0.9pt, color=ArrowGray},
+  comm/.style={-{Stealth[length=6pt]}, line width=1.1pt},
+  dashed comm/.style={comm, dashed},
+  %% Group label
+  grouplabel/.style={font=\fontsize{7.5}{9}\selectfont\bfseries,
+                     text=#1, above},
+  %% Env badge
+  envbadge/.style={draw=EnvYellow!80, fill=EnvYellow!20,
+                   rounded corners=2pt, inner sep=1.5pt,
+                   font=\fontsize{5.5}{7}\selectfont\ttfamily, align=left}
+}
+
+%% ── Helper macro: two-line service node ──────────────────────
+% \Svc{node-name}{color}{Title}{subtitle}{x}{y}
+\providecommand{\Svc}[6]{
+  \node[svc=#3, anchor=center] (#2) at (#5,#6) {
+    #4\\[2pt]
+    \textcolor{#3!60!black}{\fontsize{6.8}{8}\selectfont\ttfamily #5\_dummy}
+  };
+}
+
+%% ============================================================
+%%  DIAGRAM 1 – DEPLOYMENT VIEW
+%% ============================================================
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[x=1cm, y=1cm]
+
+  %% ── Background: Host machine ────────────────────────────────
+  \fill[HostBg, rounded corners=10pt]
+    (-1.6, -9.8) rectangle (16.8, 5.2);
+
+  %% ── Title bar ───────────────────────────────────────────────
+  \fill[TitleBg, rounded corners=6pt]
+    (-1.3, 4.5) rectangle (16.5, 5.0);
+  \node[text=white, font=\bfseries\small, anchor=west]
+    at (-0.9, 4.75) {Magnate — Deployment View};
+  \node[text=white!70, font=\fontsize{7}{9}\selectfont, anchor=east]
+    at (16.1, 4.75) {docker compose};
+
+  %% ── Docker network background ───────────────────────────────
+  \fill[GroupBg, rounded corners=8pt, draw=DockerBlue!30, line width=0.8pt,
+        dashed]
+    (-0.8, -9.4) rectangle (16.2, 4.1);
+  \node[grouplabel=DockerBlue!70] at (7.7, 4.1) {default bridge network};
+
+  %% ──────────────────────────────────────────────────────────
+  %%  SERVICE NODES
+  %% ──────────────────────────────────────────────────────────
+
+  %% PostgreSQL
+  \node[svc=PgGreen, anchor=center] (db) at (2.5, 2.2) {
+    \textcolor{PgGreen!20!black}{\small\bfseries PostgreSQL 15}\\[1pt]
+    \textcolor{PgGreen!60!black}{\fontsize{6.8}{8}\selectfont\ttfamily magnate\_db}\\[1pt]
+    \textcolor{PgGreen!50!black}{\fontsize{6}{7}\selectfont image: postgres:15-alpine}
+  };
+
+  %% Redis
+  \node[svc=RedisRed, anchor=center] (redis) at (2.5, -1.5) {
+    \textcolor{RedisRed!20!black}{\small\bfseries Redis 7}\\[1pt]
+    \textcolor{RedisRed!60!black}{\fontsize{6.8}{8}\selectfont\ttfamily magnate\_redis}\\[1pt]
+    \textcolor{RedisRed!50!black}{\fontsize{6}{7}\selectfont image: redis:7-alpine}
+  };
+
+  %% Backend
+  \node[svc=BackendPurple, anchor=center] (backend) at (8.0, 2.2) {
+    \textcolor{BackendPurple!20!black}{\small\bfseries Django / Uvicorn}\\[1pt]
+    \textcolor{BackendPurple!60!black}{\fontsize{6.8}{8}\selectfont\ttfamily magnate\_backend}\\[1pt]
+    \textcolor{BackendPurple!50!black}{\fontsize{6}{7}\selectfont build: Dockerfile.backend}\\
+    \textcolor{BackendPurple!50!black}{\fontsize{6}{7}\selectfont :8000 (internal)}
+  };
+
+  %% Celery
+  \node[svc=CeleryTeal, anchor=center] (celery) at (8.0, -1.5) {
+    \textcolor{CeleryTeal!20!black}{\small\bfseries Celery Worker}\\[1pt]
+    \textcolor{CeleryTeal!60!black}{\fontsize{6.8}{8}\selectfont\ttfamily magnate\_celery}\\[1pt]
+    \textcolor{CeleryTeal!50!black}{\fontsize{6}{7}\selectfont build: Dockerfile.backend}\\
+    \textcolor{CeleryTeal!50!black}{\fontsize{6}{7}\selectfont celery -A magnate worker}
+  };
+
+  %% Frontend / Nginx
+  \node[svc=NginxGreen, anchor=center] (frontend) at (13.5, 0.35) {
+    \textcolor{NginxGreen!20!black}{\small\bfseries Nginx + React}\\[1pt]
+    \textcolor{NginxGreen!60!black}{\fontsize{6.8}{8}\selectfont\ttfamily magnate\_frontend\_web}\\[1pt]
+    \textcolor{NginxGreen!50!black}{\fontsize{6}{7}\selectfont build: Dockerfile.frontend-web}\\[2pt]
+    \tikz{\node[port] {%
+      \fontsize{6}{7}\selectfont\ttfamily
+      \$HTTP\_PORT→80 \ \ \$HTTPS\_PORT→443%
+    };}
+  };
+
+  %% ── Port badges (outside frontend) ─────────────────────────
+  \node[port, anchor=west] (p80) at (15.5, 0.85)
+    {\fontsize{6.5}{8}\selectfont\ttfamily :80 (HTTP)};
+  \node[port, anchor=west] (p443) at (15.5, 0.05)
+    {\fontsize{6.5}{8}\selectfont\ttfamily :443 (HTTPS)};
+  \draw[DockerBlue!60, line width=0.7pt, -Stealth]
+    (frontend.east) -- (p80.west);
+  \draw[DockerBlue!60, line width=0.7pt, -Stealth]
+    (frontend.east) -- (p443.west);
+
+  %% ── Host-exposed port box ───────────────────────────────────
+  \node[draw=DockerBlue!50, fill=DockerBlue!6, rounded corners=5pt,
+        minimum width=1.8cm, minimum height=1.2cm,
+        font=\fontsize{7}{8.5}\selectfont\bfseries,
+        text=DockerBlue!80, align=center]
+    (hostports) at (16.0, 0.45) {};
+
+  %% ──────────────────────────────────────────────────────────
+  %%  VOLUMES
+  %% ──────────────────────────────────────────────────────────
+
+  %% Named volumes section background
+  \fill[VolGray!8, rounded corners=5pt, draw=VolGray!40, line width=0.6pt]
+    (-0.3, -9.1) rectangle (16.0, -6.1);
+  \node[font=\fontsize{7.5}{9}\selectfont\bfseries, text=VolGray!70,
+        anchor=west] at (0.0, -6.25) {Named Volumes};
+
+  %% postgres_data
+  \node[vol] (pgvol) at (3.5, -7.2)
+    {postgres\_data\\[-1pt]\fontsize{5.5}{7}\selectfont /var/lib/postgresql/data};
+
+  %% redis_data
+  \node[vol] (rdvol) at (7.5, -7.2)
+    {redis\_data\\[-1pt]\fontsize{5.5}{7}\selectfont /data};
+
+  %% ssl-certs bind mount
+  \node[vol, draw=NginxGreen!60, fill=NginxGreen!10]
+    (sslvol) at (11.5, -7.2)
+    {./ssl-certs\\[-1pt]\fontsize{5.5}{7}\selectfont /etc/nginx/ssl (ro)};
+
+  %% desktop-releases bind mount
+  \node[vol, draw=NginxGreen!60, fill=NginxGreen!10]
+    (dlvol) at (14.5, -7.2)
+    {./desktop-releases\\[-1pt]\fontsize{5.5}{7}\selectfont /downloads (ro)};
+
+  %% Volume connector lines
+  \draw[VolGray!60, line width=0.75pt, dashed, -{Stealth[length=4pt]}]
+    (db.south) -- ++(0,-2.2) -| (pgvol.north);
+  \draw[VolGray!60, line width=0.75pt, dashed, -{Stealth[length=4pt]}]
+    (redis.south) -- ++(0,-2.2) -| (rdvol.north);
+  \draw[VolGray!60, line width=0.75pt, dashed, -{Stealth[length=4pt]}]
+    (frontend.south) -- ++(0,-4.8) -| (sslvol.north);
+  \draw[VolGray!60, line width=0.75pt, dashed, -{Stealth[length=4pt]}]
+    (frontend.south) -- ++(0,-4.8) -| (dlvol.north);
+
+  %% ──────────────────────────────────────────────────────────
+  %%  BUILD CONTEXT NOTES
+  %% ──────────────────────────────────────────────────────────
+  \fill[EnvYellow!10, rounded corners=4pt, draw=EnvYellow!40, line width=0.6pt]
+    (-0.3, -6.0) rectangle (10.5, -4.6);
+  \node[font=\fontsize{7.5}{9}\selectfont\bfseries, text=EnvYellow!80,
+        anchor=west] at (0.0, -4.75) {Build context  (shared Dockerfile.backend)};
+  \node[envbadge, anchor=west] at (0.2, -5.4)
+    {backend \& celery share the same image build};
+  \node[envbadge, anchor=west] at (5.5, -5.4)
+    {frontend: VITE\_ args injected at build time};
+
+  %% ──────────────────────────────────────────────────────────
+  %%  DEPENDS-ON ARROWS (deployment order)
+  %% ──────────────────────────────────────────────────────────
+  %% backend depends on db
+  \draw[dep, PgGreen!70]
+    (backend.west) -- node[above, font=\fontsize{6}{7}\selectfont,
+    text=PgGreen!70] {depends\_on} (db.east);
+
+  %% backend depends on redis
+  \draw[dep, RedisRed!70]
+    (backend.west) -- +(-0.6,0) |- node[left, pos=0.25,
+    font=\fontsize{6}{7}\selectfont, text=RedisRed!70]
+    {depends\_on} (redis.east);
+
+  %% celery depends on db
+  \draw[dep, PgGreen!70]
+    (celery.west) -- +(-1.2,0) |- (db.south);
+
+  %% celery depends on redis
+  \draw[dep, RedisRed!70]
+    (celery.west) -- node[below, font=\fontsize{6}{7}\selectfont,
+    text=RedisRed!70] {depends\_on} (redis.east);
+
+  %% celery depends on backend
+  \draw[dep, BackendPurple!70]
+    (celery.north) -- node[right, font=\fontsize{6}{7}\selectfont,
+    text=BackendPurple!70] {depends\_on} (backend.south);
+
+  %% frontend depends on backend
+  \draw[dep, BackendPurple!70]
+    (frontend.west) -- node[above, font=\fontsize{6}{7}\selectfont,
+    text=BackendPurple!70] {depends\_on} (backend.east);
+
+  %% ── Legend ──────────────────────────────────────────────────
+  \fill[white, rounded corners=4pt, draw=gray!30, line width=0.6pt]
+    (0.0, -8.85) rectangle (6.0, -8.1);
+  \draw[dep, ArrowGray] (0.3,-8.47) -- (1.1,-8.47);
+  \node[font=\fontsize{6.5}{8}\selectfont, anchor=west] at (1.2,-8.47)
+    {depends\_on (startup order)};
+  \draw[VolGray!60, line width=0.75pt, dashed, -{Stealth[length=4pt]}]
+    (3.5,-8.47) -- (4.3,-8.47);
+  \node[font=\fontsize{6.5}{8}\selectfont, anchor=west] at (4.4,-8.47)
+    {volume mount};
+
+\end{tikzpicture}
+} % resizebox
+
+%% ============================================================
+\newpage
+%% ============================================================
+
+%% ============================================================
+%%  DIAGRAM 2 – RUNTIME COMMUNICATION VIEW
+%% ============================================================
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[x=1cm, y=1cm]
+
+  %% ── Background ──────────────────────────────────────────────
+  \fill[HostBg, rounded corners=10pt]
+    (-1.6, -7.5) rectangle (16.8, 5.2);
+
+  %% ── Title bar ───────────────────────────────────────────────
+  \fill[TitleBg, rounded corners=6pt]
+    (-1.3, 4.5) rectangle (16.5, 5.0);
+  \node[text=white, font=\bfseries\small, anchor=west]
+    at (-0.9, 4.75) {Magnate — Runtime Communication View};
+  \node[text=white!70, font=\fontsize{7}{9}\selectfont, anchor=east]
+    at (16.1, 4.75) {docker compose};
+
+  %% ── Docker internal network ─────────────────────────────────
+  \fill[GroupBg, rounded corners=8pt, draw=DockerBlue!30, line width=0.8pt,
+        dashed]
+    (-0.8, -7.0) rectangle (16.2, 4.1);
+  \node[grouplabel=DockerBlue!70] at (7.7, 4.1) {default bridge network};
+
+  %% ──────────────────────────────────────────────────────────
+  %%  SERVICE NODES (runtime focus)
+  %% ──────────────────────────────────────────────────────────
+
+  %% PostgreSQL
+  \node[svc=PgGreen, anchor=center] (db) at (2.5, 2.2) {
+    \textcolor{PgGreen!20!black}{\small\bfseries PostgreSQL}\\[1pt]
+    \textcolor{PgGreen!60!black}{\fontsize{6.8}{8}\selectfont\ttfamily magnate\_db}\\[1pt]
+    \textcolor{PgGreen!50!black}{\fontsize{6}{7}\selectfont port 5432}
+  };
+
+  %% Redis
+  \node[svc=RedisRed, anchor=center] (redis) at (2.5, -1.5) {
+    \textcolor{RedisRed!20!black}{\small\bfseries Redis}\\[1pt]
+    \textcolor{RedisRed!60!black}{\fontsize{6.8}{8}\selectfont\ttfamily magnate\_redis}\\[1pt]
+    \textcolor{RedisRed!50!black}{\fontsize{6}{7}\selectfont port 6379}
+  };
+
+  %% Backend
+  \node[svc=BackendPurple, anchor=center] (backend) at (8.0, 2.2) {
+    \textcolor{BackendPurple!20!black}{\small\bfseries Django / Uvicorn}\\[1pt]
+    \textcolor{BackendPurple!60!black}{\fontsize{6.8}{8}\selectfont\ttfamily magnate\_backend}\\[1pt]
+    \textcolor{BackendPurple!50!black}{\fontsize{6}{7}\selectfont 0.0.0.0:8000}\\
+    \textcolor{BackendPurple!50!black}{\fontsize{6}{7}\selectfont ASGI / WebSocket}
+  };
+
+  %% Celery
+  \node[svc=CeleryTeal, anchor=center] (celery) at (8.0, -1.5) {
+    \textcolor{CeleryTeal!20!black}{\small\bfseries Celery Worker}\\[1pt]
+    \textcolor{CeleryTeal!60!black}{\fontsize{6.8}{8}\selectfont\ttfamily magnate\_celery}\\[1pt]
+    \textcolor{CeleryTeal!50!black}{\fontsize{6}{7}\selectfont broker: Redis}\\
+    \textcolor{CeleryTeal!50!black}{\fontsize{6}{7}\selectfont backend: Postgres}
+  };
+
+  %% Frontend / Nginx
+  \node[svc=NginxGreen, anchor=center] (frontend) at (13.5, 0.35) {
+    \textcolor{NginxGreen!20!black}{\small\bfseries Nginx + React SPA}\\[1pt]
+    \textcolor{NginxGreen!60!black}{\fontsize{6.8}{8}\selectfont\ttfamily magnate\_frontend\_web}\\[1pt]
+    \textcolor{NginxGreen!50!black}{\fontsize{6}{7}\selectfont :80 / :443}\\
+    \textcolor{NginxGreen!50!black}{\fontsize{6}{7}\selectfont proxy\_pass → backend:8000}
+  };
+
+  %% External client
+  \node[draw=DockerBlue!60, fill=DockerBlue!8, rounded corners=6pt,
+        minimum width=2.6cm, minimum height=1.2cm,
+        font=\fontsize{8}{10}\selectfont\bfseries,
+        text=DockerBlue!80, align=center, blur shadow={shadow blur steps=4}]
+    (client) at (13.5, 3.5) {Browser / Client};
+
+  %% ──────────────────────────────────────────────────────────
+  %%  COMMUNICATION ARROWS
+  %% ──────────────────────────────────────────────────────────
+
+  %% Client → Frontend (HTTPS)
+  \draw[comm, NginxGreen!80]
+    (client.south) -- node[right, font=\fontsize{6.5}{8}\selectfont,
+    text=NginxGreen!70] {HTTPS / WSS} (frontend.north);
+
+  %% Frontend → Backend (reverse proxy /api)
+  \draw[comm, BackendPurple!80]
+    (frontend.west) -- node[above, font=\fontsize{6.5}{8}\selectfont,
+    text=BackendPurple!70, sloped] {proxy /api → :8000} (backend.east);
+
+  %% Backend → PostgreSQL (Django ORM)
+  \draw[comm, PgGreen!80]
+    (backend.west) -- node[above, font=\fontsize{6.5}{8}\selectfont,
+    text=PgGreen!70] {ORM — TCP:5432} (db.east);
+
+  %% Backend → Redis (cache / channel layer)
+  \draw[comm, RedisRed!80]
+    (backend.west) -- +(-0.6,0) |-
+    node[left, pos=0.25, font=\fontsize{6.5}{8}\selectfont,
+    text=RedisRed!70] {cache / channels\\TCP:6379} (redis.east);
+
+  %% Celery → Redis (broker consume)
+  \draw[comm, RedisRed!80]
+    (celery.west) -- node[below, font=\fontsize{6.5}{8}\selectfont,
+    text=RedisRed!70] {broker consume — TCP:6379} (redis.east);
+
+  %% Celery → PostgreSQL (result backend)
+  \draw[comm, PgGreen!80]
+    (celery.west) -- +(-1.2,0) |-
+    node[left, pos=0.25, font=\fontsize{6.5}{8}\selectfont,
+    text=PgGreen!70] {results — TCP:5432} (db.south);
+
+  %% Backend → Celery (task dispatch — via Redis broker)
+  \draw[comm, CeleryTeal!80, dashed, bend right=20]
+    (backend.south) to
+    node[right, pos=0.5, font=\fontsize{6.5}{8}\selectfont,
+    text=CeleryTeal!70] {task dispatch\\(via Redis broker)} (celery.north);
+
+  %% ──────────────────────────────────────────────────────────
+  %%  STARTUP SEQUENCE PANEL
+  %% ──────────────────────────────────────────────────────────
+  \fill[white, rounded corners=5pt, draw=gray!30, line width=0.6pt]
+    (-0.3, -6.7) rectangle (9.5, -4.5);
+  \node[font=\fontsize{7.5}{9}\selectfont\bfseries, text=TitleBg,
+        anchor=west] at (0.0, -4.7) {Startup \& Initialisation sequence (backend)};
+
+  \foreach \step/\desc in {
+    1/{makemigrations magnate},
+    2/{migrate magnate},
+    3/{migrate (all apps)},
+    4/{loaddata items.json \& bonus\_categories.json},
+    5/{init\_boards},
+    6/{collectstatic \texttt{-{-}}noinput},
+    7/{uvicorn magnate.asgi:application \texttt{-{-}}port 8000}
+  }{
+    \node[anchor=west,
+          font=\fontsize{6.5}{8}\selectfont,
+          text=TitleBg] at (0.2, -4.4 - \step*0.35)
+      {\textbf{\step.}\ \desc};
+  }
+
+  %% ──────────────────────────────────────────────────────────
+  %%  CORS / ALLOWED ORIGINS NOTE
+  %% ──────────────────────────────────────────────────────────
+  \fill[EnvYellow!10, rounded corners=4pt, draw=EnvYellow!40, line width=0.6pt]
+    (9.8, -6.7) rectangle (16.0, -4.5);
+  \node[font=\fontsize{7.5}{9}\selectfont\bfseries, text=EnvYellow!80,
+        anchor=west] at (10.1, -4.7) {CORS Allowed Origins};
+  \node[font=\fontsize{5.8}{7.5}\selectfont\ttfamily, text=TitleBg,
+        align=left, anchor=north west] at (10.1, -5.0) {
+    https://192.168.50.12:\$FRONTEND\_HTTPS\_PORT\\[3pt]
+    https://ninrouter.asuscomm.com:\$FRONTEND\_HTTPS\_PORT
+  };
+
+  \node[font=\fontsize{6.5}{8}\selectfont, text=gray!70,
+        align=left, anchor=north west] at (10.1, -6.0) {
+    Set in backend environment.\\
+    Allows browser SPA to reach /api.
+  };
+
+  %% ── Legend ──────────────────────────────────────────────────
+  \fill[white, rounded corners=4pt, draw=gray!30, line width=0.6pt]
+    (-0.3, -7.0) rectangle (9.3, -7.45);
+
+  \coordinate (L) at (0.2, -7.23);
+  \draw[comm, NginxGreen!80] ($(L)+(0,0)$) -- ($(L)+(0.8,0)$);
+  \node[anchor=west, font=\fontsize{6}{7.5}\selectfont] at ($(L)+(0.9,0)$)
+    {HTTP/WS};
+  \draw[comm, PgGreen!80] ($(L)+(2.2,0)$) -- ($(L)+(3.0,0)$);
+  \node[anchor=west, font=\fontsize{6}{7.5}\selectfont] at ($(L)+(3.1,0)$)
+    {SQL (TCP:5432)};
+  \draw[comm, RedisRed!80] ($(L)+(4.7,0)$) -- ($(L)+(5.5,0)$);
+  \node[anchor=west, font=\fontsize{6}{7.5}\selectfont] at ($(L)+(5.6,0)$)
+    {Redis (TCP:6379)};
+  \draw[comm, CeleryTeal!80, dashed] ($(L)+(7.1,0)$) -- ($(L)+(7.9,0)$);
+  \node[anchor=west, font=\fontsize{6}{7.5}\selectfont] at ($(L)+(8.0,0)$)
+    {task queue};
+
+\end{tikzpicture}
+} % resizebox
