@@ -503,7 +503,7 @@ destacar los siguientes hitos internos:
 				requisitos 1, 2, 3, 4, 6 y 9.
 		\item Comienzo de la integración: 3 de abril de 2026.
 		\item Comienzo del despliegue: 15 de abril de 2026.
-		\item Presentación del sistema: 5 de mayo de 2026.
+		\item Presentación del sistema: 4 de mayo de 2026.
 		\item Muestra del sistema al cliente: 15 de mayo de 2026.
 		\item Entrega final: 27 de mayo de 2026.
 \end{itemize}
@@ -763,6 +763,8 @@ diagramas de despliegue de la Figura \ref{fig:despliegue}.
 		\label{fig:despliegue}
 \end{figure}
 
+%\newpage
+
 \subsubsection{Estrategia de los bots de Magnate} 
 \label{sec:heuristica}
 Los bots que jueguen a Magnate seguirán una estrategia basada en heurísticas. 
@@ -837,7 +839,6 @@ en la Figura \ref{fig:skins}.
 		\caption{Diseño de algunos skins para las fichas de los jugadores en el juego Magnate.}
 		\label{fig:skins}
 \end{figure}
-
 
 \subsubsection{Decisiones de diseño}
 Las primeras decisiones de diseño se tomaron sobre las \textbf{tecnologías}
@@ -925,25 +926,54 @@ ritmo una vez nos familiarizamos con ellas, siguiendo el plan inicial.
 
 \subsection{Ejecución y control del proyecto} % 3.2 y 3.3
 \label{ss:mem323}
-A día 15 de marzo, la comunicación interna se ha concentrado más
+Hasta el día 15 de marzo, la \textbf{comunicación} interna se concentró más
 en los grupos de mensajerías para los equipos reducidos (backend,
 cliente web y cliente escritorio) y en persona para la medición del
 progreso y la comunicación de la empresa al completo. Creemos que
-esto refleja las necesidades de las actividades que hemos estado
-realizando hasta el momento y el primer periodo de adaptación al 
-trabajo en un grupo tan grande, y que conforme avance el proyecto 
-usaremos el resto de herramientas que hemos preparado.
-Lo mismo sucede con las pruebas: de momento solo se han realizado
-tests automáticos para el backend, que han resultado muy útiles, y 
-pruebas manuales en el frontend.
+esto refleja las necesidades de las actividades que estuvimos
+realizando hasta ese momento.
+Al comenzar la fase de integración, la comunicación por el grupo
+general y por chats privados entre los encargados de los WebSockets
+aumentó, y con las pruebas finales durante el despliegue utilizamos
+los canales de voz de Discord la gran mayoría del equipo simultáneamente.
+Además, para la preparación de la presentación del 4 de mayo también se
+creó un grupo específico con los encargados de esta una vez se designaron.
 
-En cuanto al reparto de tareas, la duplicación del trabajo en frontend
+Las herramientas y tecnologías empleadas, así como los procesos para
+conocer el trabajo realizado y pendiente y sus encargados, y los 
+procesos para la implementación y procesos relacionados se han seguido 
+respecto al plan, con resultados satisfactorios.
+El cambio más destacable resulta la creación de un \textbf{nuevo repositorio} para 
+el despliegue, como queda especificado en la sección % TODO link a lo deJaime
+el día 23 de abril.
+
+La semana del 1 de abril 
+se decidió automatizar mediante Github actions la generación
+de la \textbf{documentación} del código, lo cual se implementó tras la sesión
+de la práctica 5.
+
+El 6 de abril, comparando \textbf{diseños} de web y escritorio, se decidió que la
+primera plataforma tuviera más confirmaciones y la segunda menos, para
+poder estudiar en un futuro qué resulta más entretenido a usuarios
+nuevos y habituales. A través de la asignatura vimos que un proyecto de 
+este calibre requiere de mucho tiempo, esfuerzo y dedicación para conseguir
+un sistema que además de funcional resulte atractivo, jugable y comprensible
+para el usuario. Nos habría gustado poder haber hecho que se jugara utilizando
+las skins como fichas en 3D, como pensamos en un principio; y haber mejorado
+algunas propuestas del equipo de backend, que se enfrentaron al diseño sin
+ideas preconcebidas, como
+aumentar la visibilidad del tablero durante la aceptación de tradeos.
+
+\subsubsection{Reparto de tareas y flujo de trabajo}
+En cuanto al \textbf{reparto de tareas}, la duplicación del trabajo en frontend
 y ser la primera vez que trabajábamos juntos algunos de los integrantes
 hizo que nuestro planteamiento inicial del reparto de trabajo derivara
 en tener que repetir el trabajo por diferencias en diseños. Esto
 provocó que tuviéramos más trabajo durante un par de semanas, y nos 
 retrasásemos dos semanas con respecto al plan inicial, que era demasiado
-optimista. Tomamos medidas el 27 de febrero cambiando progresivamente
+optimista. 
+
+Tomamos medidas el 27 de febrero cambiando progresivamente
 nuestra manera de repartir el trabajo en el frontend: en vez de 
 asignar unas pantallas a web y otras a escritorio, decidimos asignarlas
 en primer lugar a web, ya que la plataforma es más restrictiva y limitada que
@@ -954,40 +984,71 @@ las pantallas. El cambio debido a esta divergencia se dio por completo el
 integración y despliegue por requisitos, y lo cambiamos al plan actual,
 que se centra primero en el diseño e implementación y después en la integración y
 despliegue. El plan también favorece el reparto de los requisitos por
-persona, permitiendo el trabajo paralelo en mayor medida. Con estas
-medidas esperamos que no sucedan más retrasos.
+persona, permitiendo el trabajo paralelo en mayor medida. 
 
-Las herramientas y tecnologías empleadas, así como los procesos para
-conocer el trabajo realizado y pendiente y sus encargados, y los 
-procesos para la implementación y procesos relacionados se han seguido 
-respecto al plan, con resultados satisfactorios.
-Destacar que todavía no se ha tenido oportunidad de probar los procesos
-de integración ni despliegue.
+Con estas medidas esperamos que no sucedieran más retrasos, aunque 
+pasadas las vacaciones de Semana Santa, el aumento de la carga de trabajo (riesgo 1) y
+la confirmación de las fechas de entrega, ligeramente posteriores a lo
+previsto (riesgo 10), supusieron que comenzásemos las fases de integración
+y posteriormente despliegue 1 semana después de lo previsto (menos de lo que
+afectaría la suma de los riesgos). 
+Además, algunas actividades se realizaron más tarde de lo previsto, como
+la implementación del chat en el juego o la posibilidad de reanudar partidas,
+pero se tardaron menos días de lo esperado en realizarlas una vez se hicieron
+las demás partes de la aplicación. Todo esto puede observarse en el diagrama
+de Gantt real y final de la Figura \ref{fig:ganttfinal}.
+
+\begin{sidewaysfigure}[hbtp]
+\centering
+		\includegraphics[width=\textwidth]{img/ganttfinal.png}
+		\caption{Diagrama de Gantt con la temporalidad de la ejecución del proyecto.}
+		\label{fig:ganttfinal}
+\end{sidewaysfigure}
+
+Durante la fase de integración se siguió el flujo de trabajo inverso en el
+frontend: primero el equipo de escritorio, que consiguió antes implementar la comunicación
+con el backend, probaba las comunicaciones e implementaba la integración, y
+después se hacía en el equipo de web. Igualmente en la fase de despliegue, se 
+trabajó de forma orgánica, tomando responsables de web o de escritorio que 
+tuvieran mejor implementadas ciertas partes (como la mecánica de las fantasías
+por un lado o de la cárcel por otro) para arreglar con el backend los problemas encontrados.
 
 La semana del 1 de abril se concretaron en el documento del plan las
-pruebas referentes a la integración y despliegue.
-También se decidió automatizar mediante Github actions la generación
-de la documentación del código, lo cual se implementó en la sesión
-de la práctica 5.
+\textbf{pruebas} referentes a la integración y despliegue.
+Hasta el día 15 de marzo solo se realizaron
+tests automáticos para el backend, que han resultado muy útiles, la simulación
+de partidas con los agentes o bots para su entrenamiento, y 
+pruebas manuales en el frontend.
+Las pruebas de la API y websockets se realizaron la semana del 8 de abril, antes
+de compartirlos con el frontend, y conforme se realizó la integración se fueron
+haciendo los fixes necesarios y repitiendo las pruebas para el mejor ajuste de los servicios. 
+Para facilitar la prueba de los arcos del grafo del juego en el frontend, se pidió
+al backend que eliminara la aleatoriedad, permitiendo forzar algunos estados como
+las tiradas de los dados o el dinero que tenían los jugadores (que pasamos a conocer
+como \textit{cheats} o trucos).
+Dado el gran número de posibilidades de acciones en las que se pueda realizar una
+partida, aun después de tener los trucos, y la naturaleza manual de la ejecución de las
+pruebas en el frontend, se desestimó la idea inicial de diseñar una partida que agrupara
+todos los posibles arcos, y simplemente se fueron probando los casos
+y resolviendo los problemas que
+hubiera incrementalmente a partir de una descripción detallada de todos estos arcos.
 
-El 6 de abril, comparando diseños de web y escritorio, se decidió que la
-primera plataforma tuviera más confirmaciones y la segunda menos, para
-poder estudiar en un futuro qué resulta más entretenido a usuarios
-nuevos y habituales.
-
-\subsection{Cierre del proyecto} % vibes de conclusiones pero más curro
-A día 15 de marzo, el proyecto sigue el plan descrito en la Figura
-\ref{fig:gantt}, y los esfuerzos realizados están en torno al 40\% del
-proyecto, adecuado para el momento en el que nos encontramos.
-
+\subsection{Cierre del proyecto}
 Durante este tiempo se han implementado las estrategias de mitigación de
-riesgos como planteado. Los riesgos 3, 7, 9, 10 y 11 todavía no se han
-presentado, y los riesgos 1, 5, 8 y 4 se han presentado sin efectos 
-negativos (aunque todavía están a tiempo de mostrarlos, sobre todo el
-último). El riesgo 6 se presentó muy temprano en el proyecto, en torno
-al 23 de febrero, y fue solventado sin pasar más de una semana. Con
-respecto al riesgo 2, su aparición y efectos se explicaron en la
+riesgos como planteado. Los riesgos 3, 7 y 11 no se han
+presentado, y los riesgos 4, 5 y 8 se han presentado sin efectos 
+negativos, es decir, sin retrasos en el plan del momento. 
+El riesgo 6 se presentó muy temprano en el proyecto, en torno
+al 23 de febrero, y fue solventado sin pasar más de una semana. 
+
+Con
+respecto a los riesgos 2, 1 y 10, su aparición y efectos se explicaron en la
 subsección \ref{ss:mem323}.
+El riesgo 9 se presentó a finales de abril, durante la fase de despliegue,
+ya que aunque se había trabajado con docker compose, no se había
+trabajado con git submodule ni con muchas de las imágenes que se acabaron
+utilizando. Finalmente, supuso un retraso de solo 2 días (menos de lo previsto)
+en los que se estuvo intentando hacer funcionar la imagen de npm.
 
 Además de los riesgos, surgió un pequeño imprevisto entre los miembros
 del equipo backend: al juntar código de distintos miembros en el
@@ -1001,118 +1062,137 @@ como riesgo en futuros proyectos, imponiendo como mitigación que las
 personas que editen los mismos ficheros lo hagan en el mismo entorno
 de desarollo. 
 
-Hemos aprendido las siguientes lecciones:
-\begin{itemize}
-		\item Usar el mismo entorno de desarrollo para editar los mismos
-				ficheros evita problemas menores pero molestos.
-		\item Al trabajar con distintas herramientas de forma que sea
-				necesario replicar el trabajo puede ser una buena práctica
-				ir más adelantado en una plataforma que en otra para evitar
-				repetir trabajo, si una de estas tecnologías es más
-				limitada que la otra.
-		\item La comunicación en el equipo depende de las actividades que
-				realicen, afectando tanto al contenido como a su forma.
-\end{itemize}
-
 El día 2 de abril resolvimos un malentendido entre el frontend y el backend
 por la interpretación distinta de una parte ambigua de las reglas. Ello
 supuso en torno a 1 hora de trabajo añadido para el backend, que por motivos
 de jugabilidad y esfuerzo se ajustaron a la versión propuesta por el frontend.
 Este es un ejemplo de manifestación del riesgo 6, ya que no definimos claramente
 esa parte de las reglas, que forma parte del requisito 1.
-% Aprendido: las reglas del juego también son requisitos que deberíamos consensuar
-
-% Gantt 
 
 \subsubsection{Dedicación por integrante} 
 En la Tabla \ref{tab:dedicacion} recogemos las horas empleadas por cada
-miembro de la empresa en cada tarea a día 15 de marzo. Podemos comprobar que estas se
-corresponden con las tareas que tenían asignadas en un principio y están
-equilibradas teniendo en cuenta las actividades realizadas hasta la
-fecha. En total se han realizado $381.25$ horas, que suponen en torno a un 40\% del proyecto.
+miembro de la empresa en cada tarea. Podemos comprobar que estas se
+corresponden con las tareas que tenían asignadas en un principio.
+% TODO espera Jaime
 
-% líneas de código
+En total se han realizado $381.25$ horas, que suponen en torno a un 40\% del proyecto. 
+Desglosado por integrante, podemos ver la implicación de todos los miembros en
+el proyecto, ya que todos llegamos al máximo de las 120 horas, y las sobrepasamos,
+al habernos enfrentado a un proyecto con más aspectos de los que se pedían en la
+asignatura, como la gamificación y los bots. 
+Algunos miembros de frontend se colocan entre las 130 horas, pero 
+Cristina llega casi a las 150 y 
+Mario como principal encargado del despliegue alcanzó casi las 145 horas. 
+Queremos destacar su voluntad, trabajo y compromiso con el proyecto.
 
-\begin{table}[hbtp]
-		\centering
+\begin{center}
 		\begin{longtable}{|l|S[table-format=3.2]|}
 				\hline
 				Responsable & Horas \\
 				\hline
-				\endfirsthead
+				\endhead
 				\hline
-				\textbf{Hugo Naudín} & 43 \\
+				\textbf{Hugo Naudín} & 122 \\
 				\hline
-				Coordinación empresa & 3.75 \\
+				Coordinación empresa & 5.5 \\
 				\hline
-				Coordinación backend & 5 \\
+				Coordinación backend & 7 \\
 				\hline 
-				Lógica del juego & 16.75 \\
+				Lógica del juego & 31.25 \\
 				\hline 
 				Bases de datos & 4.25 \\
 				\hline 
-				Calidad & 9 \\ 
-				\hline 
 				Serialización & 4.25 \\
 				\hline
+				Calidad & 9 \\ 
 				\hline 
-				\textbf{Jaime Alconchel} & 35.5 \\
+				Integración & 38 \\
 				\hline
-				Coordinación empresa & 3.75 \\
+				Despliegue & 3.5 \\
 				\hline
-				Coordinación backend & 6.25 \\
+				Bots & 19.25 \\
+				\hline
 				\hline 
-				Lógica del juego & 10 \\
+				\textbf{Jaime Alconchel} & 120.5 \\
+				\hline
+				Coordinación empresa & 4.75 \\
+				\hline
+				Coordinación backend & 10.25 \\
+				\hline 
+				Lógica del juego & 16 \\
 				\hline 
 				Bases de datos & 10 \\
 				\hline 
-				Serialización & 2 \\ 
+				Serialización & 3 \\ 
 				\hline 
+				Calidad & 29.5 \\
+				\hline 
+				Integración & 5 \\
+				\hline 
+				Despliegue & 34 \\
+				\hline 
+				Bots & 5 \\
+				\hline
 				Documentación y diagramas & 3 \\
 				\hline 
-				Calidad & 0.5 \\
 				\hline 
-				\hline 
-				\textbf{Mario Casado} & 46 \\
+				\textbf{Mario Casado} & 144.5 \\
 				\hline
-				Coordinación empresa & 2.75 \\
+				Coordinación empresa & 7.75 \\
 				\hline
 				Coordinación backend & 4.25 \\
 				\hline 
-				Lógica del juego & 19.5 \\
+				Lógica del juego & 37 \\
 				\hline 
-				Bases de datos &1.5 \\
+				Bases de datos & 3 \\
 				\hline 
 				Serialización &8.5 \\ 
 				\hline 
-				Diseño de marca & 1.5 \\
+				Diseño de marca & 4.25 \\
 				\hline 
-				Calidad & 8 \\
+				Calidad & 11 \\
 				\hline 
+				Integración & 10.75 \\
 				\hline 
-				\textbf{Miguel Royo} & 52.25 \\ 
+				Despliegue & 58 \\
+				\hline 
+
+				\pagebreak
+
+				\hline 
+				\textbf{Miguel Royo} & 130 \\ 
 				\hline
-				Coordinación equipo & 3.25 \\
+				Coordinación equipo & 4.25 \\
 				\hline
-				Coordinación frontend & 2 \\
+				Coordinación frontend & 4 \\
 				\hline
 				Diseño & 13.5 \\
 				\hline
-				Implementación & 33.5 \\ 
+				Implementación & 67.5 \\ 
+				\hline
+				Integración & 35.75 \\ 
+				\hline
+				Gamificación & 5 \\ 
 				\hline
 				\hline
-				\textbf{Cristina} & 52.25 \\ 
+				\textbf{Cristina} & 149.5 \\ 
 				\hline
 				Coordinación equipo & 3.25 \\
 				\hline
 				Coordinación frontend & 2 \\
 				\hline
-				Diseño & 11.5 \\
+				Diseño & 16.25 \\
 				\hline
-				Implementación & 35.5 \\ 
+				Implementación & 54 \\ 
+				\hline
+				Calidad & 4.5 \\
+				\hline 
+				Integración & 64.5 \\ 
+				\hline
+				Gamificación & 5 \\ 
 				\hline
 				\hline
-				\textbf{Julia} & 59 \\ 
+				\textbf{Julia} & 130.5 \\ 
 				\hline
 				Coordinación equipo & 5.5 \\
 				\hline
@@ -1120,53 +1200,172 @@ fecha. En total se han realizado $381.25$ horas, que suponen en torno a un 40\% 
 				\hline
 				Diseño & 5.5 \\
 				\hline
-				Implementación & 13.5 \\ 
+				Implementación & 22 \\ 
 				\hline
-				Gamificación & 4.5 \\ 
+				Integración & 43 \\ 
 				\hline
-				Documentación & 29.5 \\
+				Gamificación & 6.5 \\ 
+				\hline
+				Documentación & 47 \\
 				\hline
 				\hline
-				\textbf{Nicolás} & 47.75 \\ 
+				\textbf{Nicolás} & 133.75 \\ 
 				\hline
 				Coordinación equipo & 3.25 \\
 				\hline
-				Diseño & 15.5 \\
+				Diseño & 23.5 \\
 				\hline
-				Implementación & 28 \\ 
+				Implementación & 64.5 \\ 
+				\hline
+				Calidad & 1 \\
+				\hline 
+				Integración & 40.5 \\ 
 				\hline
 				Gamificación & 0.5 \\ 
 				\hline
 				Documentación y diagramas & 0.5 \\
 				\hline
 				\hline
-				\textbf{Miguel Luquín} & 45.5 \\ 
+				\textbf{Miguel Luquín} & 120 \\ 
 				\hline
 				Coordinación equipo & 1.5 \\
 				\hline
+				Coordinación frontend & 0.75 \\
+				\hline
 				Diseño & 13 \\
 				\hline
-				Implementación & 30 \\ 
+				Implementación & 74.5 \\ 
+				\hline
+				Integración & 20 \\ 
 				\hline
 				Gamificación & 1 \\ 
 				\hline
+				Documentación y diagramas & 9.25 \\
 				\hline
-		\end{longtable}
+				\hline
 		\caption{Dedicación: horas y tareas realizadas por los integrantes de la empresa.}
 		\label{tab:dedicacion}
+		\end{longtable}
+\end{center}
+
+% líneas de código
+En cuanto a la dedicación por número de líneas de código y commits, recogemos la información
+disponible en la Tabla \ref{tab:lineas}. Esta la recogemos a partir de la pestaña de 
+Insights/Contributors de los repositorios de Github, que creemos más realista
+que lo expuesto en la evaluación intermedia del Apéndice \ref{app:resinter}. Creemos que de
+manera global el aporte ha sido equitativo, teniendo en cuenta el número de líneas
+esperado para cada lenguaje de programación usado. 
+
+\begin{table}[hbtp]
+	\begin{tabular}{|l|r|r|r|r|r|r|r|r|r|r|}
+			\hline
+		& \multicolumn{2}{c|}{backend} 
+		& \multicolumn{2}{c|}{deployment} 
+		& \multicolumn{2}{c|}{gestion} 
+		& \multicolumn{2}{c|}{frontend-web} 
+		& \multicolumn{2}{c|}{frontend-desktop}\\
+		\hline 
+Encargado & Líneas & com& Líneas & com& Líneas & com& Líneas & com& Líneas & com\\
+\hline
+			Hugo & 13777 & 179 & 0 & 0 & 91 & 3 & 0 & 0 & 0 & 0 \\
+			\hline
+			Jaime 
+			& 16229 & 107 
+			& 459 & 31 
+			& 393 & 9 
+			& 0 & 0 
+			& 0 & 0 \\
+			\hline
+			Mario
+			& 6081 & 145
+			& 141 & 29 
+			& 8778 & 6
+			& 34 & 2 
+			& 0 & 0 \\
+			\hline
+			M. Royo
+			& 0 & 0 
+			& 0 & 0 
+			& 0 & 0 
+			& 9458 & 107 
+			& 14126 & 34 \\
+			\hline
+			Cristina
+			& 0 & 0 
+			& 0 & 0 
+			& 21 & 1 
+			& 23174 & 132
+			& 0 & 0 \\
+			\hline
+			Julia
+			& 0 & 0 
+			& 0 & 0 
+			& 3066 & 20
+			& 14667 & 47
+			& 0 & 0 \\
+			\hline
+			Nicolás
+			& 0 & 0 
+			& 0 & 0 
+			& 82 & 2 
+			& 0 & 0 
+			& 24467 & 166 \\
+			\hline
+			M. Luquín
+			& 0 & 0 
+			& 0 & 0 
+			& 480 & 2
+			& 0 & 0 
+			& 13751 & 49 \\
+			\hline
+	\end{tabular}
+\caption{Dedicación: número de líneas y commits en cada repositorio por los integrantes de la empresa.}
+\label{tab:lineas}
 \end{table}
 
-\section{Conclusiones} % Solo para la entrega final...
+\section{Conclusiones}
 \label{sec:con}
-personales, mejorar los procesos... 
-Además de conclusiones personales (razonadas) sobre el transcurso del proyecto realizado, es
-importante plantear ideas para mejorar los procesos llevados a cabo: si hubiera que iniciar un
-nuevo proyecto inmediatamente usando una metodología de gestión basada en procesos, ¿qué
-cambios haríais respecto a los procesos que habéis seguido durante este proyecto? ¿Qué
-cosas está claro que haríais de otra forma? ¿Qué cosas seguiríais haciendo más o menos
-igual? Pensad que si la respuesta es “no cambiaríamos nada, todo nos parece que estuvo
-bien”, lo que estáis transmitiendo es que no habéis aprendido nada en la asignatura, lo que no
-suele ser una buena señal.
+Hemos aprendido las siguientes lecciones:
+\begin{itemize}
+	\item Usar el mismo entorno de desarrollo para editar los mismos
+			ficheros evita problemas menores pero molestos.
+	\item La comunicación en el equipo depende de las actividades que
+			realicen, afectando tanto al contenido como a su forma.
+	\item Una buena planificación considera el tiempo estimado para
+			realizar una tarea y las posibles desviaciones del plan
+			original que puedan surgir.
+\end{itemize}
+
+De cara a repetir un proyecto similar, tendríamos en cuenta las siguientes consideraciones:
+\begin{itemize}
+	\item Al trabajar con distintas herramientas de forma que sea
+			necesario replicar el trabajo puede ser una buena práctica
+			ir más adelantado en una plataforma que en otra para evitar
+			repetir trabajo, si una de estas tecnologías es más
+			limitada que la otra.
+	\item Las reglas del juego y otros aspectos del comportamiento de un sistema 
+			también son requisitos que deberíamos consensuar y asegurarnos de que
+			todos los miembros están al corriente de lo decidido.
+	\item Iniciar antes la comunicación entre backend y frontend para consensuar
+			juntos las interfaces para la comunicación podría agilizar el proceso
+			de integración y ser otra forma de realizarlo en vez de ir haciendo
+			pequeños cambios al comienzo de la fase de integración.
+	\item El rendimiento de la aplicación debería ser considerado cada vez que se
+			planteen nuevos elementos aunque estos mejoren su atractivo visual.
+	\item Reservar en la programación del proyecto más tiempo para realizar las
+			pruebas, tanto para depurar errores como para iterar la aplicación
+			considerando aspectos de usabilidad y jugabilidad a mejorar, puede
+			hacer que consigamos resultados más satisfactorios.
+	\item Respetar más las fechas internas de la planificación y proponer más medidas
+			para la mitigación de riesgos como formar parejas para el seguimiento del
+			cumplimiento de estas fechas internas o asignar fechas realistas
+			a todas las pequeñas tareas a realizar. 
+\end{itemize}
+
+Creemos que la clave de nuestros resultados en el proyecto ha sido nuestro compromiso
+y nuestra adaptabilidad para ajustar el plan inicial a las capacidades de
+los miembros del equipo y la realidad de la carga de trabajo 
+afrontada tanto en esta como en otra asignaturas.
 
 \newpage
 
@@ -1192,8 +1391,10 @@ la Figura \ref{fig:autoev}.
 \newpage
 
 \section{Presentación final}
-\label{app:presen}
+\label{app:presen} 
 \input{presen}
+
+\newpage
 
 \section{Diagramas}
 \label{app:diagramas}

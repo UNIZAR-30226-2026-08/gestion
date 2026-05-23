@@ -47,6 +47,7 @@ package "Estado" {
     rectangle "Contexto de audio" as Audio
     rectangle "Bus" as Bus
 	rectangle "utils.ts" as utils
+	rectangle "Contexto de autenticación" as AuthContext
 	Audio -[hidden]right- Bus
 	Bus -[hidden]right- utils
 }
