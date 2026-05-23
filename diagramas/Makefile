@@ -12,9 +12,9 @@ OBJS := $(SRCS:.uml=.png)
 all: $(OBJS)
 
 %.png: %.uml
-	$(PLANTUML_CMD) $<
+	$(PLANTUML_CMD) --format latex $<
 
 clean:
-	rm -f *.png
+	rm -f *.png *.tex
 
 .PHONY: all clean

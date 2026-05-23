@@ -1,5 +1,5 @@
 @startuml
-title Diagrama de Despliegue - (Arquitectura de cuatro capas con Kubernetes)
+title Diagrama de despliegue - (Arquitectura de cuatro capas con Kubernetes)
 
 skinparam nodesep 40
 skinparam ranksep 60
@@ -27,6 +27,12 @@ node "Cluster Kubernetes" as K8sCluster {
             component "Django" as Django
             Gunicorn -- Django
         }
+        node "Pod Redis (Alpine)" as RedisPod {
+            component "Servidor Redis" as Redis
+        }
+        node "Pod Celery (Alpine)" as CeleryPod {
+            component "Servidor Celery" as Celery
+        }
     }
     
     node "Capa de Datos (Data Tier)" as DataTier {
@@ -38,10 +44,12 @@ node "Cluster Kubernetes" as K8sCluster {
 
 ' Conectamos componente con componente directamente usando --> (hacia abajo)
 Browser -- FrontendTier : "HTTPS"
-DesktopApp -- BackendTier : "HTTPS"
+DesktopApp -- FrontendTier : "HTTPS"
 
 ' Conexiones de red internas
 Nginx -- BackendTier : " HTTPS "
 Django -- DataTier : "TCP"
+Django -- RedisPod : "redis"
+CeleryPod -- RedisPod : "redis"
 
 @enduml
