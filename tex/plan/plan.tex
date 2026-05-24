@@ -330,6 +330,7 @@ Para ellos se proponen las siguientes estrategias de mitigación:
 \end{itemize}
 
 \subsection{Control de configuraciones, construcción del software y aseguramiento de la calidad del producto}
+\label{ss:deploy}
 Las \textbf{herramientas} a utilizar en el proyecto se han elegido por ser
 aquellas que aportan más profesionalidad y por contar cada miembro con
 experiencia en su uso.
@@ -361,17 +362,16 @@ comprometer su comprensión. Para la guía de estilo se eligieron un
 número reducido de colores principales y secundarios y se consensuaron los
 formatos de los elementos básicos (botones, fondos...) para la consistencia.
 
-Por último, las herramientas de despliegue engloban, a nivel software, 
-contenedores Docker que desplieguen un sistema operativo Alpine Linux;
-y a nivel hardware, para el despliegue de los contenedores, una máquina 
+Por último, las herramientas de \textbf{despliegue} engloban
+a nivel hardware, para el despliegue de los contenedores, una máquina 
 propiedad de Mario Casado con las siguientes especificaciones: 
 UGREEN DXP2800 con procesador Intel n100,
 8TB de HDD, 1TB de SSD m2 y 16GB de RAM DDR5.
-Como todo el despliegue se realizará en la misma máquina, los puertos
-y rutas necesarios para el despliegue aparecerán como variables de
-entorno en los ficheros yaml, y no será necesario especificar nada más.
+%Como todo el despliegue se realizará en la misma máquina, los puertos
+%y rutas necesarios para el despliegue aparecerán como variables de
+%entorno en los ficheros yaml, y no será necesario especificar nada más.
 
-\section{Despliegue} % cambia por la estructura que quieras
+%\section{Despliegue}
 
 Se ha optado por desarrollar un modelo de despliegue agnóstico, adaptable y
 escalable mediante contenedores Docker sincronizados por el software
@@ -380,59 +380,16 @@ despliegue se configura como un contenedor en la red interna virtual creada por
 esta herramienta. Para sincronizar el contenido de los tres repositorios de los
 que se servirá el entorno desplegado, se ha utilizado git y diseñado un
 repositorio específico de despliegue, aprovechando su soporte para submódulos
-para mantener actualizados los distintos repositorios del proyecto. Así, el
-repositorio creado presenta la siguiente estructura:
+para mantener actualizados los distintos repositorios del proyecto. 
 
-\begin{figure}[h]
-\begin{tabularx}{\textwidth}{@{} l X @{}}
-\toprule
-\textbf{Fichero / Directorio} & \textbf{Descripción} \\
-\midrule
-\texttt{docker-compose.yml}      & Fichero que describe la construcción y configuración de todos los contenedores. \\
-\addlinespace
-\texttt{Dockerfile.backend}      & Dockerfile para empaquetar y crear el contenedor de backend. \\
-\addlinespace
-\texttt{Dockerfile.frontend-web} & Dockerfile para compilar y configurar el servidor de frontend web. \\
-\addlinespace
-\texttt{nginx.conf}              & Fichero de configuración del servidor web. \\
-\addlinespace
-\texttt{build-desktop.sh}        & Script que compila los binarios del cliente de escritorio en un contenedor aislado de docker y las deposita en \texttt{desktop-releases/}. \\
-\addlinespace
-\texttt{generate-certs.sh}       & Script que genera certificados autofirmados para el servidor web. \\
-\addlinespace
-\texttt{backend/}                & Repositorio fuente de backend (submódulo). \\
-\addlinespace
-\texttt{frontend-web/}           & Repositorio fuente de frontend web (submódulo). \\
-\addlinespace
-\texttt{frontend-desktop/}       & Repositorio fuente de frontend escritorio (submódulo). \\
-\addlinespace
-\texttt{.env}                    & Archivo local que contiene las variables de configuración específicas para el despliegue. \\
-\bottomrule
-\end{tabularx}
-    \caption{Estructura del repositorio de despliegue}
-\end{figure}
-
-Debido a la naturaleza particular de la compilación de godot, se ha escogido
-separar la creación de los binarios del cliente del juego del sistema
-docker-compose, por lo que ahora es un script específico el que se encarga de
-generar estos binarios y depositarlos en una carpeta de lanzamientos que luego
-se expondrá públicamente a través del servidor web. En caso de no realizarse la
-compilación, el sistema seguiría funcionando, pero los enlaces de descarga
-estarían vacíos.
-
-Quizás la ventaja más interesante del despliegue desarrollado es que aísla
+La ventaja más interesante del despliegue desarrollado es que aísla
 todas las variables de configuración específicas del sistema en el que se va a
 ejecutar el software (en nuestro caso, un servidor doméstico) de la
 configuración global, por lo que el cliente únicamente tendría que generar un
-archivo entorno propio para adaptar el sistema a sus servidores. Por tanto,
-puede concluirse que el sistema de despliegue desarrollado está preparado para
-cualquier sistema con soporte para docker (en la práctica, todos los sistemas
-utilizados en la industria) e incluso se extendería fácilmente a entornos
-distribuidos, ya que la traducción de docker-compose a kubernetes es muy común
-y relativamente sencilla de realizar gracias a herramientas automáticas como
-Kompose. % triple histórico, pero igual es así
+archivo de entorno propio como el de la Figura \ref{fich:env} 
+para adaptar el sistema a sus servidores. 
 
-\begin{figure}
+\begin{figure}[hbtp]
 \begin{verbatim}
 # PostgreSQL
 DB_PASSWORD="unsafe_password"
@@ -452,15 +409,14 @@ SSL_DOMAIN=example.com
 
 \end{verbatim}
 \caption{Ejemplo de nuestro fichero \texttt{.env} con la URL cambiada}
+		\label{fich:env}
 \end{figure}
 
 Los sistemas escogidos para los contenedores son los siguientes:
 
 \begin{itemize}
     \item Para la base de datos, el contenedor específico de PostgreSQL basado
-        en Alpine Linux, por su robustez, uso en el sector y facilidad de 
-        configuración (basta con especificar 3 variables de entorno para
-        lograr un despliegue completo).
+        en Alpine Linux.
     \item Para el servidor redis, se usa directamente el contenedor específico
         para este software basado en Alpine Linux.
     \item Para los contenedores de celery y django, utilizamos la imagen
@@ -474,15 +430,10 @@ Los sistemas escogidos para los contenedores son los siguientes:
         en Debian.
 \end{itemize}
 
-En general, se observa que casi todos los contenedores están basados en Alpine
-Linux. Esto no es casualidad, ya que esta es una distribución extremadamente
-popular en contenedores Docker debido a su sencillez, reducido tamaño, buen
-rendimiento y seguridad.
+%Finalmente, incluimos un diagrama de despliegue con los distintos contenedores
+%que se utilizan, tanto en compilación como en ejecución:
 
-Finalmente, incluimos un diagrama de despliegue con los distintos contenedores
-que se utilizan, tanto en compilación como en ejecución:
-
-\input{diagrama_despliegue.tex}
+%\input{diagrama_despliegue.tex}
 
 Los \textbf{responsables} de supervisar la corrección de las configuraciones,
 construcción del software y calidad del producto son para el código del
@@ -893,6 +844,39 @@ diagramas de despliegue de la Figura \ref{fig:despliegue}.
 		\label{fig:despliegue}
 \end{figure}
 
+El repositorio creado para el despliegue presenta la estructura mostrada en la Tabla \ref{tab:deploy}.
+
+\begin{figure}[h]
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Fichero / Directorio} & \textbf{Descripción} \\
+\midrule
+\texttt{docker-compose.yml}      & Fichero que describe la construcción y configuración de todos los contenedores. \\
+\addlinespace
+\texttt{Dockerfile.backend}      & Dockerfile para empaquetar y crear el contenedor de backend. \\
+\addlinespace
+\texttt{Dockerfile.frontend-web} & Dockerfile para compilar y configurar el servidor de frontend web. \\
+\addlinespace
+\texttt{nginx.conf}              & Fichero de configuración del servidor web. \\
+\addlinespace
+\texttt{build-desktop.sh}        & Script que compila los binarios del cliente de escritorio en un contenedor aislado de docker y las deposita en \texttt{desktop-releases/}. \\
+\addlinespace
+\texttt{generate-certs.sh}       & Script que genera certificados autofirmados para el servidor web. \\
+\addlinespace
+\texttt{backend/}                & Repositorio fuente de backend (submódulo). \\
+\addlinespace
+\texttt{frontend-web/}           & Repositorio fuente de frontend web (submódulo). \\
+\addlinespace
+\texttt{frontend-desktop/}       & Repositorio fuente de frontend escritorio (submódulo). \\
+\addlinespace
+\texttt{.env}                    & Archivo local que contiene las variables de configuración específicas para el despliegue. \\
+\bottomrule
+\end{tabularx}
+    \caption{Estructura del repositorio de despliegue}
+		\label{tab:deploy}
+\end{figure}
+
+
 %\newpage
 
 \subsubsection{Estrategia de los bots de Magnate} 
@@ -950,6 +934,7 @@ resto del tablero (ver Figura \ref{fig:mapnav3}).
 		\label{fig:mapnav3}
 \end{figure}
 
+\newpage
 
 \subsubsection{Diseño de elementos del juego}
 En esta sección concretamos el diseño de algunos skins
@@ -1024,11 +1009,6 @@ ver que estas bastarían para el proyecto, estar familiarizados con el
 formato docstrings, poder integrarse y generar pdfs de forma sencilla y
 que mkdocs es moderno y fácil de configurar.
 
-Otra decisión de diseño tomada fue utilizar el servidor de Mario Casado para
-el despliegue. Se optó por esta opción sobre cualquier otra plataforma online
-para el despliegue debido a su acceso gratuito y sin condiciones, y a la
-familiaridad de algunos de los miembros del equipo con dicho entorno.
-
 La decisión sobre el diseño de la \textbf{arquitectura} viene directamente motivadas
 por las tecnologías empleadas y los flujos de trabajo habituales necesarios
 para desplegar aplicaciones que utilizan dichas tecnologías.
@@ -1043,6 +1023,34 @@ estado del juego y tratar las comunicaciones de frontend a backend
 (con los objetos responses) y de backend a frontend (con actions, enviando
 el contenido en un JSON serializado para facilitar el tratamiento en el
 frontend).
+
+Otra decisión de diseño tomada fue utilizar el servidor de Mario Casado para
+el \textbf{despliegue}. Se optó por esta opción sobre cualquier otra plataforma online
+para el despliegue debido a su acceso gratuito y sin condiciones, y a la
+familiaridad de algunos de los miembros del equipo con dicho entorno.
+Se optó por dearrollar el sistema de despliegue aislando todas las variables
+de configuracíon específica del sistema en el que se va a ejecutar el software
+de la configuración global para aumentar la compatibilidad del sistema con
+cualquier sistema con soporte para docker (en la práctica, todos los 
+sistemas utilizados en la industria).
+
+Sobre la elección de las imágenes de los contenedores, la mayoría están
+basados en Alpine Linux, una distribución extremadamente
+popular en contenedores Docker debido a su sencillez, reducido tamaño, buen
+rendimiento y seguridad. Se intentó utilizar contenedores oficiales
+siempre que estuvieran disponibles, para contar con mayor soporte e 
+información sobre estos. Por ejemplo, el contenedor oficial de PostgreSQL
+basado en Alpine Linux destaca por su robustez, uso en el sector y facilidad de
+configuración (basta con especificar 3 variables de entorno para
+lograr un despliegue completo).
+
+Debido a la naturaleza particular de la compilación de godot, se ha escogido
+separar la creación de los binarios del cliente del juego del sistema
+docker-compose, por lo que ahora es un script específico el que se encarga de
+generar estos binarios y depositarlos en una carpeta de lanzamientos que luego
+se expondrá públicamente a través del servidor web. En caso de no realizarse la
+compilación, el sistema seguiría funcionando, pero los enlaces de descarga
+estarían vacíos.
 
 \newpage
 \section{Memoria del proyecto} 
@@ -1074,7 +1082,7 @@ conocer el trabajo realizado y pendiente y sus encargados, y los
 procesos para la implementación y procesos relacionados se han seguido 
 respecto al plan, con resultados satisfactorios.
 El cambio más destacable resulta la creación de un \textbf{nuevo repositorio} para 
-el despliegue, como queda especificado en la sección % TODO link a lo deJaime
+el despliegue, como queda especificado en la sección \ref{ss:deploy}
 el día 23 de abril.
 
 La semana del 1 de abril 
@@ -1203,9 +1211,9 @@ esa parte de las reglas, que forma parte del requisito 1.
 En la Tabla \ref{tab:dedicacion} recogemos las horas empleadas por cada
 miembro de la empresa en cada tarea. Podemos comprobar que estas se
 corresponden con las tareas que tenían asignadas en un principio.
-% TODO espera Jaime
 
-En total se han realizado $381.25$ horas, que suponen en torno a un 40\% del proyecto. 
+En total se han realizado $1053.75$ horas, que suponen un 109.77\% de lo
+estimado para el proyecto. 
 Desglosado por integrante, podemos ver la implicación de todos los miembros en
 el proyecto, ya que todos llegamos al máximo de las 120 horas, y las sobrepasamos,
 al habernos enfrentado a un proyecto con más aspectos de los que se pedían en la
@@ -1243,7 +1251,7 @@ Queremos destacar su voluntad, trabajo y compromiso con el proyecto.
 				Bots & 19.25 \\
 				\hline
 				\hline 
-				\textbf{Jaime Alconchel} & 120.5 \\
+				\textbf{Jaime Alconchel} & 123.5 \\
 				\hline
 				Coordinación empresa & 4.75 \\
 				\hline
@@ -1263,7 +1271,7 @@ Queremos destacar su voluntad, trabajo y compromiso con el proyecto.
 				\hline 
 				Bots & 5 \\
 				\hline
-				Documentación y diagramas & 3 \\
+				Documentación y diagramas & 6 \\
 				\hline 
 				\hline 
 				\textbf{Mario Casado} & 144.5 \\
