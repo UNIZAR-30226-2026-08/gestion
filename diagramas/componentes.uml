@@ -27,7 +27,7 @@ IApi -- pDjango
 
 ' Conexiones de los clientes hacia las interfaces
 WebClient ..> IWeb : "Navega y solicita vistas"
-DesktopClient ..> IApi : "Consulta y envía datos"
+DesktopClient ..> pNginx : "Consulta y envía datos"
 
 ' Conexiones internas
 NginxServer ..> IApi : "Redirige peticiones (Proxy)"

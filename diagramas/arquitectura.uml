@@ -15,7 +15,7 @@ database "Servidor de Base de Datos" as DB
 
 WebClient --> WebServer : HTTP/HTTPS
 WebServer --> Backend : Rest API / WebSockets
-GodotClient --> Backend : Rest API / WebSockets
+GodotClient --> WebServer : HTTP/HTTPS
 
 Backend --> DB : Persiste y recupera información
 

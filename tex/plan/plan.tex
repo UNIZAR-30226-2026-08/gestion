@@ -155,7 +155,7 @@ Por dicho precio se entregará lo siguiente a la finalización del proyecto:
 \begin{itemize}
 		\item Todo el código desarrollado.
 		\item Documentación de despliegue y ficheros de configuración y Docker Compose para el despliegue.
-		\item Un AppImagen con la versión escritorio, ya compilado.
+		\item Un ejecutable linux con la versión escritorio, ya compilado.
 \end{itemize}
 
 
@@ -468,20 +468,19 @@ se destacan algunos detalles específicos a las herramientas:
 				clase Node, como RefCounted.
 \end{itemize}
 
-El código se ha organizado en 4 \textbf{repositorios} de GitHub: uno para el backend,
-otro para el frontend del cliente web, otro para el frontend del cliente 
-escritorio y otro para la gestión y documentación. Todos los miembros del
-equipo tienen acceso a todos los repositorios, y respetan el workflow
-consensuado en el equipo. 
-Las issues se crean tras una reunión entre los miembros del equipo 
-correspondiente en la que se identifican, definen y reparten las tareas a
-realizar. Se designa un encargado que cree en Github las issues 
-correspondientes. Para realizar un commit en el repositorio compartido, se
-ha de obtener el permiso de los demás usuarios habituales del repositorio
-(los miembros del equipo correspondiente) para minimizar las posibles 
-incongruencias (aunque ya se definen las tareas teniendo esto en cuenta), y
-no se han de revisar los commits ya que se confía en la capacidad y buen
-criterio de los miembros del equipo.
+El código se ha organizado en 5 \textbf{repositorios} de GitHub: uno para el
+backend, otro para el frontend del cliente web, otro para el frontend del
+cliente escritorio, otro para la gestión y documentación y un último para
+centralizar el despliegue. Todos los miembros del equipo tienen acceso a todos
+los repositorios, y respetan el workflow consensuado en el equipo. Las issues
+se crean tras una reunión entre los miembros del equipo correspondiente en la
+que se identifican, definen y reparten las tareas a realizar. Se designa un
+encargado que cree en Github las issues correspondientes. Para realizar un
+commit en el repositorio compartido, se ha de obtener el permiso de los demás
+usuarios habituales del repositorio (los miembros del equipo correspondiente)
+para minimizar las posibles incongruencias (aunque ya se definen las tareas
+teniendo esto en cuenta), y no se han de revisar los commits ya que se confía
+en la capacidad y buen criterio de los miembros del equipo.
 
 Ante la detección de \textbf{incidencias}, el que la haya detectado tiene la
 responsabilidad de encontrar a la persona que haya generado la incidencia,
@@ -532,7 +531,7 @@ Se entregará al cliente lo siguiente a la finalización del proyecto:
 \begin{itemize}
 		\item Todo el código desarrollado.
 		\item Documentación de despliegue y ficheros de configuración y Docker Compose para el despliegue.
-		\item Un AppImagen con la versión escritorio, ya compilado.
+		\item Un ejecutable linux con la versión escritorio, ya compilado.
 \end{itemize}
 
 
@@ -1003,11 +1002,12 @@ previa trabajando con ellos.
 Para la base de datos, se barajaron bases de datos SQL, que son con las
 que tenemos experiencia, y nos decantamos por PostgreSQL por ser
 compleja, potente y eficiente.
-La decisión de utilizar las herramientas automáticas de generación de 
-documentación vienen por haberse encontrado tras una pequeña búsqueda,
-ver que estas bastarían para el proyecto, estar familiarizados con el
-formato docstrings, poder integrarse y generar pdfs de forma sencilla y
-que mkdocs es moderno y fácil de configurar.
+Se optó por la herramienta MkDocs para la generación automática de 
+documentación del backend debido a su popularidad y a que resultaba muy 
+sencilla de añadir al código en desarrollo, ya que sólo requería cambiar
+el estilo de los comentarios al formato estandarizado docstring. Además,
+resultó trivial automatizar la generación de documentos y sitios web como una 
+acción de github vinculada al github sites del repositorio.
 
 La decisión sobre el diseño de la \textbf{arquitectura} viene directamente motivadas
 por las tecnologías empleadas y los flujos de trabajo habituales necesarios
