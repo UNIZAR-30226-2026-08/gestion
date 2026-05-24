@@ -432,7 +432,27 @@ distribuidos, ya que la traducción de docker-compose a kubernetes es muy común
 y relativamente sencilla de realizar gracias a herramientas automáticas como
 Kompose. % triple histórico, pero igual es así
 
-% Que Mario ponga su .env
+\begin{figure}
+\begin{verbatim}
+# PostgreSQL
+DB_PASSWORD="unsafe_password"
+
+# Django
+SECRET_KEY="another_unsafe_password"
+ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,192.168.50.12,example.com
+
+# Ports
+FRONTEND_HTTP_PORT=8081
+FRONTEND_HTTPS_PORT=4433
+
+BACKEND_HOST="example.com:443/api"
+
+SSL_BACKEND_IP=192.168.50.12
+SSL_DOMAIN=example.com
+
+\end{verbatim}
+\caption{Ejemplo de nuestro fichero \texttt{.env} con la URL cambiada}
+\end{figure}
 
 Los sistemas escogidos para los contenedores son los siguientes:
 
