@@ -36,11 +36,29 @@
 \renewcommand{\thealgorithm}{}
 
 \usepackage{url}
-\usepackage[pdftex, colorlinks=true, citecolor=cyan, linkcolor=black, 
-urlcolor=blue]{hyperref}
+\usepackage[colorlinks=true, citecolor=cyan, linkcolor=black, urlcolor=blue]{hyperref}
 
 \usepackage[backend=biber, style=numeric]{biblatex}
 \addbibresource{references.bib}
+
+\setlength{\headheight}{14pt}
+\usepackage{lmodern}
+
+% For diagrams
+
+\usepackage{tikz}
+\usetikzlibrary{
+  arrows.meta,
+  backgrounds,
+  calc,
+  fit,
+  positioning,
+  shadows.blur,
+  shapes.geometric,
+  shapes.misc
+}
+\usepackage{xcolor}
+\usepackage{helvet}
 
 \begin{document}
     
@@ -352,7 +370,119 @@ UGREEN DXP2800 con procesador Intel n100,
 Como todo el despliegue se realizará en la misma máquina, los puertos
 y rutas necesarios para el despliegue aparecerán como variables de
 entorno en los ficheros yaml, y no será necesario especificar nada más.
-% TODO poner punteros y pequeña especificación (ver github issue)
+
+\section{Despliegue} % cambia por la estructura que quieras
+
+Se ha optado por desarrollar un modelo de despliegue agnóstico, adaptable y
+escalable mediante contenedores Docker sincronizados por el software
+docker-compose. Cada uno de los servicios necesarios para realizar el
+despliegue se configura como un contenedor en la red interna virtual creada por
+esta herramienta. Para sincronizar el contenido de los tres repositorios de los
+que se servirá el entorno desplegado, se ha utilizado git y diseñado un
+repositorio específico de despliegue, aprovechando su soporte para submódulos
+para mantener actualizados los distintos repositorios del proyecto. Así, el
+repositorio creado presenta la siguiente estructura:
+
+\begin{figure}[h]
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Fichero / Directorio} & \textbf{Descripción} \\
+\midrule
+\texttt{docker-compose.yml}      & Fichero que describe la construcción y configuración de todos los contenedores. \\
+\addlinespace
+\texttt{Dockerfile.backend}      & Dockerfile para empaquetar y crear el contenedor de backend. \\
+\addlinespace
+\texttt{Dockerfile.frontend-web} & Dockerfile para compilar y configurar el servidor de frontend web. \\
+\addlinespace
+\texttt{nginx.conf}              & Fichero de configuración del servidor web. \\
+\addlinespace
+\texttt{build-desktop.sh}        & Script que compila los binarios del cliente de escritorio en un contenedor aislado de docker y las deposita en \texttt{desktop-releases/}. \\
+\addlinespace
+\texttt{generate-certs.sh}       & Script que genera certificados autofirmados para el servidor web. \\
+\addlinespace
+\texttt{backend/}                & Repositorio fuente de backend (submódulo). \\
+\addlinespace
+\texttt{frontend-web/}           & Repositorio fuente de frontend web (submódulo). \\
+\addlinespace
+\texttt{frontend-desktop/}       & Repositorio fuente de frontend escritorio (submódulo). \\
+\addlinespace
+\texttt{.env}                    & Archivo local que contiene las variables de configuración específicas para el despliegue. \\
+\bottomrule
+\end{tabularx}
+    \caption{Estructura del repositorio de despliegue}
+\end{figure}
+
+Debido a la naturaleza particular de la compilación de godot, se ha escogido
+separar la creación de los binarios del cliente del juego del sistema
+docker-compose, por lo que ahora es un script específico el que se encarga de
+generar estos binarios y depositarlos en una carpeta de lanzamientos que luego
+se expondrá públicamente a través del servidor web. En caso de no realizarse la
+compilación, el sistema seguiría funcionando, pero los enlaces de descarga
+estarían vacíos.
+
+Quizás la ventaja más interesante del despliegue desarrollado es que aísla
+todas las variables de configuración específicas del sistema en el que se va a
+ejecutar el software (en nuestro caso, un servidor doméstico) de la
+configuración global, por lo que el cliente únicamente tendría que generar un
+archivo entorno propio para adaptar el sistema a sus servidores. Por tanto,
+puede concluirse que el sistema de despliegue desarrollado está preparado para
+cualquier sistema con soporte para docker (en la práctica, todos los sistemas
+utilizados en la industria) e incluso se extendería fácilmente a entornos
+distribuidos, ya que la traducción de docker-compose a kubernetes es muy común
+y relativamente sencilla de realizar gracias a herramientas automáticas como
+Kompose. % triple histórico, pero igual es así
+
+\begin{figure}
+\begin{verbatim}
+# PostgreSQL
+DB_PASSWORD="unsafe_password"
+
+# Django
+SECRET_KEY="another_unsafe_password"
+ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,192.168.50.12,example.com
+
+# Ports
+FRONTEND_HTTP_PORT=8081
+FRONTEND_HTTPS_PORT=4433
+
+BACKEND_HOST="example.com:443/api"
+
+SSL_BACKEND_IP=192.168.50.12
+SSL_DOMAIN=example.com
+
+\end{verbatim}
+\caption{Ejemplo de nuestro fichero \texttt{.env} con la URL cambiada}
+\end{figure}
+
+Los sistemas escogidos para los contenedores son los siguientes:
+
+\begin{itemize}
+    \item Para la base de datos, el contenedor específico de PostgreSQL basado
+        en Alpine Linux, por su robustez, uso en el sector y facilidad de 
+        configuración (basta con especificar 3 variables de entorno para
+        lograr un despliegue completo).
+    \item Para el servidor redis, se usa directamente el contenedor específico
+        para este software basado en Alpine Linux.
+    \item Para los contenedores de celery y django, utilizamos la imagen
+        oficial de Python.
+    \item Para la compilación del código de frontend web, se usa el contendor
+        oficial de NPM con base Alpine.
+    \item Para el servidor web, se usa la imagen oficial de NGINX basada
+        en Alpine Linux.
+    \item Para la compilación de los clientes de escritorio, se usa un 
+        contenedor no oficial de Godot (pero verificado y actualizado) basado
+        en Debian.
+\end{itemize}
+
+En general, se observa que casi todos los contenedores están basados en Alpine
+Linux. Esto no es casualidad, ya que esta es una distribución extremadamente
+popular en contenedores Docker debido a su sencillez, reducido tamaño, buen
+rendimiento y seguridad.
+
+Finalmente, incluimos un diagrama de despliegue con los distintos contenedores
+que se utilizan, tanto en compilación como en ejecución:
+
+\input{diagrama_despliegue.tex}
 
 Los \textbf{responsables} de supervisar la corrección de las configuraciones,
 construcción del software y calidad del producto son para el código del

@@ -1,0 +1,36 @@
+# LaTeX
+*.aux
+*.log
+*.toc
+*.lof
+*.lot
+*.out
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.pdfsync
+
+# Biblatex
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+
+# Listings
+*.lol
+
+# Subfiles
+*.sub
+*.suc
+*.sout
+
+# latexmk
+*.bak
+*.sav
+*.tmp
+*.auxlock
+indent.log
+*.dvi
+*.bcf-SAVE-ERROR
+
+
